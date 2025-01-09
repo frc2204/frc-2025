@@ -75,7 +75,6 @@ public class TunerConstants {
   // All swerve devices must share the same CAN bus
   public static final CANBus kCANBus = new CANBus("canivore", "./logs/example.hoot");
 
-
   /** tuning is required later */
   public static final LinearVelocity kSpeedAt12Volts = MetersPerSecond.of(0.5397754);
 
@@ -86,6 +85,7 @@ public class TunerConstants {
 
   /** gear ratios are estimated values, need to be tuned later */
   private static final double kDriveGearRatio = 7.363636363636365;
+
   private static final double kSteerGearRatio = 15.42857142857143;
   private static final Distance kWheelRadius = Inches.of(2.0);
 
