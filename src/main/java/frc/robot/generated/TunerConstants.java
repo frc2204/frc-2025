@@ -21,7 +21,7 @@ public class TunerConstants {
   // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
   private static final Slot0Configs steerGains =
       new Slot0Configs()
-          .withKP(7)
+          .withKP(17)
           .withKI(0)
           .withKD(0.0)
           .withKS(0.1)
@@ -81,13 +81,13 @@ public class TunerConstants {
 
   // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
   // This may need to be tuned to your individual robot
-  /** potential tuning needed */
+  /** circumference of bot */
   private static final double kCoupleRatio = 3.8181818181818183;
 
-  /** gear ratios are estimated values, need to be tuned later */
-  private static final double kDriveGearRatio = 7.363636363636365;
+  /** */
+  private static final double kDriveGearRatio = (42.0 / 11.0) * (18.0 / 28.0) * (45.0 / 15.0);
 
-  private static final double kSteerGearRatio = 15.42857142857143;
+  private static final double kSteerGearRatio = 15.43;
   private static final Distance kWheelRadius = Inches.of(2.0);
 
   private static final boolean kInvertLeftSide = false;
@@ -163,7 +163,7 @@ public class TunerConstants {
   private static final int kBackLeftDriveMotorId = 5;
   private static final int kBackLeftSteerMotorId = 6;
   private static final int kBackLeftEncoderId = 11;
-  private static final Angle kBackLeftEncoderOffset = Rotations.of(0.40408);
+  private static final Angle kBackLeftEncoderOffset = Rotations.of(0.393311);
   private static final boolean kBackLeftSteerMotorInverted = true;
   private static final boolean kBackLeftEncoderInverted = false;
 
