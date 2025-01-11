@@ -73,7 +73,8 @@ public class TunerConstants {
 
   // CAN bus that the devices are located on;
   // All swerve devices must share the same CAN bus
-  public static final CANBus kCANBus = new CANBus("canivore", "./logs/example.hoot");
+  public static final CANBus kCANBus =
+      new CANBus("E97741A7394C4853202020504D1B19FF", "./logs/example.hoot");
 
   /** tuning is required later */
   public static final LinearVelocity kSpeedAt12Volts = MetersPerSecond.of(0.5397754);
