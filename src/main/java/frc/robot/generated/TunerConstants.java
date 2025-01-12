@@ -77,7 +77,7 @@ public class TunerConstants {
       new CANBus("E97741A7394C4853202020504D1B19FF", "./logs/example.hoot");
 
   /** tuning is required later */
-  public static final LinearVelocity kSpeedAt12Volts = MetersPerSecond.of(0.5397754);
+  public static final LinearVelocity kSpeedAt12Volts = FeetPerSecond.of(15.0);
 
   // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
   // This may need to be tuned to your individual robot
