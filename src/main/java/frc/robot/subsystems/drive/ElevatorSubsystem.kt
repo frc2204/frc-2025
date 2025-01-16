@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Talon
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import frc.robot.Constants
 import frc.robot.util.ElevatorConstants
+import org.littletonrobotics.junction.Logger
 
 
 object ElevatorSubsystem : SubsystemBase() {
@@ -22,9 +23,8 @@ object ElevatorSubsystem : SubsystemBase() {
      * the [.getInstance] method to get the single instance (rather
      * than trying to construct an instance of this class.)
      */
-    val instance: ElevatorSubsystem = ElevatorSubsystem()
-
-    val motor = TalonFX(1, CANBus("1"))
+    val instance: ElevatorSubsystem = ElevatorSubsystem
+    val leader = TalonFX(1, CANBus("1"))
     var digit: Int = 0
     val Positions = arrayOf(
         ElevatorConstants.Position.L1,
@@ -32,15 +32,23 @@ object ElevatorSubsystem : SubsystemBase() {
         ElevatorConstants.Position.L3,
         ElevatorConstants.Position.L4
     )
-    private var currentPosition = Positions[digit]
-    fun getCurrentPosition():ElevatorConstants.Position {
-        return currentPosition
+    private var currentPosition:Double? = null
+    private var desiredPosition:ElevatorConstants.Position = Positions[digit]
+    fun getDesiredPosition():ElevatorConstants.Position {
+        return desiredPosition
     }
     fun moveToNextPosition() {
-        motor.setPosition(Positions[digit % 4].Height)
+        leader.setPosition(Positions[digit % 4].Height)
         println(Positions[digit])
         digit++
 
     }
+    override fun periodic(){
+        if(currentPosition == desiredPosition.Height){
+            println("At desired position")
+            Logger.recordOutput("e",leader.position)
+        }
+    }
+
 }
 

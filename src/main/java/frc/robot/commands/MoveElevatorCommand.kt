@@ -16,11 +16,6 @@ class MoveElevatorCommand : Command() {
     override fun initialize() {
         ElevatorSubsystem
     }
-    override fun periodic() {
-        if(ElevatorSubsystem.motor.get() == ElevatorSubsystem.getCurrentPosition()){
-
-        }
-    }
     override fun execute() {
         ElevatorSubsystem.moveToNextPosition()
     }
