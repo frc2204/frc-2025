@@ -16,6 +16,7 @@ class MoveElevatorCommand : Command() {
     override fun initialize() {
         ElevatorSubsystem
     }
+
     override fun execute() {
         ElevatorSubsystem.moveToNextPosition()
     }
@@ -25,5 +26,12 @@ class MoveElevatorCommand : Command() {
         return false
     }
 
-    override fun end(interrupted: Boolean) {}
+override fun end(interrupted: Boolean) {
+    if (isFinished){
+
+        return println("end")
+
+    }
+}
+
 }

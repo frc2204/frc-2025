@@ -14,7 +14,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.subsystems.drive.ElevatorSubsystem;
 
 /**
  * Do NOT add any static variables to this class, or any initialization at all. Unless you know what
@@ -23,6 +22,7 @@ import frc.robot.subsystems.drive.ElevatorSubsystem;
  */
 public final class Main {
   private Main() {}
+
   /**
    * Main initialization function. Do not perform any initialization here.
    *
