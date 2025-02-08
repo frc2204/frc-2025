@@ -19,6 +19,7 @@ import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
+import edu.wpi.first.wpilibj.PS5Controller
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
@@ -28,13 +29,15 @@ import frc.robot.commands.elevator.PositionElevator
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
+import javax.swing.text.Position
 
 class RobotContainer {
     // Subsystems
     private var drive: Drive? = null
 
-    // Controller
+    // Controllers
     private val controller = CommandXboxController(0)
+    private val controllerTwo = PS5Controller(1)
 
     // Dashboard inputs
     private val autoChooser: LoggedDashboardChooser<Command>
@@ -161,19 +164,19 @@ class RobotContainer {
             { -controller.rightX * 0.5 })
 
         // Lock to 0° when A button is held
-        controller
-            .a()
-            .whileTrue(
-                DriveCommands.joystickDriveAtAngle(
-                    drive, { -controller.leftY }, { controller.leftX }, { Rotation2d() })
-            )
+//        controller
+//            .a()
+//            .whileTrue(
+//                DriveCommands.joystickDriveAtAngle(
+//                    drive, { -controller.leftY }, { controller.leftX }, { Rotation2d() })
+//            )
 
         // Switch to X pattern when X button is pressed
-        controller.x().onTrue(Commands.runOnce({ drive!!.stopWithX() }, drive))
+        //controller.x().onTrue(Commands.runOnce({ drive!!.stopWithX() }, drive))
 
         // Reset gyro to 0° when B button is pressed
         controller
-            .b()
+            .leftTrigger()
             .onTrue(
                 Commands.runOnce(
                     {
@@ -184,7 +187,15 @@ class RobotContainer {
                     .ignoringDisable(true)
             )
 
-        controller.y().onTrue(PositionElevator({1.0}, {it > 0.5}))
+        /** Elevator commands */
+        // L1
+        controller.y().onTrue(PositionElevator({24.5}, {it > 21.0}))
+        // L2
+        controller.a().onTrue(PositionElevator({48.6},{it > 45.0}))
+        // L3
+        controller.x().onTrue(PositionElevator({77.3},{it > 75}))
+        // L4
+        controller.b().onTrue(PositionElevator({122.77},{it > 120}))
     }
 
     val autonomousCommand: Command
