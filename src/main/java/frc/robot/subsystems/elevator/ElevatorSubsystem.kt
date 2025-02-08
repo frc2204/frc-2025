@@ -8,10 +8,18 @@ import org.littletonrobotics.junction.Logger
 
 object ElevatorSubsystem: SubsystemBase() {
     private val elevatorMotor = TalonFX(ElevatorConstants.ELEVATOR_MOTOR_ID, "rio")
+
     val position get() = elevatorMotor.position.valueAsDouble
-    /** must be properly declared */
+
     var desiredPosition = 0.0
-    var extensionOffset = 0.0
+        set(position) {
+            field = if(position in ElevatorConstants.ELEVATOR_MIN_HEIGHT..ElevatorConstants.ELEVATOR_MAX_HEIGHT)
+                position
+            else
+                this.position
+        }
+
+    var extensionOffset = 0.5
 
     init{
         elevatorMotor.configurator.apply(CTREConfig.elevatorFXConfig)
@@ -19,6 +27,8 @@ object ElevatorSubsystem: SubsystemBase() {
 
     override fun periodic() {
         elevatorMotor.setPosition(desiredPosition)
+
+        Logger.recordOutput("ElevatorDesiredPosition", desiredPosition)
 
         Logger.recordOutput("ElevatorPosition", position)
         Logger.recordOutput("ElevatorVelocity", elevatorMotor.velocity.valueAsDouble)
