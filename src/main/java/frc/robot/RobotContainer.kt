@@ -30,7 +30,6 @@ import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
-import javax.swing.text.Position
 
 class RobotContainer {
     // Subsystems
