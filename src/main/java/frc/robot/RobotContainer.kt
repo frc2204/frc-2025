@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.elevator.PositionElevator
 import frc.robot.subsystems.drive.*
+import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
 import javax.swing.text.Position
@@ -196,6 +197,9 @@ class RobotContainer {
         controller.x().onTrue(PositionElevator({77.3},{it > 75}))
         // L4
         controller.b().onTrue(PositionElevator({122.77},{it > 120}))
+        // trims
+        controller.povUp().onTrue(PositionElevator({ElevatorSubsystem.position+ElevatorSubsystem.extensionOffset}, {true}))
+        controller.povDown().onTrue(PositionElevator({ElevatorSubsystem.position-ElevatorSubsystem.extensionOffset}, {true}))
     }
 
     val autonomousCommand: Command
