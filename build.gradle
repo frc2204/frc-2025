@@ -216,3 +216,9 @@ spotless {
         endWithNewline()
     }
 }
+repositories {
+    mavenCentral()
+}
+kotlin {
+    jvmToolchain(17)
+}
