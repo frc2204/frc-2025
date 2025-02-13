@@ -198,8 +198,8 @@ class RobotContainer {
         // L4
         controller.b().onTrue(PositionElevator({122.77},{it > 120}))
         // trims
-        controller.povUp().onTrue(PositionElevator({ElevatorSubsystem.position+ElevatorSubsystem.extensionOffset}, {true}))
-        controller.povDown().onTrue(PositionElevator({ElevatorSubsystem.position-ElevatorSubsystem.extensionOffset}, {true}))
+        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorSubsystem.extensionOffset } )
+        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorSubsystem.extensionOffset } )
     }
 
     val autonomousCommand: Command
