@@ -1,6 +1,5 @@
 package frc.robot.subsystems.elevator
 
-import com.ctre.phoenix6.controls.DutyCycleOut
 import com.ctre.phoenix6.hardware.TalonFX
 import config.ElevatorConstants
 import edu.wpi.first.wpilibj2.command.SubsystemBase
