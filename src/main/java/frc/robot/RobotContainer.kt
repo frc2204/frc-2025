@@ -13,6 +13,7 @@
 package frc.robot
 
 import com.pathplanner.lib.auto.AutoBuilder
+import config.ElevatorConstants
 import config.TunerConstants
 import edu.wpi.first.math.Matrix
 import edu.wpi.first.math.geometry.Pose2d
@@ -189,13 +190,13 @@ class RobotContainer {
 
         /** Elevator commands */
         // L1
-        controller.y().onTrue(PositionElevator({24.5}, {it > 21.0}))
+        controller.y().onTrue(PositionElevator({ElevatorConstants.L1_POSITION}, {it > 21.0}))
         // L2
-        controller.a().onTrue(PositionElevator({48.6},{it > 45.0}))
+        controller.a().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},{it > 45.0}))
         // L3
-        controller.x().onTrue(PositionElevator({77.3},{it > 75}))
+        controller.x().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},{it > 75}))
         // L4
-        controller.b().onTrue(PositionElevator({122.77},{it > 120}))
+        controller.b().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 120}))
         // trims
         controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorSubsystem.extensionOffset } )
         controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorSubsystem.extensionOffset } )

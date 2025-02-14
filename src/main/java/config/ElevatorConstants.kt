@@ -29,4 +29,9 @@ object ElevatorConstants {
     const val VOLTAGE_OPEN_LOOP_RAMP_PERIOD = 0.35
     const val DUTY_CYCLE_CLOSED_LOOP_RAMP_PERIOD = 0.0
     const val VOLTAGE_CLOSED_LOOP_RAMP_PERIOD = 0.0
+
+    const val L1_POSITION = 24.5
+    const val L2_POSITION = 48.6
+    const val L3_POSITION = 77.3
+    const val L4_POSITION = 122.77
 }
