@@ -11,7 +11,7 @@ object ElevatorConstants {
 
     const val ELEVATOR_MIN_HEIGHT = 0.0
     /** in inches, need to tune */
-    const val ELEVATOR_MAX_HEIGHT = 72.0
+    const val ELEVATOR_MAX_HEIGHT = 130.0
 
     const val EXTENSION_RATE = 0.50
 
