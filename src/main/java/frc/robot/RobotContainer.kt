@@ -29,6 +29,7 @@ import frc.robot.commands.DriveCommands
 import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.commands.command_groups.SourceIntakeHome
 import frc.robot.commands.elevator.PositionElevator
+import frc.robot.path_finding_and_follow.PathFindingCommand
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
@@ -207,6 +208,9 @@ class RobotContainer {
         // intake
         controller.leftTrigger().onTrue(SourceIntake())
         controller.leftTrigger().onFalse(SourceIntakeHome())
+
+        /** Auto align */
+        controller.leftBumper().onTrue(PathFindingCommand.intakePathFindingCommand)
     }
 
     val autonomousCommand: Command
