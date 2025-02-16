@@ -30,6 +30,7 @@ import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.commands.command_groups.SourceIntakeHome
 import frc.robot.commands.elevator.PositionElevator
 import frc.robot.path_finding_and_follow.PathFindingCommand
+import frc.robot.path_finding_and_follow.StopPathFindingCommand
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
@@ -211,6 +212,7 @@ class RobotContainer {
 
         /** Auto align */
         controller.leftBumper().onTrue(PathFindingCommand.intakePathFindingCommand)
+        controller.leftBumper().onFalse(StopPathFindingCommand.stopPathFindingCommand)
     }
 
     val autonomousCommand: Command
