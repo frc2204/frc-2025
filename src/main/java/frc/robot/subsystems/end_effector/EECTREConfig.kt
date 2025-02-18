@@ -2,7 +2,6 @@ package frc.robot.subsystems.end_effector
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration
 import config.EEConstants
-import config.ElevatorConstants
 
 object EECTREConfig {
     var eeFXConfig = TalonFXConfiguration()
