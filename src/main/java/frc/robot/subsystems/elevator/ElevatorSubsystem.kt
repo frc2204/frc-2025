@@ -21,7 +21,7 @@ object ElevatorSubsystem: SubsystemBase() {
     var extensionOffset = 0.5
 
     init{
-        elevatorMotor.configurator.apply(CTREConfig.elevatorFXConfig)
+        elevatorMotor.configurator.apply(ElevatorCTREConfig.elevatorFXConfig)
     }
 
     override fun periodic() {

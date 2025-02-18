@@ -3,7 +3,7 @@ package frc.robot.subsystems.elevator
 import com.ctre.phoenix6.configs.TalonFXConfiguration
 import config.ElevatorConstants
 
-object CTREConfig {
+object ElevatorCTREConfig {
     var elevatorFXConfig = TalonFXConfiguration()
     init {
         elevatorFXConfig = TalonFXConfiguration()
