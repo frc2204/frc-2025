@@ -10,8 +10,8 @@ object EECTREConfig {
 
         /** End effector PID */
         eeFXConfig.Slot0.kP = EEConstants.EE_PID.kP
-        eeFXConfig.Slot0.kI = EEConstants.EE_PID.kD
-        eeFXConfig.Slot0.kD = EEConstants.EE_PID.kI
+        eeFXConfig.Slot0.kI = EEConstants.EE_PID.kI
+        eeFXConfig.Slot0.kD = EEConstants.EE_PID.kD
 
         /** MotorOutput States */
         eeFXConfig.MotorOutput.NeutralMode = EEConstants.eeNeutralMode
