@@ -207,6 +207,10 @@ class RobotContainer {
         // intake
         controller.leftTrigger().onTrue(SourceIntake())
         controller.leftTrigger().onFalse(SourceIntakeHome())
+
+        // algae intake
+        controller.rightTrigger().onTrue(AlgaeIntake())
+        controller.rightTrigger().onFalse(AlgaeIntakeHome())
     }
 
     val autonomousCommand: Command
