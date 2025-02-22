@@ -11,6 +11,6 @@ import frc.robot.subsystems.intake.IntakeSubsystem
 class SourceIntake: SequentialCommandGroup(
     PositionElevator({ElevatorConstants.ELEVATOR_MIN_HEIGHT}, {it < 5.0}),
     Commands.runOnce({IntakeSubsystem.intake()}, IntakeSubsystem),
-    Commands.runOnce({EESubsystem.endEffectorStart()}, EESubsystem),
+    Commands.runOnce({EESubsystem.startEndEffector()}, EESubsystem),
     BeamBreakCommand { EESubsystem.beamBreakState }
 )

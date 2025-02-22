@@ -16,11 +16,11 @@ object EESubsystem: SubsystemBase() {
         eeMotor.configurator.apply(EECTREConfig.eeFXConfig)
     }
 
-    fun endEffectorStart() {
+    fun startEndEffector() {
         eeMotor.set(0.5)
     }
 
-    fun endEffectorStop() {
+    fun stopEndEffector() {
         eeMotor.stopMotor()
     }
 
