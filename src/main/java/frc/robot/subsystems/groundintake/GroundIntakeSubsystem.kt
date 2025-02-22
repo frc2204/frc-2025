@@ -20,7 +20,7 @@ import org.littletonrobotics.junction.Logger
 object GroundIntakeSubsystem : SubsystemBase() {
 
     val AIintakemotor1 = SparkMax(GroundIntakeConstants.GROUNDINTAKE_MOTOR_CAN_ID,SparkLowLevel.MotorType.kBrushless).apply{
-        configure(GroundIntakeSparkMAXConfig.groundIntakeMotorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters, SparkBaseConfig.IdleMode(CoastOut))
+        configure(GroundIntakeSparkMAXConfig.groundIntakeMotorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
     }
     val AIintakemotor2 = SparkMax(GroundIntakeConstants.GROUNDINTAKE_MOTOR_CAN_ID,SparkLowLevel.MotorType.kBrushless).apply{
         configure(GroundIntakeSparkMAXConfig2.groundIntakeMotorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
@@ -46,7 +46,6 @@ object GroundIntakeSubsystem : SubsystemBase() {
 
 
 
-
         AIarmmotor.setPosition(desiredAngle)
 
         Logger.recordOutput("AIdesiredAngle", desiredAngle)
@@ -54,6 +53,10 @@ object GroundIntakeSubsystem : SubsystemBase() {
         Logger.recordOutput("AIAngle", AIangle)
         Logger.recordOutput("AIVelocity", AIarmmotor.velocity.valueAsDouble)
         Logger.recordOutput("AICurrent", AIarmmotor.torqueCurrent.valueAsDouble)
+
+        if (AIarmmotor.torqueCurrent.valueAsDouble >= GroundIntakeConstants.GROUNDINTAKE_STALLING_CURRENT){
+            stopintake()
+        }
     }
     
     fun stopintake() {
