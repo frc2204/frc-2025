@@ -8,7 +8,7 @@ object GroundIntakeSparkMAXConfig {
     init {
         groundIntakeMotorConfig.smartCurrentLimit(40)
         groundIntakeMotorConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
-        groundIntakeMotorConfig.inverted(true)
+        groundIntakeMotorConfig.inverted(false)
     }
 }
 object GroundIntakeSparkMAXConfig2 {
