@@ -29,6 +29,7 @@ import frc.robot.commands.DriveCommands
 import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.commands.command_groups.SourceIntakeHome
 import frc.robot.commands.elevator.PositionElevator
+import frc.robot.commands.drive.LimelightAlign
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
@@ -177,7 +178,7 @@ class RobotContainer {
         // Switch to X pattern when X button is pressed
         //controller.x().onTrue(Commands.runOnce({ drive!!.stopWithX() }, drive))
 
-        // Reset gyro to 0° when B button is pressed
+        // Reset gyro to 0° when B button is pressed
         controller
             .leftTrigger()
             .onTrue(
@@ -207,6 +208,14 @@ class RobotContainer {
         // intake
         controller.leftTrigger().onTrue(SourceIntake())
         controller.leftTrigger().onFalse(SourceIntakeHome())
+
+        // Auto-align to target when right bumper is held
+        controller.rightBumper().whileTrue(
+            LimelightAlign(
+                drive!!,
+                vision!!
+            )
+        )
     }
 
     val autonomousCommand: Command
