@@ -29,9 +29,9 @@ object GroundIntakeSubsystem : SubsystemBase() {
     val AIangle get() = AIarmmotor.position.valueAsDouble
 
     var desiredAngle = 0.0
-        set(angle) {
-            field = if(angle in ElevatorConstants.ELEVATOR_MIN_HEIGHT..ElevatorConstants.ELEVATOR_MAX_HEIGHT)
-                angle
+        set(AIangle) {
+            field = if(AIangle in GroundIntakeConstants.GROUNDINTAKE_MIN_ANGLE..GroundIntakeConstants.GROUNDINTAKE_MAX_ANGLE)
+                AIangle
             else
                 this.AIangle
         }
