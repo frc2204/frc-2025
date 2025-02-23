@@ -9,7 +9,7 @@ import frc.robot.subsystems.groundintake.GroundIntakeSubsystem
 
 // TODO: Add your sequential commands in the super constructor call,
 //       e.g. SequentialCommandGroup(OpenClawCommand(), MoveArmCommand())
-class GroundIntakeCommandGroup : SequentialCommandGroup(
+class GroundIntakeDown : SequentialCommandGroup(
     PositionElevator({ElevatorConstants.ELEVATOR_MIN_HEIGHT}, {it <1.0}),
-    Commands.runOnce({GroundIntakeSubsystem})
+    Commands.runOnce({GroundIntakeSubsystem.intake()},GroundIntakeSubsystem)
 )
