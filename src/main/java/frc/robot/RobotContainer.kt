@@ -26,6 +26,8 @@ import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
+import frc.robot.commands.command_groups.GroundIntakeDown
+import frc.robot.commands.command_groups.GroundIntakeUp
 import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.commands.command_groups.SourceIntakeHome
 import frc.robot.commands.elevator.PositionElevator
@@ -207,6 +209,12 @@ class RobotContainer {
         // intake
         controller.leftTrigger().onTrue(SourceIntake())
         controller.leftTrigger().onFalse(SourceIntakeHome())
+
+
+        /** GroundIntake commands */
+        // intake
+        controller.povLeft().onTrue(GroundIntakeDown())
+        controller.povLeft().onFalse(GroundIntakeUp())
     }
 
     val autonomousCommand: Command
