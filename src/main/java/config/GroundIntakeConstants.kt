@@ -5,6 +5,8 @@ object GroundIntakeConstants{
   const val GROUNDINTAKE_MOTOR_CAN_ID = 0 //change later
   const val GROUNDINTAKE_SPEED = 0.0 //changer later
   const val GROUNDINTAKE_MOTOR_ID = 0//change later
-  const val GROUNDINTAKE_STALLING_CURRENT = 0 //change later
+  const val GROUNDINTAKE_STALLING_CURRENT = 0.0 //change later
+  const val GROUNDINTAKE_MIN_ANGLE = 0.0 //change later
+  const val GROUNDINTAKE_MAX_ANGLE = 0.0 //change later
 //  const val G
 }
