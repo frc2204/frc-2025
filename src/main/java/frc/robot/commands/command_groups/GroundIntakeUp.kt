@@ -1,7 +1,5 @@
 package frc.robot.commands.command_groups
 
-
-import config.ElevatorConstants
 import config.GroundIntakeConstants
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup
