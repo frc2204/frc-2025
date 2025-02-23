@@ -49,11 +49,9 @@ object GroundIntakeSubsystem : SubsystemBase() {
         AIarmmotor.setPosition(desiredAngle)
 
         Logger.recordOutput("AIdesiredAngle", desiredAngle)
-
         Logger.recordOutput("AIAngle", AIangle)
-        Logger.recordOutput("AIVelocity", AIarmmotor.velocity.valueAsDouble)
+        Logger.recordOutput("AIarmmotorVelocity", AIarmmotor.velocity.valueAsDouble)
         Logger.recordOutput("AICurrent", AIarmmotor.torqueCurrent.valueAsDouble)
-
         if (AIarmmotor.torqueCurrent.valueAsDouble >= GroundIntakeConstants.GROUNDINTAKE_STALLING_CURRENT){
             stopintake()
         }
