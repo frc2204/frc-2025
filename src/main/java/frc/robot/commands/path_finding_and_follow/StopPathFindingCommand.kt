@@ -1,4 +1,4 @@
-package frc.robot.path_finding_and_follow
+package frc.robot.commands.path_finding_and_follow
 
 import com.pathplanner.lib.auto.AutoBuilder
 import com.pathplanner.lib.path.PathConstraints
