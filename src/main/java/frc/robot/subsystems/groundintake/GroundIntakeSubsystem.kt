@@ -36,7 +36,7 @@ object GroundIntakeSubsystem : SubsystemBase() {
                 this.AIangle
         }
 
-    var extensionOffset = 0.5
+//    var extensionOffset = 0.5
 
     init{
         AIarmmotor.configurator.apply(CTREConfig.elevatorFXConfig)
