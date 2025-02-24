@@ -48,6 +48,6 @@ class CoralAlign(
         return if (isRight)
             abs(AutoAlignConstants.DESIRED_TX_RIGHT - visionSubsystem.getTargetX(cameraIndex).degrees)
         else
-            abs(AutoAlignConstants.DESIRED_TX_RIGHT - visionSubsystem.getTargetX(cameraIndex).degrees)
+            abs(AutoAlignConstants.DESIRED_TX_LEFT - visionSubsystem.getTargetX(cameraIndex).degrees)
     }
 }
