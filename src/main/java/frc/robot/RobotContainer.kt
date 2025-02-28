@@ -212,8 +212,8 @@ class RobotContainer {
         controller.leftTrigger().onFalse(SourceIntakeHome())
 
         /** Auto align */
-        controller.povLeft().onTrue(CoralAlign(drive!!, vision!!, 0, false))
-        controller.povRight().onTrue(CoralAlign(drive!!, vision!!, 0,true))
+        //controller.povLeft().onTrue(CoralAlign(drive!!, vision!!, 0, false))
+        //controller.povRight().onTrue(CoralAlign(drive!!, vision!!, 0,true))
 
         controller.leftBumper().onTrue(PathFindingCommand.intakePathFindingCommand)
         controller.leftBumper().onFalse(StopPathFindingCommand.stopPathFindingCommand)
