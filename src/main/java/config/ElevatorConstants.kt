@@ -4,7 +4,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue
 import com.pathplanner.lib.config.PIDConstants
 
 object ElevatorConstants {
-    const val ELEVATOR_MOTOR_ID = 14
+    const val ELEVATOR_MOTOR_ID = 13
 
     /** must be tuned later */
     val ELEVATOR_PID = PIDConstants(0.2, 0.0, 0.0)
