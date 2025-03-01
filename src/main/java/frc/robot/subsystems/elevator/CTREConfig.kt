@@ -18,8 +18,7 @@ object CTREConfig {
         elevatorFXConfig.MotorOutput.Inverted = ElevatorConstants.elevatorInverted
 
         /** Gear Ratio */
-        // double-check the initialization of gear ratio
-//       elevatorFXConfig.Feedback.SensorToMechanismRatio = ElevatorConstants.ELEVATOR_GEAR_RATIO
+        elevatorFXConfig.Feedback.SensorToMechanismRatio = ElevatorConstants.ELEVATOR_GEAR_RATIO
 
         /** Current Limiting */
         elevatorFXConfig.CurrentLimits.SupplyCurrentLimitEnable = ElevatorConstants.ELEVATOR_ENABLE_CURRENT_LIMIT
