@@ -13,6 +13,7 @@
 package frc.robot
 
 import com.pathplanner.lib.auto.AutoBuilder
+import com.pathplanner.lib.auto.NamedCommands
 import config.ElevatorConstants
 import config.TunerConstants
 import edu.wpi.first.math.Matrix
@@ -149,6 +150,10 @@ class RobotContainer {
         autoChooser.addOption(
             "Drive SysId (Dynamic Reverse)", drive!!.sysIdDynamic(SysIdRoutine.Direction.kReverse)
         )
+
+        // registering commands for pathplanner autonomous
+        NamedCommands.registerCommand("sourceIntake", SourceIntake())
+        NamedCommands.registerCommand("sourceIntakeHome", SourceIntakeHome())
 
         // Configure the button bindings
         configureButtonBindings()
