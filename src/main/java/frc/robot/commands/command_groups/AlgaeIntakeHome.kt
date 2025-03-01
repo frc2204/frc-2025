@@ -8,6 +8,5 @@ import frc.robot.commands.algae.AngleArm
 import frc.robot.subsystems.algae.AlgaeSubsystem
 
 class AlgaeIntakeHome : SequentialCommandGroup(
-    Commands.runOnce({AlgaeSubsystem.stopMotor()}, AlgaeSubsystem),
-    AngleArm({AlgaeConstants.ARM_MIN_ANGLE}, {it < 1.0})
+    Commands.runOnce({AlgaeSubsystem.stopMotor()}, AlgaeSubsystem)
 )
