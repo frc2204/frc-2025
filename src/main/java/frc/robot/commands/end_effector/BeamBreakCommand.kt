@@ -19,6 +19,6 @@ class BeamBreakCommand(private val bbState: () -> Boolean): Command() {
     override fun end(interrupted: Boolean) {
         Commands.runOnce({ IntakeSubsystem.stopIntake()}, IntakeSubsystem)
         Commands.runOnce({ EESubsystem.stopEndEffector()}, EESubsystem)
-        PositionElevator({ ElevatorConstants.L1_POSITION}, {it > 21.0})
+        //PositionElevator({ ElevatorConstants.L1_POSITION}, {it > 21.0})
     }
 }

@@ -192,16 +192,16 @@ class RobotContainer {
 
         /** Elevator commands */
         // L1
-        controller.y().onTrue(PositionElevator({ElevatorConstants.L1_POSITION}, {it > 0.7}))
+        controller.y().onTrue(PositionElevator({ElevatorConstants.L1_POSITION}, {it > 21.0}))
         // L2
-        controller.b().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},{it > 1.5}))
+        controller.a().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},{it > 45.0}))
         // L3
-        controller.a().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},{it > 3.5}))
+        controller.x().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},{it > 75}))
         // L4
-        controller.x().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 5.2}))
+        controller.b().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 120}))
         // trims
-        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
-        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
+        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorSubsystem.extensionOffset } )
+        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorSubsystem.extensionOffset } )
 
         /** Intake commands */
         // intake
