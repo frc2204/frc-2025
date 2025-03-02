@@ -192,13 +192,13 @@ class RobotContainer {
 
         /** Elevator commands */
         // L1
-        controller.y().onTrue(PositionElevator({ElevatorConstants.L1_POSITION}, {it > 0.7}))
+        controller.y().onTrue(PositionElevator({ElevatorConstants.L1_POSITION}, {it > 1.05}))
         // L2
-        controller.b().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},{it > 1.5}))
+        controller.b().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},{it > 2.35}))
         // L3
-        controller.a().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},{it > 3.5}))
+        controller.a().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},{it > 4.35}))
         // L4
-        controller.x().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 5.2}))
+        controller.x().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 5.15}))
         // trims
         controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
         controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
