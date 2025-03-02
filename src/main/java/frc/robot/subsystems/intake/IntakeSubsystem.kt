@@ -15,6 +15,11 @@ object IntakeSubsystem: SubsystemBase() {
     val intakeCurrent
         get() = intakeMotor.outputCurrent
 
+    val currentDraw = intakeMotor.outputCurrent
+    
+    fun getMotorCurrent(): Double {
+        return intakeMotor.outputCurrent// Assuming "motor" is your SparkMAX instance
+    }
     fun intake() {
         intakeMotor.set(IntakeConstants.INTAKE_SPEED)
     }
@@ -28,5 +33,9 @@ object IntakeSubsystem: SubsystemBase() {
         Logger.recordOutput("Intake/Velocity", intakeMotor.encoder.velocity)
         Logger.recordOutput("Intake/Current", intakeMotor.outputCurrent)
         Logger.recordOutput("Intake/Temperature", intakeMotor.motorTemperature)
+    }
+
+    fun set(d: Double) {
+
     }
 }

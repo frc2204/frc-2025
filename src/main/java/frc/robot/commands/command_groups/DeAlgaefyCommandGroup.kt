@@ -1,0 +1,17 @@
+package frc.robot.commands.command_groups
+
+import edu.wpi.first.wpilibj2.command.Commands
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup
+import frc.robot.commands.elevator.PositionElevator
+import frc.robot.subsystems.elevator.ElevatorSubsystem
+
+class deAlgaefyCommandGroup :  SequentialCommandGroup(
+    Commands.runOnce({PositionElevator({ElevatorSubsystem.desiredPosition}, {it < 5.0})},
+
+
+    )
+
+
+    )
+
+
