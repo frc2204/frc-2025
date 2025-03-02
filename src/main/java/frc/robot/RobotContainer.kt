@@ -200,8 +200,8 @@ class RobotContainer {
         // L4
         controller.b().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 120}))
         // trims
-        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorSubsystem.extensionOffset } )
-        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorSubsystem.extensionOffset } )
+        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
+        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
 
         /** Intake commands */
         // intake
