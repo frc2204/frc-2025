@@ -3,6 +3,7 @@ package frc.robot.commands.auto_align
 import config.AutoAlignConstants
 import edu.wpi.first.math.controller.PIDController
 import edu.wpi.first.math.filter.SlewRateLimiter
+import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj2.command.Command
 import frc.robot.commands.DriveCommands
 import frc.robot.subsystems.drive.Drive
@@ -16,12 +17,6 @@ class CoralAlign(
     private val isRight: Boolean
 ): Command() {
 
-    private val thetaPIDController = PIDController(0.01, 0.0, 0.0).apply {
-        setTolerance(2.0)
-    }
-
-    private val thetaSlewRateLimiter = SlewRateLimiter(2.0)
-
     private var calculatedTheta = 0.0
 
     init {
@@ -29,15 +24,12 @@ class CoralAlign(
     }
 
     override fun execute() {
-       calculatedTheta = thetaPIDController.calculate(visionSubsystem.getTargetX(cameraIndex).degrees, calculateOffset())
-       val slewRateLimitedTheta = thetaSlewRateLimiter.calculate(calculatedTheta)
-
-       DriveCommands.joystickDrive(driveSubsystem, {0.0}, {0.0}, {slewRateLimitedTheta})
+       /** TODO: calculateTheta: offset between desired angle and current angle */
+       DriveCommands.joystickDriveAtAngle(driveSubsystem, {0.0}, {0.0}, {Rotation2d(calculatedTheta)})
     }
 
     override fun isFinished(): Boolean {
-        // if angle is within defined tolerance
-       return thetaPIDController.atSetpoint()
+       return false
     }
 
     override fun end(interrupted: Boolean) {
