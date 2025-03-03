@@ -215,8 +215,7 @@ class RobotContainer {
         //controller.povLeft().onTrue(CoralAlign(drive!!, vision!!, 0, false))
         //controller.povRight().onTrue(CoralAlign(drive!!, vision!!, 0,true))
 
-        controller.leftBumper().onTrue(PathFindingCommand.intakePathFindingCommand)
-        controller.leftBumper().onFalse(StopPathFindingCommand.stopPathFindingCommand)
+        controller.leftBumper().whileTrue(PathFindingCommand.intakePathFindingCommand)
     }
 
     val autonomousCommand: Command
