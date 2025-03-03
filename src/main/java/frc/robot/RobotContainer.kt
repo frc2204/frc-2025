@@ -30,7 +30,8 @@ import frc.robot.commands.auto_align.CoralAlign
 import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.commands.command_groups.SourceIntakeHome
 import frc.robot.commands.elevator.PositionElevator
-import frc.robot.commands.path_finding_and_follow.PathFindingCommand
+import frc.robot.commands.path_finding_and_follow.AutoReef4Align
+import frc.robot.commands.path_finding_and_follow.AutoSourceAlign
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
@@ -214,7 +215,9 @@ class RobotContainer {
         controller.povLeft().onTrue(CoralAlign(drive!!, vision!!, 0, false))
         controller.povRight().onTrue(CoralAlign(drive!!, vision!!, 0,true))
 
-        controller.leftBumper().whileTrue(PathFindingCommand.intakePathFindingCommand)
+        controller.leftBumper().whileTrue(AutoSourceAlign.intakePathFindingCommand)
+        controller.leftBumper().and(controller.x()).whileTrue(AutoReef4Align.intakePathFindingCommand)
+        //controller.leftBumper().and(controller.povRight()).whileTrue()
     }
 
     val autonomousCommand: Command
