@@ -10,6 +10,8 @@ object ElevatorSubsystem: SubsystemBase() {
 
     val position get() = elevatorMotor.position.valueAsDouble
 
+
+
     var desiredPosition = 0.0
         set(position) {
             field = if(position in ElevatorConstants.ELEVATOR_MIN_HEIGHT..ElevatorConstants.ELEVATOR_MAX_HEIGHT)
@@ -18,9 +20,13 @@ object ElevatorSubsystem: SubsystemBase() {
                 this.position
         }
 
-    var extensionOffset = 0.5
+        var extensionOffset = 0.5
 
-    init{
+    fun homeElevator(height:Double) {
+        ElevatorSubsystem.desiredPosition = height
+    }
+
+        init{
         elevatorMotor.configurator.apply(CTREConfig.elevatorFXConfig)
     }
 
