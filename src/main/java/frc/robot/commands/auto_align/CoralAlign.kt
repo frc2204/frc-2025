@@ -1,14 +1,12 @@
 package frc.robot.commands.auto_align
 
 import config.AutoAlignConstants
-import edu.wpi.first.math.controller.PIDController
-import edu.wpi.first.math.filter.SlewRateLimiter
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj2.command.Command
 import frc.robot.commands.DriveCommands
 import frc.robot.subsystems.drive.Drive
 import frc.robot.subsystems.vision.Vision
-import kotlin.math.abs
+import kotlin.math.PI
 
 class CoralAlign(
     private val driveSubsystem: Drive,
@@ -24,7 +22,7 @@ class CoralAlign(
     }
 
     override fun execute() {
-       /** TODO: calculateTheta: offset between desired angle and current angle */
+       calculatedTheta = degreesToRadians(calculateOffset())
        DriveCommands.joystickDriveAtAngle(driveSubsystem, {0.0}, {0.0}, {Rotation2d(calculatedTheta)})
     }
 
@@ -38,8 +36,12 @@ class CoralAlign(
 
     private fun calculateOffset(): Double {
         return if (isRight)
-            abs(AutoAlignConstants.DESIRED_TX_RIGHT - visionSubsystem.getTargetX(cameraIndex).degrees)
+            AutoAlignConstants.DESIRED_TX_RIGHT - visionSubsystem.getTargetX(cameraIndex).degrees
         else
-            abs(AutoAlignConstants.DESIRED_TX_LEFT - visionSubsystem.getTargetX(cameraIndex).degrees)
+            AutoAlignConstants.DESIRED_TX_LEFT - visionSubsystem.getTargetX(cameraIndex).degrees
+    }
+
+    private fun degreesToRadians(degrees: Double): Double {
+        return degrees * (PI/180)
     }
 }
