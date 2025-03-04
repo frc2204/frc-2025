@@ -206,9 +206,8 @@ class RobotContainer {
         controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
 
         /** Intake commands */
-        // intake
-        controller.leftTrigger().onTrue(SourceIntake())
-        controller.leftTrigger().onFalse(SourceIntakeHome())
+        controller.leftBumper().onTrue(SourceIntake())
+        controller.leftBumper().onFalse(SourceIntakeHome())
 
         /** Auto align */
         controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
