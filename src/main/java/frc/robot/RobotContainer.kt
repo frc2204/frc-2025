@@ -13,6 +13,7 @@
 package frc.robot
 
 import com.pathplanner.lib.auto.AutoBuilder
+import config.AutoAlignConstants
 import config.ElevatorConstants
 import config.TunerConstants
 import edu.wpi.first.math.Matrix
@@ -29,7 +30,7 @@ import frc.robot.commands.DriveCommands
 import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.commands.command_groups.SourceIntakeHome
 import frc.robot.commands.elevator.PositionElevator
-import frc.robot.commands.path_finding_and_follow.PathFindingCommand
+import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
@@ -205,15 +206,14 @@ class RobotContainer {
         controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
 
         /** Intake commands */
-        // intake
-        controller.leftTrigger().onTrue(SourceIntake())
-        controller.leftTrigger().onFalse(SourceIntakeHome())
+        controller.leftBumper().onTrue(SourceIntake())
+        controller.leftBumper().onFalse(SourceIntakeHome())
 
         /** Auto align */
-        //controller.povLeft().onTrue(CoralAlign(drive!!, vision!!, 0, false))
-        //controller.povRight().onTrue(CoralAlign(drive!!, vision!!, 0,true))
-
-        controller.leftBumper().whileTrue(PathFindingCommand.intakePathFindingCommand)
+        controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
+        controller.rightTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
+        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
     }
 
     val autonomousCommand: Command
