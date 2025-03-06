@@ -8,5 +8,5 @@ import frc.robot.subsystems.intake.IntakeSubsystem
 
 class SourceIntakeHome: SequentialCommandGroup(
     Commands.runOnce({IntakeSubsystem.stopIntake()}, IntakeSubsystem),
-    PositionElevator({ElevatorConstants.L1_POSITION}, {it > 21.0})
+    PositionElevator({ElevatorConstants.L1_POSITION}, {it > 1.05})
 )

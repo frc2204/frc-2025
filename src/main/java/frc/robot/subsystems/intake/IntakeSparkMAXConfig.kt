@@ -8,6 +8,7 @@ object IntakeSparkMAXConfig {
     init {
         intakeMotorConfig.smartCurrentLimit(40)
         intakeMotorConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
-        intakeMotorConfig.inverted(true)
+        intakeMotorConfig.inverted(false)
+        intakeMotorConfig.openLoopRampRate(0.25)
     }
 }
