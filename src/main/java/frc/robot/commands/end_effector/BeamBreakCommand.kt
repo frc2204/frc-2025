@@ -7,7 +7,7 @@ import frc.robot.subsystems.intake.IntakeSubsystem
 
 class BeamBreakCommand(private val beamBreakState: () -> Boolean): Command() {
     init {
-        addRequirements(EESubsystem)
+        addRequirements(EESubsystem, IntakeSubsystem)
     }
 
     override fun isFinished(): Boolean {
