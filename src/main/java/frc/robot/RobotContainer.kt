@@ -192,15 +192,15 @@ class RobotContainer {
                     .ignoringDisable(true)
             )
 
-        /** Elevator commands */
+        /** Elevator commands --> complete scoring commands after testing */
         // L1
-        controller.y().onTrue(PositionElevator({ElevatorConstants.L1_POSITION}, {it > 1.05}))
+        controller.rightBumper().and(controller.x().onTrue(PositionElevator({ElevatorConstants.L1_POSITION}, {it > 0.75})))
         // L2
-        controller.b().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},{it > 2.35}))
+        controller.rightBumper().and(controller.y().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},{it > 1.4})))
         // L3
-        controller.a().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},{it > 4.35}))
+        controller.rightBumper().and(controller.b().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},{it > 2.95})))
         // L4
-        controller.x().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 5.15}))
+        controller.rightBumper().and(controller.a().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 5.15})))
         // trims
         controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
         controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
@@ -209,13 +209,13 @@ class RobotContainer {
         controller.leftBumper().onTrue(SourceIntake())
         controller.leftBumper().onFalse(SourceIntakeHome())
 
-        /** Auto align */
+        /** Source auto align */
         controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
         controller.rightTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
-        //controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
-        controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left))
-        //controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
-        controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right))
+
+        /** Reef auto align */
+        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
     }
 
     val autonomousCommand: Command
