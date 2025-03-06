@@ -24,6 +24,7 @@ import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.wpilibj.PS5Controller
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
@@ -42,7 +43,7 @@ class RobotContainer {
 
     // Controllers
     private val controller = CommandXboxController(0)
-    private val controllerTwo = PS5Controller(1)
+    private val controllerTwo = CommandPS5Controller(1)
 
     // Dashboard inputs
     private val autoChooser: LoggedDashboardChooser<Command>
@@ -164,9 +165,9 @@ class RobotContainer {
         // Default command, normal field-relative drive
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
-            { -controller.leftY * 0.5 },
-            { -controller.leftX * 0.5 },
-            { -controller.rightX * 0.5 })
+            { -controllerTwo.leftY * 0.5 },
+            { -controllerTwo.leftX * 0.5 },
+            { -controllerTwo.rightX * 0.5 })
 
         // Lock to 0° when A button is held
 //        controller
@@ -211,15 +212,21 @@ class RobotContainer {
 
         /** Intake commands */
         controller.leftBumper().onTrue(SourceIntake())
+//        controllerTwo.L1().onTrue(SourceIntake())
         controller.leftBumper().onFalse(SourceIntakeHome())
+//        controllerTwo.L1().onFalse(SourceIntake())
 
         /** Source auto align */
         controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
+//        controllerTwo.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
         controller.rightTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
+//        controllerTwo.R2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
 
         /** Reef auto align */
         controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+//        controllerTwo.square().and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
         controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
+//        controllerTwo.square().and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
     }
 
     val autonomousCommand: Command
