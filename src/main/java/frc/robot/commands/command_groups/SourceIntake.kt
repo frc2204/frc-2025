@@ -7,6 +7,6 @@ import frc.robot.commands.elevator.PositionElevator
 import frc.robot.subsystems.intake.IntakeSubsystem
 
 class SourceIntake: SequentialCommandGroup(
-    PositionElevator({ElevatorConstants.ELEVATOR_MIN_HEIGHT}, {it < 5.0}),
+    PositionElevator({ElevatorConstants.ELEVATOR_MIN_HEIGHT}, {it < 0.5}),
     Commands.runOnce({IntakeSubsystem.intake()}, IntakeSubsystem)
 )
