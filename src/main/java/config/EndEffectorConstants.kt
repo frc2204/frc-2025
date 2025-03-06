@@ -5,7 +5,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue
 import com.pathplanner.lib.config.PIDConstants
 
 object EEConstants {
-    const val EE_MOTOR_ID = 16
+    const val EE_MOTOR_ID = 14
 
     val EE_PID = PIDConstants(0.2, 0.0, 0.0)
 
