@@ -12,6 +12,5 @@ object LEDSubsystem : SubsystemBase() {
     var state:State = State(null, null, null)
     override fun periodic() {
         CANdleHandler.setState(state)
-
     }
 }
