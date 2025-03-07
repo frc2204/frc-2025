@@ -21,17 +21,16 @@ import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.wpilibj2.command.Command
-import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
+import frc.robot.commands.command_groups.ReverseIntake
 import frc.robot.commands.command_groups.ScoreCoral
 import frc.robot.commands.command_groups.ScoreCoralHome
 import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.subsystems.drive.*
-import frc.robot.subsystems.intake.IntakeSubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
 
@@ -217,7 +216,7 @@ class RobotContainer {
         controller.a().onTrue(ScoreCoral { ElevatorConstants.L4_POSITION })
         controller.a().onFalse(ScoreCoralHome())
 
-        controller.rightTrigger().whileTrue(Commands.runOnce({IntakeSubsystem.reverseIntake()}, IntakeSubsystem))
+        controller.rightTrigger().whileTrue(ReverseIntake())
 
         /** Intake commands */
 //        controller.leftBumper().onTrue(SourceIntake())

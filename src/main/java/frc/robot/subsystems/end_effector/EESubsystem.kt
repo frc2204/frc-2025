@@ -24,6 +24,10 @@ object EESubsystem: SubsystemBase() {
         eeMotor.set(1.0)
     }
 
+    fun eeReverse() {
+        eeMotor.set(-1.0)
+    }
+
     fun stopEndEffector() {
         eeMotor.stopMotor()
     }
