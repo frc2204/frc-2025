@@ -17,11 +17,11 @@ object AutoAlignConstants {
         Units.degreesToRadians(360.0), Units.degreesToRadians(540.0)))
 
     val ALIGN_REEF4_Right = CompletePath(PathPlannerPath.fromPathFile("Auto_Align_Reef4_Right"),
-        PathConstraints(0.5, 1.0,
+        PathConstraints(1.5, 1.0,
         Units.degreesToRadians(360.0), Units.degreesToRadians(540.0)))
 
     val ALIGN_REEF4_Left = CompletePath(PathPlannerPath.fromPathFile("Auto_Align_Reef4_Left"),
-        PathConstraints(0.5, 1.0,
+        PathConstraints(1.5, 1.0,
             Units.degreesToRadians(360.0), Units.degreesToRadians(540.0)))
 }
 

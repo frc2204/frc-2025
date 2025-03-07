@@ -167,9 +167,9 @@ class RobotContainer {
         // Default command, normal field-relative drive
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
-            { -controllerTwo.leftY * 0.5 },
-            { -controllerTwo.leftX * 0.5 },
-            { -controllerTwo.rightX * 0.5 })
+            { -controller.leftY * 1 },
+            { -controller.leftX * 1 },
+            { -controller.rightX * 1 })
 
         // Lock to 0° when A button is held
 //        controller
