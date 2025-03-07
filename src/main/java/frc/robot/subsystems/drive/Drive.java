@@ -14,7 +14,6 @@
 package frc.robot.subsystems.drive;
 
 import static edu.wpi.first.units.Units.*;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.PIDConstants;
@@ -22,6 +21,7 @@ import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import com.pathplanner.lib.util.PathPlannerLogging;
+import config.State;
 import config.TunerConstants;
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
@@ -48,11 +48,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.Constants;
 import frc.robot.Constants.Mode;
+import frc.robot.subsystems.led.LEDSubsystem;
 import frc.robot.util.LocalADStarAK;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import org.littletonrobotics.junction.AutoLogOutput;
 import org.littletonrobotics.junction.Logger;
+import config.LEDConstants;
 
 public class Drive extends SubsystemBase {
   // TunerConstants doesn't include these constants, so they are declared locally
@@ -156,7 +158,8 @@ public class Drive extends SubsystemBase {
             new SysIdRoutine.Mechanism(
                 (voltage) -> runCharacterization(voltage.in(Volts)), null, this));
   }
-
+  private static LEDSubsystem ledSubsystem;
+  private static LEDConstants ledConstants;
   @Override
   public void periodic() {
     odometryLock.lock(); // Prevents odometry updates while reading data
@@ -167,8 +170,9 @@ public class Drive extends SubsystemBase {
     }
     odometryLock.unlock();
 
-    // Stop moving when disabled
+    // Stop moving when disabled and set CANdle to show
     if (DriverStation.isDisabled()) {
+      ledSubsystem.setState(ledConstants.getIS_DISABLED());
       for (var module : modules) {
         module.stop();
       }
