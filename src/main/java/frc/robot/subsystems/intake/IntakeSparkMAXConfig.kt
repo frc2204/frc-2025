@@ -10,5 +10,6 @@ object IntakeSparkMAXConfig {
         intakeMotorConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
         intakeMotorConfig.inverted(false)
         intakeMotorConfig.openLoopRampRate(0.25)
+        intakeMotorConfig.encoder.positionConversionFactor(5.0)
     }
 }
