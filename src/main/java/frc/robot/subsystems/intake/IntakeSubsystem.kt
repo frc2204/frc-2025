@@ -19,6 +19,10 @@ object IntakeSubsystem: SubsystemBase() {
         intakeMotor.set(IntakeConstants.INTAKE_SPEED)
     }
 
+    fun reverseIntake() {
+        intakeMotor.set(-IntakeConstants.INTAKE_SPEED)
+    }
+
     fun stopIntake() {
         intakeMotor.stopMotor()
     }
