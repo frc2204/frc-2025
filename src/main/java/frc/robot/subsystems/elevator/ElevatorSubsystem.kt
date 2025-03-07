@@ -1,15 +1,23 @@
 package frc.robot.subsystems.elevator
 
+import com.ctre.phoenix6.controls.DutyCycleOut
 import com.ctre.phoenix6.controls.PositionDutyCycle
 import com.ctre.phoenix6.hardware.TalonFX
 import config.ElevatorConstants
+import edu.wpi.first.wpilibj.DutyCycleEncoder
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.littletonrobotics.junction.Logger
 
 object ElevatorSubsystem: SubsystemBase() {
     private val elevatorMotor = TalonFX(ElevatorConstants.ELEVATOR_MOTOR_ID, "rio")
 
-    val position get() = elevatorMotor.position.valueAsDouble
+    private val throughBorePosition = DutyCycleEncoder(1)
+
+    /** TODO */
+    val position: Double
+        get() {
+            return throughBorePosition.get() / 360 * 2048
+        }
 
     var desiredPosition = position
         set(position) {
@@ -24,7 +32,7 @@ object ElevatorSubsystem: SubsystemBase() {
      * temporary solution: 2-step decline
      */
 //      private val desiredPositionDutyCycle
-//          get() =
+//          get() =i
 //          if(((desiredPosition - position) < 0)) {
 //              if(((abs(desiredPosition - position)) > ElevatorConstants.ELEVATOR_MAX_ERROR)) {
 //                  PositionDutyCycle(desiredPosition).withSlot(1)
@@ -50,9 +58,7 @@ object ElevatorSubsystem: SubsystemBase() {
     }
 
     override fun periodic() {
-        //elevatorMotor.setControl(desiredPositionDutyCycle)
-        /** previous */
-        elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
+//        elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
 
         Logger.recordOutput("ElevatorDesiredPosition", desiredPosition)
 
@@ -61,5 +67,4 @@ object ElevatorSubsystem: SubsystemBase() {
         Logger.recordOutput("ElevatorCurrent", elevatorMotor.torqueCurrent.valueAsDouble)
         Logger.recordOutput("ElevatorControlMode", elevatorMotor.controlMode.value)
     }
-
 }
