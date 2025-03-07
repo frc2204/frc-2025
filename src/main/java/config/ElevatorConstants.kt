@@ -7,7 +7,7 @@ object ElevatorConstants {
     const val ELEVATOR_MOTOR_ID = 13
 
     /** must be tuned later */
-    val ELEVATOR_PID = PIDConstants(0.40, 0.0, 0.0)
+    val ELEVATOR_PID = PIDConstants(0.60, 0.0, 0.0)
     val ELEVATOR_PID_DEC1 = PIDConstants(0.12, 0.0, 0.0)
     val ELEVATOR_PID_DEC2 = PIDConstants(0.20, 0.0, 0.0)
 
@@ -19,6 +19,7 @@ object ElevatorConstants {
 
     const val EXTENSION_RATE = 0.25
     const val OFFSET_RATE = 0.15
+    const val SCORING_OFFSET = 0.10
 
     const val ELEVATOR_GEAR_RATIO = 20.0
 

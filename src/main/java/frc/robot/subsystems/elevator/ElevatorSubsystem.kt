@@ -19,32 +19,6 @@ object ElevatorSubsystem: SubsystemBase() {
                 this.position
         }
 
-    /**
-     * waiting on mechanical fixing gear skipping
-     * temporary solution: 2-step decline
-     */
-//      private val desiredPositionDutyCycle
-//          get() =
-//          if(((desiredPosition - position) < 0)) {
-//              if(((abs(desiredPosition - position)) > ElevatorConstants.ELEVATOR_MAX_ERROR)) {
-//                  PositionDutyCycle(desiredPosition).withSlot(1)
-//              }
-//              else {
-//                  PositionDutyCycle(desiredPosition).withSlot(2)
-//              }
-//          } else {
-//              PositionDutyCycle(desiredPosition).withSlot(0)
-//          }
-
-    /** temporary fix: slowing down elevator on lowering */
-//          private val desiredPositionDutyCycle
-//          get() =
-//          if(((desiredPosition - position) < 0)) {
-//              PositionDutyCycle(desiredPosition).withSlot(1)
-//          } else {
-//              PositionDutyCycle(desiredPosition).withSlot(0)
-//          }
-
     init{
         elevatorMotor.configurator.apply(CTREConfig.elevatorFXConfig)
     }
