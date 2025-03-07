@@ -2,7 +2,9 @@ package frc.robot.subsystems.elevator
 
 import com.ctre.phoenix6.hardware.TalonFX
 import config.ElevatorConstants
+import config.LEDConstants
 import edu.wpi.first.wpilibj2.command.SubsystemBase
+import frc.robot.subsystems.led.LEDSubsystem
 
 object ElevatorSubsystem: SubsystemBase() {
     private val elevatorMotor = TalonFX(ElevatorConstants.ELEVATOR_MOTOR_ID, "rio")
@@ -52,7 +54,12 @@ object ElevatorSubsystem: SubsystemBase() {
 //        //elevatorMotor.setControl(desiredPositionDutyCycle)
 //        /** previous */
 //        //elevatorMotor.setControl(PositionDutyCycle(desiredPosition))
-//
+            if(position!= ElevatorConstants.ELEVATOR_MIN_HEIGHT){
+                LEDSubsystem.state = LEDConstants.IS_ELEVATOR_RAISED
+            }
+            else{
+                LEDSubsystem.state = LEDConstants.IDLE
+            }
 //        Logger.recordOutput("ElevatorDesiredPosition", desiredPosition)
 //
 //        Logger.recordOutput("ElevatorPosition", position)
