@@ -155,7 +155,7 @@ class RobotContainer {
 
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
-     * instantiating a [GenericHID] or one of its subclasses ([ ] or [XboxController]), and then passing it to a [ ].
+     * instantiating a GenericHID or one of its subclasses ([ ] or XboxController), and then passing it to a [ ].
      */
     private fun configureButtonBindings() {
         // Default command, normal field-relative drive
