@@ -7,13 +7,13 @@ object ElevatorConstants {
     const val ELEVATOR_MOTOR_ID = 13
 
     /** must be tuned later */
-    val ELEVATOR_PID = PIDConstants(0.60, 0.0, 0.0)
+    val ELEVATOR_PID = PIDConstants(1.25, 0.0, 0.0)
     val ELEVATOR_PID_DEC1 = PIDConstants(0.12, 0.0, 0.0)
     val ELEVATOR_PID_DEC2 = PIDConstants(0.20, 0.0, 0.0)
 
-    const val ELEVATOR_MIN_HEIGHT = 0.0
+    const val ELEVATOR_MIN_HEIGHT = 0.01
     /** in inches, need to tune */
-    const val ELEVATOR_MAX_HEIGHT = 5.75
+    const val ELEVATOR_MAX_HEIGHT = 5.783
 
     const val ELEVATOR_MAX_ERROR = 1.45
 
@@ -36,8 +36,8 @@ object ElevatorConstants {
     const val DUTY_CYCLE_CLOSED_LOOP_RAMP_PERIOD = 0.0
     const val VOLTAGE_CLOSED_LOOP_RAMP_PERIOD = 0.0
 
-    const val L1_POSITION = 0.855
-    const val L2_POSITION = 1.5
-    const val L3_POSITION = 3.05
-    const val L4_POSITION = 5.3
+    const val L1_POSITION = 1.237
+    const val L2_POSITION = 2.068
+    const val L3_POSITION = 3.480
+    const val L4_POSITION = 5.684
 }

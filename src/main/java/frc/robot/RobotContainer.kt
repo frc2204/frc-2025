@@ -13,23 +13,23 @@
 package frc.robot
 
 import com.pathplanner.lib.auto.AutoBuilder
+import com.pathplanner.lib.commands.PathPlannerAuto
 import config.AutoAlignConstants
 import config.ElevatorConstants
 import config.TunerConstants
 import edu.wpi.first.math.Matrix
 import edu.wpi.first.math.geometry.Pose2d
+import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.wpilibj2.command.Command
+import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
-import frc.robot.commands.command_groups.ReverseIntake
-import frc.robot.commands.command_groups.ScoreCoral
-import frc.robot.commands.command_groups.ScoreCoralHome
-import frc.robot.commands.command_groups.SourceIntake
+import frc.robot.commands.command_groups.*
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
@@ -150,6 +150,13 @@ class RobotContainer {
             "Drive SysId (Dynamic Reverse)", drive!!.sysIdDynamic(SysIdRoutine.Direction.kReverse)
         )
 
+        autoChooser.addOption(
+            "Testing/Drive Forward 1M", autoDrive1M()
+        )
+        autoChooser.addOption(
+            "Testing/Rotate 90", rotate90()
+        )
+
         // Configure the button bindings
         configureButtonBindings()
     }
@@ -178,17 +185,17 @@ class RobotContainer {
         //controller.x().onTrue(Commands.runOnce({ drive!!.stopWithX() }, drive))
 
         // Reset gyro to 0° when B button is pressed
-//        controller
-//            .leftTrigger()
-//            .onTrue(
-//                Commands.runOnce(
-//                    {
-//                        drive!!.pose = Pose2d(drive!!.pose.translation, Rotation2d())
-//                    },
-//                    drive
-//                )
-//                    .ignoringDisable(true)
-//            )
+        controller
+            .leftStick()
+            .onTrue(
+                Commands.runOnce(
+                    {
+                        drive!!.pose = Pose2d(drive!!.pose.translation, Rotation2d())
+                    },
+                    drive
+                )
+                    .ignoringDisable(true)
+            )
 
         /** Scoring */
 //        // L1
@@ -217,12 +224,13 @@ class RobotContainer {
         controller.a().onFalse(ScoreCoralHome())
 
         controller.rightTrigger().whileTrue(ReverseIntake())
+        controller.rightTrigger().onFalse(ReverseIntakeStop())
 
         /** Intake commands */
 //        controller.leftBumper().onTrue(SourceIntake())
         controllerTwo.L1().onTrue(SourceIntake())
 //        controller.leftBumper().onFalse(SourceIntakeHome())
-        controllerTwo.L1().onFalse(SourceIntake())
+        controllerTwo.L1().onFalse(SourceIntakeHome())
 
         /** Source auto align */
 //        controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
@@ -246,4 +254,12 @@ class RobotContainer {
          * @return the command to run in autonomous
          */
         get() = autoChooser.get()
+
+    private fun autoDrive1M(): Command {
+        return PathPlannerAuto("Forward 1M")
+    }
+
+    private fun rotate90(): Command {
+        return PathPlannerAuto("Rotate90")
+    }
 }
