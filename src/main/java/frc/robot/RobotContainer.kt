@@ -18,24 +18,18 @@ import config.ElevatorConstants
 import config.TunerConstants
 import edu.wpi.first.math.Matrix
 import edu.wpi.first.math.geometry.Pose2d
-import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
-import edu.wpi.first.wpilibj.PS5Controller
 import edu.wpi.first.wpilibj2.command.Command
-import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
-import frc.robot.commands.command_groups.SourceIntake
-import frc.robot.commands.command_groups.SourceIntakeHome
-import frc.robot.commands.elevator.PositionElevator
 import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.command_groups.ScoreCoral
 import frc.robot.commands.command_groups.ScoreCoralHome
+import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.subsystems.drive.*
-import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
 
@@ -167,9 +161,9 @@ class RobotContainer {
         // Default command, normal field-relative drive
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
-            { -controller.leftY * 1 },
-            { -controller.leftX * 1 },
-            { -controller.rightX * 1 })
+            { -controllerTwo.leftY * 1 },
+            { -controllerTwo.leftX * 1 },
+            { -controllerTwo.rightX * 1 })
 
         // Lock to 0° when A button is held
 //        controller
@@ -183,19 +177,19 @@ class RobotContainer {
         //controller.x().onTrue(Commands.runOnce({ drive!!.stopWithX() }, drive))
 
         // Reset gyro to 0° when B button is pressed
-        controller
-            .leftTrigger()
-            .onTrue(
-                Commands.runOnce(
-                    {
-                        drive!!.pose = Pose2d(drive!!.pose.translation, Rotation2d())
-                    },
-                    drive
-                )
-                    .ignoringDisable(true)
-            )
+//        controller
+//            .leftTrigger()
+//            .onTrue(
+//                Commands.runOnce(
+//                    {
+//                        drive!!.pose = Pose2d(drive!!.pose.translation, Rotation2d())
+//                    },
+//                    drive
+//                )
+//                    .ignoringDisable(true)
+//            )
 
-        /** Elevator commands --> complete scoring commands after testing */
+        /** Scoring */
 //        // L1
 //        controller.x().onTrue(PositionElevator({ElevatorConstants.L1_POSITION},
 //            {it in ElevatorConstants.L1_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L1_POSITION + ElevatorConstants.OFFSET_RATE}))
@@ -222,22 +216,24 @@ class RobotContainer {
         controller.a().onFalse(ScoreCoralHome())
 
         /** Intake commands */
-        controller.leftBumper().onTrue(SourceIntake())
-//        controllerTwo.L1().onTrue(SourceIntake())
-        controller.leftBumper().onFalse(SourceIntakeHome())
-//        controllerTwo.L1().onFalse(SourceIntake())
+//        controller.leftBumper().onTrue(SourceIntake())
+        controllerTwo.L1().onTrue(SourceIntake())
+//        controller.leftBumper().onFalse(SourceIntakeHome())
+        controllerTwo.L1().onFalse(SourceIntake())
 
         /** Source auto align */
-        controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
-//        controllerTwo.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
-        controller.rightTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
-//        controllerTwo.R2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
+//        controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
+        controllerTwo.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
+//        controller.rightTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
+        controllerTwo.R2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
 
         /** Reef auto align */
-        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
-//        controllerTwo.square().and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
-        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
-//        controllerTwo.square().and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
+//        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+        controllerTwo.square()
+            .and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+//        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
+        controllerTwo.square()
+            .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
     }
 
     val autonomousCommand: Command
