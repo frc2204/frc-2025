@@ -24,6 +24,7 @@ import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.wpilibj.PS5Controller
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
@@ -31,6 +32,8 @@ import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.commands.command_groups.SourceIntakeHome
 import frc.robot.commands.elevator.PositionElevator
 import frc.robot.commands.auto_align.AutoAlign
+import frc.robot.commands.command_groups.ScoreCoral
+import frc.robot.commands.command_groups.ScoreCoralHome
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
@@ -42,7 +45,7 @@ class RobotContainer {
 
     // Controllers
     private val controller = CommandXboxController(0)
-    private val controllerTwo = PS5Controller(1)
+    private val controllerTwo = CommandPS5Controller(1)
 
     // Dashboard inputs
     private val autoChooser: LoggedDashboardChooser<Command>
@@ -164,9 +167,9 @@ class RobotContainer {
         // Default command, normal field-relative drive
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
-            { -controller.leftY * 0.5 },
-            { -controller.leftX * 0.5 },
-            { -controller.rightX * 0.5 })
+            { -controller.leftY * 1 },
+            { -controller.leftX * 1 },
+            { -controller.rightX * 1 })
 
         // Lock to 0° when A button is held
 //        controller
@@ -192,30 +195,49 @@ class RobotContainer {
                     .ignoringDisable(true)
             )
 
-        /** Elevator commands */
-        // L1
-        controller.y().onTrue(PositionElevator({ElevatorConstants.L1_POSITION}, {it > 1.05}))
-        // L2
-        controller.b().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},{it > 2.35}))
-        // L3
-        controller.a().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},{it > 4.35}))
-        // L4
-        controller.x().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},{it > 5.15}))
-        // trims
-        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
-        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
+        /** Elevator commands --> complete scoring commands after testing */
+//        // L1
+//        controller.x().onTrue(PositionElevator({ElevatorConstants.L1_POSITION},
+//            {it in ElevatorConstants.L1_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L1_POSITION + ElevatorConstants.OFFSET_RATE}))
+//        // L2
+//        controller.y().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},
+//            {it in ElevatorConstants.L2_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L2_POSITION + ElevatorConstants.OFFSET_RATE}))
+//        // L3
+//        controller.b().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},
+//            {it in ElevatorConstants.L3_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L3_POSITION + ElevatorConstants.OFFSET_RATE}))
+//        // L4
+//        controller.a().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},
+//            {it in ElevatorConstants.L4_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L4_POSITION + ElevatorConstants.OFFSET_RATE}))
+//        // trims
+//        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
+//        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
+
+        controller.x().onTrue(ScoreCoral { ElevatorConstants.L1_POSITION })
+        controller.x().onFalse(ScoreCoralHome())
+        controller.y().onTrue(ScoreCoral { ElevatorConstants.L2_POSITION })
+        controller.y().onFalse(ScoreCoralHome())
+        controller.b().onTrue(ScoreCoral { ElevatorConstants.L3_POSITION })
+        controller.b().onFalse(ScoreCoralHome())
+        controller.a().onTrue(ScoreCoral { ElevatorConstants.L4_POSITION })
+        controller.a().onFalse(ScoreCoralHome())
 
         /** Intake commands */
         controller.leftBumper().onTrue(SourceIntake())
+//        controllerTwo.L1().onTrue(SourceIntake())
         controller.leftBumper().onFalse(SourceIntakeHome())
+//        controllerTwo.L1().onFalse(SourceIntake())
 
-        /** Auto align */
+        /** Source auto align */
         controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
+//        controllerTwo.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
         controller.rightTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
-        //controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
-        controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left))
-        //controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
-        controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right))
+//        controllerTwo.R2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
+
+        /** Reef auto align */
+        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+//        controllerTwo.square().and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
+//        controllerTwo.square().and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
     }
 
     val autonomousCommand: Command

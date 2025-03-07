@@ -8,7 +8,8 @@ import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.intake.IntakeSubsystem
 
 class SourceIntakeHome: SequentialCommandGroup(
-    Commands.runOnce({IntakeSubsystem.stopIntake()}, IntakeSubsystem),
     Commands.runOnce({ EESubsystem.stopEndEffector() }, EESubsystem),
-    PositionElevator({ElevatorConstants.L1_POSITION}, {it > 1.05})
+    Commands.runOnce({IntakeSubsystem.stopIntake()}, IntakeSubsystem),
+    PositionElevator({ElevatorConstants.ELEVATOR_MIN_HEIGHT},
+        {it in ElevatorConstants.ELEVATOR_MIN_HEIGHT - ElevatorConstants.OFFSET_RATE.. ElevatorConstants.ELEVATOR_MIN_HEIGHT + ElevatorConstants.OFFSET_RATE})
 )

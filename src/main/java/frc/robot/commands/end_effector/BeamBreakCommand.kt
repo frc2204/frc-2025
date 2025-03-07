@@ -6,16 +6,23 @@ import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.intake.IntakeSubsystem
 
 class BeamBreakCommand(private val beamBreakState: () -> Boolean): Command() {
+    private var isBroken = false
     init {
-        addRequirements(EESubsystem)
+        addRequirements(EESubsystem, IntakeSubsystem)
+    }
+
+    override fun execute() {
+        if (!beamBreakState.invoke())
+            isBroken = true
     }
 
     override fun isFinished(): Boolean {
-       return beamBreakState.invoke()
+        return isBroken && beamBreakState.invoke()
     }
 
     override fun end(interrupted: Boolean) {
-        Commands.runOnce({ IntakeSubsystem.stopIntake() }, IntakeSubsystem)
-        Commands.runOnce({ EESubsystem.stopEndEffector() }, EESubsystem)
+        EESubsystem.stopEndEffector()
+        IntakeSubsystem.stopIntake()
+        isBroken = false
     }
 }

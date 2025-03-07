@@ -18,6 +18,7 @@ object ElevatorConstants {
     const val ELEVATOR_MAX_ERROR = 1.45
 
     const val EXTENSION_RATE = 0.25
+    const val OFFSET_RATE = 0.15
 
     const val ELEVATOR_GEAR_RATIO = 20.0
 
