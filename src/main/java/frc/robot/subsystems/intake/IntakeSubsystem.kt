@@ -4,7 +4,9 @@ import com.revrobotics.spark.SparkBase
 import com.revrobotics.spark.SparkLowLevel
 import com.revrobotics.spark.SparkMax
 import config.IntakeConstants
+import config.LEDConstants
 import edu.wpi.first.wpilibj2.command.SubsystemBase
+import frc.robot.subsystems.led.LEDSubsystem
 import org.littletonrobotics.junction.Logger
 
 object IntakeSubsystem: SubsystemBase() {
@@ -17,10 +19,12 @@ object IntakeSubsystem: SubsystemBase() {
 
     fun intake() {
         intakeMotor.set(IntakeConstants.INTAKE_SPEED)
+        LEDSubsystem.state = LEDConstants.IS_INTAKING
     }
 
     fun stopIntake() {
         intakeMotor.stopMotor()
+        LEDSubsystem.state = LEDConstants.IDLE
     }
 
     override fun periodic() {
