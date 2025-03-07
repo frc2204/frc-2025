@@ -32,6 +32,8 @@ import frc.robot.commands.command_groups.SourceIntake
 import frc.robot.commands.command_groups.SourceIntakeHome
 import frc.robot.commands.elevator.PositionElevator
 import frc.robot.commands.auto_align.AutoAlign
+import frc.robot.commands.command_groups.ScoreCoral
+import frc.robot.commands.command_groups.ScoreCoralHome
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.vision.*
@@ -194,21 +196,30 @@ class RobotContainer {
             )
 
         /** Elevator commands --> complete scoring commands after testing */
-        // L1
-        controller.x().onTrue(PositionElevator({ElevatorConstants.L1_POSITION},
-            {it in ElevatorConstants.L1_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L1_POSITION + ElevatorConstants.OFFSET_RATE}))
-        // L2
-        controller.y().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},
-            {it in ElevatorConstants.L2_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L2_POSITION + ElevatorConstants.OFFSET_RATE}))
-        // L3
-        controller.b().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},
-            {it in ElevatorConstants.L3_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L3_POSITION + ElevatorConstants.OFFSET_RATE}))
-        // L4
-        controller.a().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},
-            {it in ElevatorConstants.L4_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L4_POSITION + ElevatorConstants.OFFSET_RATE}))
-        // trims
-        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
-        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
+//        // L1
+//        controller.x().onTrue(PositionElevator({ElevatorConstants.L1_POSITION},
+//            {it in ElevatorConstants.L1_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L1_POSITION + ElevatorConstants.OFFSET_RATE}))
+//        // L2
+//        controller.y().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},
+//            {it in ElevatorConstants.L2_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L2_POSITION + ElevatorConstants.OFFSET_RATE}))
+//        // L3
+//        controller.b().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},
+//            {it in ElevatorConstants.L3_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L3_POSITION + ElevatorConstants.OFFSET_RATE}))
+//        // L4
+//        controller.a().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},
+//            {it in ElevatorConstants.L4_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L4_POSITION + ElevatorConstants.OFFSET_RATE}))
+//        // trims
+//        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
+//        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
+
+        controller.x().onTrue(ScoreCoral { ElevatorConstants.L1_POSITION })
+        controller.x().onFalse(ScoreCoralHome())
+        controller.y().onTrue(ScoreCoral { ElevatorConstants.L2_POSITION })
+        controller.y().onFalse(ScoreCoralHome())
+        controller.b().onTrue(ScoreCoral { ElevatorConstants.L3_POSITION })
+        controller.b().onFalse(ScoreCoralHome())
+        controller.a().onTrue(ScoreCoral { ElevatorConstants.L4_POSITION })
+        controller.a().onFalse(ScoreCoralHome())
 
         /** Intake commands */
         controller.leftBumper().onTrue(SourceIntake())

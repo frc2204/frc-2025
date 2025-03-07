@@ -20,6 +20,10 @@ object EESubsystem: SubsystemBase() {
         eeMotor.set(0.5)
     }
 
+    fun eeScore() {
+        eeMotor.set(1.0)
+    }
+
     fun stopEndEffector() {
         eeMotor.stopMotor()
     }

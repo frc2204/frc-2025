@@ -9,5 +9,5 @@ import frc.robot.subsystems.end_effector.EESubsystem
 class ScoreCoral(private val desiredPosition: () -> Double): SequentialCommandGroup(
     PositionElevator({ desiredPosition.invoke() },
         {it in desiredPosition.invoke() - ElevatorConstants.OFFSET_RATE ..desiredPosition.invoke() + ElevatorConstants.OFFSET_RATE}),
-    Commands.runOnce({ EESubsystem.startEndEffector() }, EESubsystem)
+    Commands.runOnce({ EESubsystem.eeScore() }, EESubsystem)
 )
