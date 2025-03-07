@@ -13,6 +13,7 @@
 
 package frc.robot.commands;
 
+import config.LEDConstants;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -29,6 +30,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.drive.Drive;
+import frc.robot.subsystems.led.LEDSubsystem;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.LinkedList;
@@ -63,6 +66,9 @@ public class DriveCommands {
         .getTranslation();
   }
 
+  private static LEDSubsystem ledSubsystem;
+  private static LEDConstants ledConstants;
+
   /**
    * Field relative drive command using two joysticks (controlling linear and angular velocities).
    */
@@ -71,6 +77,7 @@ public class DriveCommands {
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
       DoubleSupplier omegaSupplier) {
+      ledSubsystem.setState(ledConstants.getIS_TELEOP());
     return Commands.run(
         () -> {
           // Get linear velocity
