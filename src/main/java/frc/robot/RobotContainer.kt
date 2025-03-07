@@ -195,17 +195,17 @@ class RobotContainer {
 
         /** Elevator commands --> complete scoring commands after testing */
         // L1
-        controller.rightBumper().and(controller.x().onTrue(PositionElevator({ElevatorConstants.L1_POSITION},
-            {it in ElevatorConstants.L1_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L1_POSITION + ElevatorConstants.OFFSET_RATE})))
+        controller.x().onTrue(PositionElevator({ElevatorConstants.L1_POSITION},
+            {it in ElevatorConstants.L1_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L1_POSITION + ElevatorConstants.OFFSET_RATE}))
         // L2
-        controller.rightBumper().and(controller.y().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},
-            {it in ElevatorConstants.L2_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L2_POSITION + ElevatorConstants.OFFSET_RATE})))
+        controller.y().onTrue(PositionElevator({ElevatorConstants.L2_POSITION},
+            {it in ElevatorConstants.L2_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L2_POSITION + ElevatorConstants.OFFSET_RATE}))
         // L3
-        controller.rightBumper().and(controller.b().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},
-            {it in ElevatorConstants.L3_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L3_POSITION + ElevatorConstants.OFFSET_RATE})))
+        controller.b().onTrue(PositionElevator({ElevatorConstants.L3_POSITION},
+            {it in ElevatorConstants.L3_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L3_POSITION + ElevatorConstants.OFFSET_RATE}))
         // L4
-        controller.rightBumper().and(controller.a().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},
-            {it in ElevatorConstants.L4_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L4_POSITION + ElevatorConstants.OFFSET_RATE})))
+        controller.a().onTrue(PositionElevator({ElevatorConstants.L4_POSITION},
+            {it in ElevatorConstants.L4_POSITION - ElevatorConstants.OFFSET_RATE..ElevatorConstants.L4_POSITION + ElevatorConstants.OFFSET_RATE}))
         // trims
         controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
         controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
