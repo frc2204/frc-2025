@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
+import frc.robot.commands.CANdle.Statuschange
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.command_groups.*
@@ -223,8 +224,10 @@ class RobotContainer {
         controller.a().onTrue(ScoreCoral { ElevatorConstants.L4_POSITION })
         controller.a().onFalse(ScoreCoralHome())
 
-        controller.rightTrigger().whileTrue(ReverseIntake())
-        controller.rightTrigger().onFalse(ReverseIntakeStop())
+//        controller.rightTrigger().whileTrue(ReverseIntake())
+//        controller.rightTrigger().onFalse(ReverseIntakeStop())
+        controller.rightTrigger().onTrue(Statuschange())
+
 
         /** Intake commands */
 //        controller.leftBumper().onTrue(SourceIntake())

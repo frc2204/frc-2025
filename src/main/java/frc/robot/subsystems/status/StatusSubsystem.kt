@@ -2,6 +2,7 @@ package frc.robot.subsystems.status
 
 import com.ctre.phoenix.led.CANdle
 import com.ctre.phoenix.led.CANdleConfiguration
+import com.ctre.phoenix.led.RainbowAnimation
 import config.StatusConstants
 import config.StatusState
 import edu.wpi.first.wpilibj2.command.SubsystemBase
@@ -26,6 +27,12 @@ object StatusSubsystem: SubsystemBase() {
         candle.setLEDs(statusState.rgb.r, statusState.rgb.g, statusState.rgb.b)
         candle.animate(statusState.anim)
         println("CandleStatus Set")
+    }
+
+    fun testCandle() {
+        candle.setLEDs(255,0,0)
+        candle.animate(RainbowAnimation())
+        println("testingcAndle Set")
     }
 
     override fun periodic() {
