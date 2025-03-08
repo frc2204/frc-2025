@@ -4,7 +4,6 @@ import com.ctre.phoenix.led.CANdle
 import com.ctre.phoenix.led.CANdleConfiguration
 import config.StatusConstants
 import config.StatusState
-import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.littletonrobotics.junction.Logger
 
@@ -12,7 +11,9 @@ object StatusSubsystem: SubsystemBase() {
     val candle = CANdle(StatusConstants.CANDLE_ID, "rio")
 
     init {
-        candle.configAllSettings(CANdleConfiguration())
+        val config = CANdleConfiguration()
+        config.stripType = CANdle.LEDStripType.RGB
+        candle.configAllSettings(config)
     }
 
     fun disableStatus() {
