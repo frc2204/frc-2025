@@ -18,11 +18,13 @@ object StatusSubsystem: SubsystemBase() {
     fun disableStatus() {
         candle.animate(null)
         candle.setLEDs(0,0,0)
+        println("CandleStatus Disabled")
     }
 
     fun setCandleStatus(statusState: StatusState) {
         candle.setLEDs(statusState.rgb.r, statusState.rgb.g, statusState.rgb.b)
         candle.animate(statusState.anim)
+        println("CandleStatus Set")
     }
 
     override fun periodic() {

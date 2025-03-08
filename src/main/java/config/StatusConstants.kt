@@ -5,7 +5,7 @@ import com.ctre.phoenix.led.ColorFlowAnimation
 import com.ctre.phoenix.led.RainbowAnimation
 
 object StatusConstants {
-    const val CANDLE_ID = 16
+    const val CANDLE_ID = 15
     private const val LED_COUNTS = 160
 
     val disabledStatus = StatusState(RainbowAnimation(0.7, 0.5, LED_COUNTS), RGB(255, 192, 203))
