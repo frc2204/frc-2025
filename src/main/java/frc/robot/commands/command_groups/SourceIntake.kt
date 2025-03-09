@@ -11,7 +11,7 @@ import frc.robot.subsystems.intake.IntakeSubsystem
 import frc.robot.subsystems.status.StatusSubsystem
 
 class SourceIntake: SequentialCommandGroup(
-    Commands.runOnce({StatusSubsystem.setCandleStatus(StatusConstants.intakeStatus)}, StatusSubsystem),
+    //Commands.runOnce({StatusSubsystem.setCandleStatus(StatusConstants.intakeStatus)}, StatusSubsystem),
     PositionElevator({ElevatorConstants.ELEVATOR_MIN_HEIGHT},
         {it in ElevatorConstants.ELEVATOR_MIN_HEIGHT - ElevatorConstants.OFFSET_RATE..ElevatorConstants.ELEVATOR_MIN_HEIGHT + ElevatorConstants.OFFSET_RATE}),
     Commands.runOnce({IntakeSubsystem.intake()}, IntakeSubsystem),

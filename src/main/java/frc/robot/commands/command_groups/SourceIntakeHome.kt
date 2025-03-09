@@ -10,7 +10,7 @@ import frc.robot.subsystems.intake.IntakeSubsystem
 import frc.robot.subsystems.status.StatusSubsystem
 
 class SourceIntakeHome: SequentialCommandGroup(
-    Commands.runOnce({ StatusSubsystem.disableStatus()}, StatusSubsystem),
+    //Commands.runOnce({ StatusSubsystem.disableStatus()}, StatusSubsystem),
     Commands.runOnce({ EESubsystem.stopEndEffector() }, EESubsystem),
     Commands.runOnce({IntakeSubsystem.stopIntake()}, IntakeSubsystem),
     PositionElevator({ElevatorConstants.ELEVATOR_MIN_HEIGHT},
