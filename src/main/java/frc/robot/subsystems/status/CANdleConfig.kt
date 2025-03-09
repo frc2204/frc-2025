@@ -8,7 +8,9 @@ object CANdleConfig {
 
     init {
         config.stripType = CANdle.LEDStripType.RGB
-        //config.v5Enabled = true
+        config.v5Enabled = false
         config.statusLedOffWhenActive = false
+        config.vBatOutputMode = CANdle.VBatOutputMode.Modulated
+        config.brightnessScalar = 1.0
     }
 }

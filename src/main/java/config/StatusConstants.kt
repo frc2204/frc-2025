@@ -8,9 +8,9 @@ object StatusConstants {
     const val CANDLE_ID = 15
     private const val LED_COUNTS = 156
 
-    val disabledStatus = StatusState(RainbowAnimation(0.7, 0.5, LED_COUNTS), RGB(255, 192, 203))
+    val disabledStatus = StatusState(RainbowAnimation(0.7, 0.5, LED_COUNTS), RGB(255, 0, 0))
     val intakeStatus = StatusState(ColorFlowAnimation(0, 255, 255), RGB(0, 255, 255))
-    val testStatus = StatusState(RainbowAnimation(1.0, 0.5, 25), RGB (255, 192, 203))
+    val testStatus = StatusState(RainbowAnimation(1.0, 0.5, 20), RGB (0, 0, 255))
 }
 
 data class StatusState(val anim: Animation, val rgb: RGB)

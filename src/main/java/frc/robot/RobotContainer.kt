@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.command_groups.*
+import frc.robot.commands.statusled.StatusCommand
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
@@ -246,6 +247,8 @@ class RobotContainer {
 //        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
         controllerTwo.square()
             .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
+
+        controller.leftTrigger().whileTrue(StatusCommand())
     }
 
     val autonomousCommand: Command
