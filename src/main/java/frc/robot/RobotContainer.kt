@@ -29,11 +29,9 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
-import frc.robot.commands.Status.StatusCommand
 import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.command_groups.*
 import frc.robot.subsystems.drive.*
-import frc.robot.subsystems.status.StatusSubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
 
@@ -53,7 +51,6 @@ class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands.  */
     init {
-        StatusSubsystem.setCandleStatus(StatusConstants.disabledStatus)
         when (Constants.currentMode) {
             Constants.Mode.REAL -> {
                 // Real robot, instantiate hardware IO implementations
