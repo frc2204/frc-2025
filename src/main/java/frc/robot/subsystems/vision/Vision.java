@@ -100,16 +100,15 @@ public class Vision extends SubsystemBase {
 
       // Loop over pose observations
       for (var observation : inputs[cameraIndex].poseObservations) {
-        double distance = observation.pose().getX();
-        boolean distanceJump = lastAcceptedPose != null && (abs(distance - lastAcceptedPose.toPose2d().getX()) > maxJumpDistance);
+        Pose3d currentPose = observation.pose();
+        boolean distanceJump = getJump(currentPose);
 
         // Check whether to reject pose
         boolean rejectPose =
             observation.tagCount() == 0 // Must have at least one tag
                 || (observation.tagCount() == 1
                     && observation.ambiguity() > maxAmbiguity) // Cannot be high ambiguity
-                || abs(observation.pose().getZ())
-                    > maxZError // Must have realistic Z coordinate
+                || abs(observation.pose().getZ()) > maxZError // Must have realistic Z coordinate
 
                 // Must be within the field boundaries
                 || observation.pose().getX() < 0.0
@@ -194,5 +193,13 @@ public class Vision extends SubsystemBase {
         Pose2d visionRobotPoseMeters,
         double timestampSeconds,
         Matrix<N3, N1> visionMeasurementStdDevs);
+  }
+
+  public Boolean getJump(Pose3d currentPose) {
+    if (lastAcceptedPose != null) {
+      return (abs(currentPose.getX() - lastAcceptedPose.toPose2d().getX()) > maxDriveJumpDistance
+          || abs(currentPose.getY() - lastAcceptedPose.toPose2d().getY()) > maxDriveJumpDistance);
+    }
+    return false;
   }
 }

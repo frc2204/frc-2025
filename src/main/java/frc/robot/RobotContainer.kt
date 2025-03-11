@@ -40,8 +40,8 @@ class RobotContainer {
     private var drive: Drive? = null
 
     // Controllers
-    private val controller = CommandXboxController(1)
-    private val controllerTwo = CommandPS5Controller(0)
+    private val controller = CommandXboxController(0)
+    private val controllerTwo = CommandPS5Controller(1)
 
     // Dashboard inputs
     private val autoChooser: LoggedDashboardChooser<Command>

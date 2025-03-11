@@ -38,7 +38,10 @@ public class VisionConstants {
   public static double maxAmbiguity = 0.25;
   public static double maxZError = 0.10;
   public static double minTagArea = 0.75;
-  public static double maxJumpDistance = 0.5;
+
+  public static double maxDriveJumpDistance = 0.40;
+
+  // public static double maxAlignJumpDistance = 0.5;
 
   // Standard deviation baselines, for 1 meter distance and 1 tag
   // (Adjusted automatically based on distance and # of tags)
