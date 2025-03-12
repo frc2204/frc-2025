@@ -37,8 +37,9 @@ public class Vision extends SubsystemBase {
   private final VisionIOInputsAutoLogged[] inputs;
   private final Alert[] disconnectedAlerts;
   private Pose3d lastAcceptedPose = null;
+  private VisionIO.PoseObservation[] observationArray = new VisionIO.PoseObservation[2];
 
-  public Vision(VisionConsumer consumer, VisionIO... io) {
+    public Vision(VisionConsumer consumer, VisionIO... io) {
     this.consumer = consumer;
     this.io = io;
 
@@ -124,6 +125,7 @@ public class Vision extends SubsystemBase {
         } else {
           robotPosesAccepted.add(observation.pose());
           lastAcceptedPose = observation.pose();
+          observationArray[cameraIndex] = observation;
         }
 
         // Skip if rejected
@@ -131,28 +133,28 @@ public class Vision extends SubsystemBase {
           continue;
         }
 
-        // Calculate standard deviations
-        double stdDevFactor =
-            Math.pow(observation.averageTagDistance(), 2.0) / observation.tagCount();
+//        // Calculate standard deviations
+//        double stdDevFactor =
+//            Math.pow(observation.averageTagDistance(), 2.0) / observation.tagCount();
+//
+//        double linearStdDev = linearStdDevBaseline * stdDevFactor;
+//        double angularStdDev = angularStdDevBaseline * stdDevFactor;
+//
+//        if (observation.type() == PoseObservationType.MEGATAG_2) {
+//          linearStdDev *= linearStdDevMegatag2Factor;
+//          angularStdDev *= angularStdDevMegatag2Factor;
+//        }
+//
+//        if (cameraIndex < cameraStdDevFactors.length) {
+//          linearStdDev *= cameraStdDevFactors[cameraIndex];
+//          angularStdDev *= cameraStdDevFactors[cameraIndex];
+//        }
 
-        double linearStdDev = linearStdDevBaseline * stdDevFactor;
-        double angularStdDev = angularStdDevBaseline * stdDevFactor;
-
-        if (observation.type() == PoseObservationType.MEGATAG_2) {
-          linearStdDev *= linearStdDevMegatag2Factor;
-          angularStdDev *= angularStdDevMegatag2Factor;
-        }
-
-        if (cameraIndex < cameraStdDevFactors.length) {
-          linearStdDev *= cameraStdDevFactors[cameraIndex];
-          angularStdDev *= cameraStdDevFactors[cameraIndex];
-        }
-
-        // Send vision observation
-        consumer.accept(
-            observation.pose().toPose2d(),
-            observation.timestamp(),
-            VecBuilder.fill(linearStdDev, linearStdDev, angularStdDev));
+//        // Send vision observation
+//        consumer.accept(
+//            observation.pose().toPose2d(),
+//            observation.timestamp(),
+//            VecBuilder.fill(linearStdDev, linearStdDev, angularStdDev));
       }
 
       // Log camera datadata
@@ -173,6 +175,35 @@ public class Vision extends SubsystemBase {
       allRobotPosesAccepted.addAll(robotPosesAccepted);
       allRobotPosesRejected.addAll(robotPosesRejected);
     }
+
+    int observationIndex;
+    if(observationArray[0].averageTagDistance() < observationArray[1].averageTagDistance())
+      observationIndex = 0;
+    else
+      observationIndex = 1;
+
+    // Calculate standard deviations
+    double stdDevFactor =
+            Math.pow(observationArray[observationIndex].averageTagDistance(), 2.0) / observationArray[observationIndex].tagCount();
+
+    double linearStdDev = linearStdDevBaseline * stdDevFactor;
+    double angularStdDev = angularStdDevBaseline * stdDevFactor;
+
+    if (observationArray[observationIndex].type() == PoseObservationType.MEGATAG_2) {
+      linearStdDev *= linearStdDevMegatag2Factor;
+      angularStdDev *= angularStdDevMegatag2Factor;
+    }
+
+    if (observationIndex < cameraStdDevFactors.length) {
+      linearStdDev *= cameraStdDevFactors[observationIndex];
+      angularStdDev *= cameraStdDevFactors[observationIndex];
+    }
+
+    // Send vision observation
+    consumer.accept(
+            observationArray[observationIndex].pose().toPose2d(),
+            observationArray[observationIndex].timestamp(),
+            VecBuilder.fill(linearStdDev, linearStdDev, angularStdDev));
 
     // Log summary data
     Logger.recordOutput(
