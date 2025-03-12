@@ -124,8 +124,8 @@ public class Vision extends SubsystemBase {
         } else {
           robotPosesAccepted.add(observation.pose());
           lastAcceptedPose = observation;
+          observationArray[cameraIndex] = observation;
         }
-          observationArray[cameraIndex] = lastAcceptedPose;
 
           // Skip if rejected
         if (rejectPose) {
