@@ -39,7 +39,7 @@ public class VisionConstants {
   public static double maxZError = 0.10;
   public static double minTagArea = 0.75;
 
-  public static double maxDriveJumpDistance = 0.40;
+  public static double maxDriveJumpDistance = 1.0;
 
   // public static double maxAlignJumpDistance = 0.5;
 
@@ -55,8 +55,9 @@ public class VisionConstants {
   // (Adjust to trust some cameras more than others)
   public static double[] cameraStdDevFactors =
       new double[] {
-        1.0, // Camera 0
-        1.0 // Camera 1
+        0.8, // Camera 0
+        1.0, // Camera 1
+        1.2
       };
 
   // Multipliers to apply for MegaTag 2 observations

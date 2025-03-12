@@ -23,6 +23,7 @@ import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
+import edu.wpi.first.wpilibj.GenericHID
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
@@ -40,8 +41,8 @@ class RobotContainer {
     private var drive: Drive? = null
 
     // Controllers
-    private val controller = CommandXboxController(0)
-    private val controllerTwo = CommandPS5Controller(1)
+    val controller = CommandXboxController(0)
+    val controllerTwo = CommandPS5Controller(1)
 
     // Dashboard inputs
     private val autoChooser: LoggedDashboardChooser<Command>
