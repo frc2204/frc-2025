@@ -37,7 +37,8 @@ public class Vision extends SubsystemBase {
   private final VisionIOInputsAutoLogged[] inputs;
   private final Alert[] disconnectedAlerts;
   private VisionIO.PoseObservation lastAcceptedPose = null;
-  private VisionIO.PoseObservation[] observationArray = new VisionIO.PoseObservation[3];
+  private boolean acceptPose = false;
+  private VisionIO.PoseObservation[] observationArray = new VisionIO.PoseObservation[2];
 
   public Vision(VisionConsumer consumer, VisionIO... io) {
     this.consumer = consumer;
@@ -120,10 +121,9 @@ public class Vision extends SubsystemBase {
         robotPoses.add(observation.pose());
         if (rejectPose) {
           robotPosesRejected.add(observation.pose());
-          lastAcceptedPose = null;
+          observationArray[cameraIndex] = null;
         } else {
           robotPosesAccepted.add(observation.pose());
-          lastAcceptedPose = observation;
           observationArray[cameraIndex] = observation;
         }
 
@@ -182,22 +182,26 @@ public class Vision extends SubsystemBase {
 
     if (observationArray[0] != null && observationArray[1] != null) {
       // Both are not null, compare their averageTagDistance
-      if (observationArray[0].averageTagDistance() < observationArray[1].averageTagDistance())
+      if (observationArray[0].averageTagDistance() <= observationArray[1].averageTagDistance())
         observationIndex = 0;
       else observationIndex = 1;
+
+      acceptPose = true;
     } else if (observationArray[0] != null) {
       // Only the first element is not null, take its measurement
       observationIndex = 0;
+      acceptPose = true;
     } else if (observationArray[1] != null) {
       // Only the second element is not null, take its measurement
       observationIndex = 1;
+      acceptPose = true;
     } else {
       // Both are null
-      observationArray[2] = lastAcceptedPose;
-      observationIndex = 2;
+      acceptPose = false;
+      observationIndex = -1;
     }
 
-    if (lastAcceptedPose != null) {
+    if (acceptPose) {
       // Calculate standard deviations
 
       double stdDevFactor =
