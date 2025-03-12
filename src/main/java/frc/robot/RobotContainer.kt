@@ -246,6 +246,24 @@ class RobotContainer {
 //        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
         controllerTwo.square()
             .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
+
+        controllerTwo.triangle()
+            .and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Left)))
+
+        controllerTwo.triangle()
+            .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Right)))
+
+        controllerTwo.circle()
+            .and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Left)))
+
+        controllerTwo.circle()
+            .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Right)))
+
+        controllerTwo.cross()
+            .and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Left)))
+
+        controllerTwo.cross()
+            .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right)))
     }
 
     val autonomousCommand: Command
