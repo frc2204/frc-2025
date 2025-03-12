@@ -101,8 +101,7 @@ public class Vision extends SubsystemBase {
 
       // Loop over pose observations
       for (var observation : inputs[cameraIndex].poseObservations) {
-        Pose3d currentPose = observation.pose();
-        boolean distanceJump = getJump(currentPose);
+        boolean distanceJump = getJump(observation.pose());
 
         // Check whether to reject pose
         boolean rejectPose =
@@ -121,13 +120,14 @@ public class Vision extends SubsystemBase {
         robotPoses.add(observation.pose());
         if (rejectPose) {
           robotPosesRejected.add(observation.pose());
+          lastAcceptedPose = null;
         } else {
           robotPosesAccepted.add(observation.pose());
           lastAcceptedPose = observation;
-          observationArray[cameraIndex] = observation;
         }
+          observationArray[cameraIndex] = lastAcceptedPose;
 
-        // Skip if rejected
+          // Skip if rejected
         if (rejectPose) {
           continue;
         }
