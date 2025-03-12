@@ -35,8 +35,8 @@ public class VisionConstants {
       new Transform3d(-0.2, 0.0, 0.2, new Rotation3d(0.0, -0.4, Math.PI));
 
   // Basic filtering thresholds
-  public static double maxAmbiguity = 0.25;
-  public static double maxZError = 0.10;
+  public static double maxAmbiguity = 0.75;
+  public static double maxZError = 0.25;
   public static double minTagArea = 0.75;
 
   public static double maxDriveJumpDistance = 1.0;
@@ -57,7 +57,6 @@ public class VisionConstants {
       new double[] {
         0.8, // Camera 0
         1.0, // Camera 1
-        1.2
       };
 
   // Multipliers to apply for MegaTag 2 observations
