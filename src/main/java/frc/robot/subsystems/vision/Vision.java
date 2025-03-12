@@ -36,10 +36,10 @@ public class Vision extends SubsystemBase {
   private final VisionIO[] io;
   private final VisionIOInputsAutoLogged[] inputs;
   private final Alert[] disconnectedAlerts;
-  private Pose3d lastAcceptedPose = null;
-  private VisionIO.PoseObservation[] observationArray = new VisionIO.PoseObservation[2];
+  private VisionIO.PoseObservation lastAcceptedPose = null;
+  private VisionIO.PoseObservation[] observationArray = new VisionIO.PoseObservation[3];
 
-    public Vision(VisionConsumer consumer, VisionIO... io) {
+  public Vision(VisionConsumer consumer, VisionIO... io) {
     this.consumer = consumer;
     this.io = io;
 
@@ -102,7 +102,7 @@ public class Vision extends SubsystemBase {
       // Loop over pose observations
       for (var observation : inputs[cameraIndex].poseObservations) {
         Pose3d currentPose = observation.pose();
-        boolean distanceJump = getJump(currentPose);
+        // boolean distanceJump = getJump(currentPose);
 
         // Check whether to reject pose
         boolean rejectPose =
@@ -115,8 +115,8 @@ public class Vision extends SubsystemBase {
                 || observation.pose().getX() < 0.0
                 || observation.pose().getX() > aprilTagLayout.getFieldLength()
                 || observation.pose().getY() < 0.0
-                || observation.pose().getY() > aprilTagLayout.getFieldWidth()
-                || distanceJump;
+                || observation.pose().getY() > aprilTagLayout.getFieldWidth();
+        // || distanceJump;
 
         // Add pose to log
         robotPoses.add(observation.pose());
@@ -124,7 +124,7 @@ public class Vision extends SubsystemBase {
           robotPosesRejected.add(observation.pose());
         } else {
           robotPosesAccepted.add(observation.pose());
-          lastAcceptedPose = observation.pose();
+          lastAcceptedPose = observation;
           observationArray[cameraIndex] = observation;
         }
 
@@ -133,28 +133,28 @@ public class Vision extends SubsystemBase {
           continue;
         }
 
-//        // Calculate standard deviations
-//        double stdDevFactor =
-//            Math.pow(observation.averageTagDistance(), 2.0) / observation.tagCount();
-//
-//        double linearStdDev = linearStdDevBaseline * stdDevFactor;
-//        double angularStdDev = angularStdDevBaseline * stdDevFactor;
-//
-//        if (observation.type() == PoseObservationType.MEGATAG_2) {
-//          linearStdDev *= linearStdDevMegatag2Factor;
-//          angularStdDev *= angularStdDevMegatag2Factor;
-//        }
-//
-//        if (cameraIndex < cameraStdDevFactors.length) {
-//          linearStdDev *= cameraStdDevFactors[cameraIndex];
-//          angularStdDev *= cameraStdDevFactors[cameraIndex];
-//        }
+        //        // Calculate standard deviations
+        //        double stdDevFactor =
+        //            Math.pow(observation.averageTagDistance(), 2.0) / observation.tagCount();
+        //
+        //        double linearStdDev = linearStdDevBaseline * stdDevFactor;
+        //        double angularStdDev = angularStdDevBaseline * stdDevFactor;
+        //
+        //        if (observation.type() == PoseObservationType.MEGATAG_2) {
+        //          linearStdDev *= linearStdDevMegatag2Factor;
+        //          angularStdDev *= angularStdDevMegatag2Factor;
+        //        }
+        //
+        //        if (cameraIndex < cameraStdDevFactors.length) {
+        //          linearStdDev *= cameraStdDevFactors[cameraIndex];
+        //          angularStdDev *= cameraStdDevFactors[cameraIndex];
+        //        }
 
-//        // Send vision observation
-//        consumer.accept(
-//            observation.pose().toPose2d(),
-//            observation.timestamp(),
-//            VecBuilder.fill(linearStdDev, linearStdDev, angularStdDev));
+        //        // Send vision observation
+        //        consumer.accept(
+        //            observation.pose().toPose2d(),
+        //            observation.timestamp(),
+        //            VecBuilder.fill(linearStdDev, linearStdDev, angularStdDev));
       }
 
       // Log camera datadata
@@ -177,14 +177,31 @@ public class Vision extends SubsystemBase {
     }
 
     int observationIndex;
-    if(observationArray[0].averageTagDistance() < observationArray[1].averageTagDistance())
+    //    if (observationArray[0].averageTagDistance() < observationArray[1].averageTagDistance())
+    //      observationIndex = 0;
+    //    else observationIndex = 1;
+
+    if (observationArray[0] != null && observationArray[1] != null) {
+      // Both are not null, compare their averageTagDistance
+      if (observationArray[0].averageTagDistance() < observationArray[1].averageTagDistance())
+        observationIndex = 0;
+      else observationIndex = 1;
+    } else if (observationArray[0] != null) {
+      // Only the first element is not null, take its measurement
       observationIndex = 0;
-    else
+    } else if (observationArray[1] != null) {
+      // Only the second element is not null, take its measurement
       observationIndex = 1;
+    } else {
+      // Both are null
+      observationArray[2] = lastAcceptedPose;
+      observationIndex = 2;
+    }
 
     // Calculate standard deviations
     double stdDevFactor =
-            Math.pow(observationArray[observationIndex].averageTagDistance(), 2.0) / observationArray[observationIndex].tagCount();
+        Math.pow(observationArray[observationIndex].averageTagDistance(), 2.0)
+            / observationArray[observationIndex].tagCount();
 
     double linearStdDev = linearStdDevBaseline * stdDevFactor;
     double angularStdDev = angularStdDevBaseline * stdDevFactor;
@@ -201,9 +218,9 @@ public class Vision extends SubsystemBase {
 
     // Send vision observation
     consumer.accept(
-            observationArray[observationIndex].pose().toPose2d(),
-            observationArray[observationIndex].timestamp(),
-            VecBuilder.fill(linearStdDev, linearStdDev, angularStdDev));
+        observationArray[observationIndex].pose().toPose2d(),
+        observationArray[observationIndex].timestamp(),
+        VecBuilder.fill(linearStdDev, linearStdDev, angularStdDev));
 
     // Log summary data
     Logger.recordOutput(
@@ -228,8 +245,10 @@ public class Vision extends SubsystemBase {
 
   public Boolean getJump(Pose3d currentPose) {
     if (lastAcceptedPose != null) {
-      return (abs(currentPose.getX() - lastAcceptedPose.toPose2d().getX()) > maxDriveJumpDistance
-          || abs(currentPose.getY() - lastAcceptedPose.toPose2d().getY()) > maxDriveJumpDistance);
+      return (abs(currentPose.getX() - lastAcceptedPose.pose().toPose2d().getX())
+              > maxDriveJumpDistance
+          || abs(currentPose.getY() - lastAcceptedPose.pose().toPose2d().getY())
+              > maxDriveJumpDistance);
     }
     return false;
   }
