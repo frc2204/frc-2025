@@ -38,7 +38,7 @@ public class Vision extends SubsystemBase {
   private final Alert[] disconnectedAlerts;
   private VisionIO.PoseObservation lastAcceptedPose = null;
   private boolean acceptPose = false;
-  private VisionIO.PoseObservation[] observationArray = new VisionIO.PoseObservation[2];
+  private final VisionIO.PoseObservation[] observationArray = new VisionIO.PoseObservation[2];
 
   public Vision(VisionConsumer consumer, VisionIO... io) {
     this.consumer = consumer;
@@ -127,7 +127,7 @@ public class Vision extends SubsystemBase {
           observationArray[cameraIndex] = observation;
         }
 
-          // Skip if rejected
+        // Skip if rejected
         if (rejectPose) {
           continue;
         }
@@ -202,6 +202,13 @@ public class Vision extends SubsystemBase {
     }
 
     if (acceptPose) {
+
+      System.out.println(
+          "ll"
+              + observationIndex
+              + ": pose: "
+              + observationArray[observationIndex].pose().toPose2d());
+
       // Calculate standard deviations
 
       double stdDevFactor =
