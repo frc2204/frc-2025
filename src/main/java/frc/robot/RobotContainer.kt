@@ -40,8 +40,8 @@ class RobotContainer {
     private var drive: Drive? = null
 
     // Controllers
-    private val controller = CommandXboxController(1)
-    private val controllerTwo = CommandPS5Controller(0)
+    private val controller = CommandXboxController(0)
+    private val controllerTwo = CommandPS5Controller(1)
 
     // Dashboard inputs
     private val autoChooser: LoggedDashboardChooser<Command>
@@ -242,28 +242,28 @@ class RobotContainer {
         /** Reef auto align */
 //        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
         controllerTwo.square()
-            .and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left))
 //        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
         controllerTwo.square()
-            .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
+            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right))
 
         controllerTwo.triangle()
-            .and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Left)))
+            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Left))
 
         controllerTwo.triangle()
-            .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Right)))
+            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Right))
 
         controllerTwo.circle()
-            .and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Left)))
+            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Left))
 
         controllerTwo.circle()
-            .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Right)))
+            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Right))
 
         controllerTwo.cross()
-            .and(controllerTwo.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Left)))
+            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Left))
 
         controllerTwo.cross()
-            .and(controllerTwo.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right)))
+            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right))
     }
 
     val autonomousCommand: Command
