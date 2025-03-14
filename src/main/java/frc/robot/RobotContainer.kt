@@ -17,7 +17,6 @@ import com.pathplanner.lib.auto.NamedCommands
 import com.pathplanner.lib.commands.PathPlannerAuto
 import config.AutoAlignConstants
 import config.ElevatorConstants
-import config.StatusConstants
 import config.TunerConstants
 import edu.wpi.first.math.Matrix
 import edu.wpi.first.math.geometry.Pose2d
