@@ -13,6 +13,7 @@
 package frc.robot
 
 import com.pathplanner.lib.auto.AutoBuilder
+import com.pathplanner.lib.auto.NamedCommands
 import com.pathplanner.lib.commands.PathPlannerAuto
 import config.AutoAlignConstants
 import config.ElevatorConstants
@@ -30,6 +31,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
+import frc.robot.commands.autonomous.Intake
+import frc.robot.commands.autonomous.L4Score
 import frc.robot.commands.command_groups.*
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.vision.*
@@ -126,6 +129,10 @@ class RobotContainer {
                     }, object : VisionIO {}, object : VisionIO {})
             }
         }
+
+        NamedCommands.registerCommand("Intake", Intake())
+        NamedCommands.registerCommand("L4Score",L4Score())
+
         // Set up auto routines
         autoChooser = LoggedDashboardChooser("Auto Choices", AutoBuilder.buildAutoChooser())
 
