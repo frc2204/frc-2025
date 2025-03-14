@@ -13,5 +13,5 @@ class SourceIntake: SequentialCommandGroup(
         {it in ElevatorConstants.ELEVATOR_MIN_HEIGHT - ElevatorConstants.OFFSET_RATE..ElevatorConstants.ELEVATOR_MIN_HEIGHT + ElevatorConstants.OFFSET_RATE}),
     Commands.runOnce({IntakeSubsystem.intake()}, IntakeSubsystem),
     Commands.runOnce({ EESubsystem.startEndEffector()}, EESubsystem),
-    BeamBreakCommand { EESubsystem.beamBreakState }
+    BeamBreakCommand ({ EESubsystem.beamBreakState }, {IntakeSubsystem.intakeCurrent})
 )
