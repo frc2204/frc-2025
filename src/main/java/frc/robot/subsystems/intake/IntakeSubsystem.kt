@@ -13,7 +13,7 @@ object IntakeSubsystem: SubsystemBase() {
     }
 
     val intakeCurrent
-        get() = intakeMotor.outputCurrent > IntakeConstants.INTAKE_STALL_LIMIT
+        get() = intakeMotor.outputCurrent >= IntakeConstants.INTAKE_STALL_LIMIT
 
     fun intake() {
         intakeMotor.set(IntakeConstants.INTAKE_SPEED)

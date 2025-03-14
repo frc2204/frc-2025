@@ -1,11 +1,10 @@
 package frc.robot.commands.end_effector
 
 import edu.wpi.first.wpilibj2.command.Command
-import edu.wpi.first.wpilibj2.command.Commands
 import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.intake.IntakeSubsystem
 
-class BeamBreakCommand(private val beamBreakState: () -> Boolean): Command() {
+class BeamBreakCommand(private val beamBreakState: () -> Boolean, private val intakeStall: () -> Boolean): Command() {
     private var isBroken = false
     init {
         addRequirements(EESubsystem, IntakeSubsystem)
@@ -17,7 +16,7 @@ class BeamBreakCommand(private val beamBreakState: () -> Boolean): Command() {
     }
 
     override fun isFinished(): Boolean {
-        return (isBroken && beamBreakState.invoke()) || (IntakeSubsystem.intakeCurrent)
+        return (isBroken && beamBreakState.invoke()) || (intakeStall.invoke())
     }
 
     override fun end(interrupted: Boolean) {
