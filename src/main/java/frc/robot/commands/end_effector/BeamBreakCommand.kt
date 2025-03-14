@@ -17,7 +17,7 @@ class BeamBreakCommand(private val beamBreakState: () -> Boolean): Command() {
     }
 
     override fun isFinished(): Boolean {
-        return isBroken && beamBreakState.invoke()
+        return (isBroken && beamBreakState.invoke()) || (IntakeSubsystem.intakeCurrent)
     }
 
     override fun end(interrupted: Boolean) {

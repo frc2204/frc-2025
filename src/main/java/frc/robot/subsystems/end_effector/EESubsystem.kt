@@ -21,7 +21,7 @@ object EESubsystem: SubsystemBase() {
     }
 
     fun eeScore() {
-        eeMotor.set(0.2)
+        eeMotor.set(1.0)
     }
 
     fun eeReverse() {
