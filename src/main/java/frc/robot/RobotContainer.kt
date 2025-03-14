@@ -242,10 +242,10 @@ class RobotContainer {
         /** Reef auto align */
 //        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
         controllerTwo.square()
-            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left))
+            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Left))
 //        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
         controllerTwo.square()
-            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right))
+            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Right))
 
         controllerTwo.triangle()
             .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Left))
