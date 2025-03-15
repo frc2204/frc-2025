@@ -164,6 +164,18 @@ class RobotContainer {
             "Testing/Rotate 90", rotate90()
         )
 
+        autoChooser.addOption(
+            "Start1_Reef6_1", start1_reef6_1()
+        )
+
+        autoChooser.addOption(
+            "Start2_Reef1_1", start2_reef1_1()
+        )
+
+        autoChooser.addOption(
+            "Start3_Reef2_1", start3_reef2_1()
+        )
+
         // Configure the button bindings
         configureButtonBindings()
     }
@@ -286,5 +298,17 @@ class RobotContainer {
 
     private fun rotate90(): Command {
         return PathPlannerAuto("Rotate90")
+    }
+
+    private fun start1_reef6_1(): Command {
+        return PathPlannerAuto("Start1_Reef6_1")
+    }
+
+    private fun start2_reef1_1(): Command {
+        return PathPlannerAuto("Start2_Reef1_1")
+    }
+
+    private fun start3_reef2_1(): Command {
+        return PathPlannerAuto("Start3_Reef2_1")
     }
 }
