@@ -13,7 +13,7 @@ object StatusSubsystem: SubsystemBase() {
 
     init {
         candle.configAllSettings(CANdleConfiguration())
-        candle.configLEDType(CANdle.LEDStripType.RGB)
+        candle.configLEDType(CANdle.LEDStripType.GRB)
         candle.configBrightnessScalar(1.0)
     }
 
@@ -24,8 +24,7 @@ object StatusSubsystem: SubsystemBase() {
 
     fun setCandleStatus(statusState: StatusState) {
         candle.setLEDs(statusState.rgb.r, statusState.rgb.g, statusState.rgb.b)
-        candle.animate(statusState.anim)
-        candle
+        //candle.animate(statusState.anim)
     }
 
     override fun periodic() {

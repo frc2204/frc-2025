@@ -15,9 +15,7 @@ package frc.robot
 import com.pathplanner.lib.auto.AutoBuilder
 import com.pathplanner.lib.auto.NamedCommands
 import com.pathplanner.lib.commands.PathPlannerAuto
-import config.AutoAlignConstants
-import config.ElevatorConstants
-import config.TunerConstants
+import config.*
 import edu.wpi.first.math.Matrix
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
@@ -42,8 +40,8 @@ class RobotContainer {
     private var drive: Drive? = null
 
     // Controllers
-    private val controller = CommandXboxController(0)
-    private val controllerTwo = CommandPS5Controller(1)
+    private val xBoxController = CommandXboxController(1)
+    private val ps5Controller = CommandPS5Controller(0)
 
     // Dashboard inputs
     private val autoChooser: LoggedDashboardChooser<Command>
@@ -176,6 +174,10 @@ class RobotContainer {
             "Start3_Reef2_1", start3_reef2_1()
         )
 
+        autoChooser.addOption(
+            "Start1_Reef6&5_2", start1_reef6_5_2()
+        )
+
         // Configure the button bindings
         configureButtonBindings()
     }
@@ -188,9 +190,9 @@ class RobotContainer {
         // Default command, normal field-relative drive
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
-            { -controllerTwo.leftY * 1 },
-            { -controllerTwo.leftX * 1 },
-            { -controllerTwo.rightX * 1 })
+            { -ps5Controller.leftY * 1 },
+            { -ps5Controller.leftX * 1 },
+            { -ps5Controller.rightX * 1 })
 
         // Lock to 0° when A button is held
 //        controller
@@ -204,7 +206,7 @@ class RobotContainer {
         //controller.x().onTrue(Commands.runOnce({ drive!!.stopWithX() }, drive))
 
         // Reset gyro to 0° when B button is pressed
-        controller
+        xBoxController
             .leftStick()
             .onTrue(
                 Commands.runOnce(
@@ -233,55 +235,55 @@ class RobotContainer {
 //        controller.povUp().onTrue(PositionElevator { ElevatorSubsystem.position + ElevatorConstants.EXTENSION_RATE } )
 //        controller.povDown().onTrue(PositionElevator { ElevatorSubsystem.position - ElevatorConstants.EXTENSION_RATE } )
 
-        controller.x().onTrue(ScoreCoral { ElevatorConstants.L1_POSITION })
-        controller.x().onFalse(ScoreCoralHome())
-        controller.y().onTrue(ScoreCoral { ElevatorConstants.L2_POSITION })
-        controller.y().onFalse(ScoreCoralHome())
-        controller.b().onTrue(ScoreCoral { ElevatorConstants.L3_POSITION })
-        controller.b().onFalse(ScoreCoralHome())
-        controller.a().onTrue(ScoreCoral { ElevatorConstants.L4_POSITION })
-        controller.a().onFalse(ScoreCoralHome())
+        xBoxController.x().onTrue(ScoreCoral { ElevatorConstants.L1_POSITION })
+        xBoxController.x().onFalse(ScoreCoralHome())
+        xBoxController.y().onTrue(ScoreCoral { ElevatorConstants.L2_POSITION })
+        xBoxController.y().onFalse(ScoreCoralHome())
+        xBoxController.b().onTrue(ScoreCoral { ElevatorConstants.L3_POSITION })
+        xBoxController.b().onFalse(ScoreCoralHome())
+        xBoxController.a().onTrue(ScoreCoral { ElevatorConstants.L4_POSITION })
+        xBoxController.a().onFalse(ScoreCoralHome())
 
-        controller.rightTrigger().whileTrue(ReverseIntake())
-        controller.rightTrigger().onFalse(ReverseIntakeStop())
+        xBoxController.rightTrigger().whileTrue(ReverseIntake())
+        xBoxController.rightTrigger().onFalse(ReverseIntakeStop())
 
         /** Intake commands */
 //        controller.leftBumper().onTrue(SourceIntake())
-        controllerTwo.L1().onTrue(SourceIntake())
+        ps5Controller.L1().onTrue(SourceIntake())
 //        controller.leftBumper().onFalse(SourceIntakeHome())
-        controllerTwo.L1().onFalse(SourceIntakeHome())
+        ps5Controller.L1().onFalse(SourceIntakeHome())
 
         /** Source auto align */
 //        controller.leftTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
-        controllerTwo.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
+        ps5Controller.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
 //        controller.rightTrigger().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
-        controllerTwo.R2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
+        ps5Controller.R2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
 
         /** Reef auto align */
 //        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
-        controllerTwo.square()
-            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Left))
+        ps5Controller.square()
+            .and(ps5Controller.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Left))
 //        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
-        controllerTwo.square()
-            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Right))
+        ps5Controller.square()
+            .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Right))
 
-        controllerTwo.triangle()
-            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Left))
+        ps5Controller.circle()
+            .and(ps5Controller.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Left))
 
-        controllerTwo.triangle()
-            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Right))
+        ps5Controller.circle()
+            .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF1_Right))
 
-        controllerTwo.circle()
-            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Left))
+        ps5Controller.cross()
+            .and(ps5Controller.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Left))
 
-        controllerTwo.circle()
-            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Right))
+        ps5Controller.cross()
+            .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF2_Right))
 
-        controllerTwo.cross()
-            .and(controllerTwo.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Left))
+        ps5Controller.triangle()
+            .and(ps5Controller.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Left))
 
-        controllerTwo.cross()
-            .and(controllerTwo.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right))
+        ps5Controller.triangle()
+            .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right))
     }
 
     val autonomousCommand: Command
@@ -310,5 +312,9 @@ class RobotContainer {
 
     private fun start3_reef2_1(): Command {
         return PathPlannerAuto("Start3_Reef2_1")
+    }
+
+    private fun start1_reef6_5_2(): Command {
+        return PathPlannerAuto("Start1_Reef65_2_new")
     }
 }

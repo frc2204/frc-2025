@@ -14,6 +14,7 @@
 package frc.robot.subsystems.vision;
 
 import static frc.robot.subsystems.vision.VisionConstants.*;
+import static java.lang.Math.abs;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.VecBuilder;
@@ -35,6 +36,8 @@ public class Vision extends SubsystemBase {
   private final VisionIO[] io;
   private final VisionIOInputsAutoLogged[] inputs;
   private final Alert[] disconnectedAlerts;
+  private Pose3d lastAcceptedPose = null;
+  private int lastAcceptedPoseCounter = 0;
 
   public Vision(VisionConsumer consumer, VisionIO... io) {
     this.consumer = consumer;
@@ -98,22 +101,24 @@ public class Vision extends SubsystemBase {
 
       // Loop over pose observations
       for (var observation : inputs[cameraIndex].poseObservations) {
+        // boolean isOscillating = isOscillating(observation.pose());
         // Check whether to reject pose
         boolean rejectPose =
             observation.tagCount() == 0 // Must have at least one tag
                 || (observation.tagCount() == 1
                     && observation.ambiguity() > maxAmbiguity) // Cannot be high ambiguity
-                || Math.abs(observation.pose().getZ())
-                    > maxZError // Must have realistic Z coordinate
+                || abs(observation.pose().getZ()) > maxZError // Must have realistic Z coordinate
 
                 // Must be within the field boundaries
                 || observation.pose().getX() < 0.0
                 || observation.pose().getX() > aprilTagLayout.getFieldLength()
                 || observation.pose().getY() < 0.0
                 || observation.pose().getY() > aprilTagLayout.getFieldWidth();
+        // || !isOscillating;
 
         // Add pose to log
         robotPoses.add(observation.pose());
+        // lastAcceptedPose = observation.pose();
         if (rejectPose) {
           robotPosesRejected.add(observation.pose());
         } else {
@@ -184,5 +189,16 @@ public class Vision extends SubsystemBase {
         Pose2d visionRobotPoseMeters,
         double timestampSeconds,
         Matrix<N3, N1> visionMeasurementStdDevs);
+  }
+
+  public Boolean isOscillating(Pose3d currentPose) {
+    if (lastAcceptedPose != null) {
+      // if current pose - last accepted pose is less than oscillation distance --> data is good
+      return (((abs(currentPose.getX()) - lastAcceptedPose.toPose2d().getX())
+              > maxOscillationDistance)
+          && (abs(currentPose.getY()) - lastAcceptedPose.toPose2d().getY())
+              > maxOscillationDistance);
+    }
+    return false;
   }
 }

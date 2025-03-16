@@ -1,8 +1,11 @@
 package frc.robot.commands.autonomous
 
 import config.ElevatorConstants
+import edu.wpi.first.wpilibj.SynchronousInterrupt.WaitResult
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup
+import edu.wpi.first.wpilibj2.command.WaitCommand
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand
 import frc.robot.commands.elevator.PositionElevator
 import frc.robot.commands.end_effector.BeamBreakCommand
 import frc.robot.subsystems.end_effector.EESubsystem
