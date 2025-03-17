@@ -178,6 +178,14 @@ class RobotContainer {
             "Start1_Reef6&5_2", start1_reef6_5_2()
         )
 
+        autoChooser.addOption(
+            "Start2_Reef1&3_2", start2_reef13_2()
+        )
+
+        autoChooser.addOption(
+            "Start3_Reef2&3_2", start3_reef23_2()
+        )
+
         // Configure the button bindings
         configureButtonBindings()
     }
@@ -316,5 +324,13 @@ class RobotContainer {
 
     private fun start1_reef6_5_2(): Command {
         return PathPlannerAuto("Start1_Reef65_2_new")
+    }
+
+    private fun start2_reef13_2(): Command {
+        return PathPlannerAuto("Start2_Reef13_2")
+    }
+
+    private fun start3_reef23_2(): Command {
+        return PathPlannerAuto("Start3_Reef23_2")
     }
 }
