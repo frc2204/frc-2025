@@ -51,8 +51,8 @@ public class VisionConstants {
   // (Adjust to trust some cameras more than others)
   public static double[] cameraStdDevFactors =
       new double[] {
-        0.65, // Camera 0
-        1.0 // Camera 1
+        0.50, // Camera 0
+        1.05 // Camera 1
       };
 
   // Multipliers to apply for MegaTag 2 observations

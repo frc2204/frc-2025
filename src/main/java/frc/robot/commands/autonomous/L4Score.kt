@@ -10,7 +10,7 @@ import frc.robot.subsystems.end_effector.EESubsystem
 class L4Score: SequentialCommandGroup(
     PositionElevator({ ElevatorConstants.L4_POSITION },
         {it in ElevatorConstants.L4_POSITION - ElevatorConstants.SCORING_OFFSET .. ElevatorConstants.L4_POSITION + ElevatorConstants.SCORING_OFFSET}),
-    Commands.runOnce({ EESubsystem.eeScore() }, EESubsystem),
+    Commands.runOnce({ EESubsystem.eeScoreAuto() }, EESubsystem),
     WaitCommand(0.5),
     Commands.runOnce({ EESubsystem.stopEndEffector() }, EESubsystem),
     WaitCommand(0.2),

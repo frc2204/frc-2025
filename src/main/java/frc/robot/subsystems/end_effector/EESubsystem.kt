@@ -21,11 +21,19 @@ object EESubsystem: SubsystemBase() {
     }
 
     fun eeScore() {
+        eeMotor.set(0.2)
+    }
+
+    fun eeScoreAuto() {
         eeMotor.set(1.0)
     }
 
     fun eeReverse() {
         eeMotor.set(-1.0)
+    }
+
+    fun eeStage() {
+        eeMotor.set(-0.05)
     }
 
     fun stopEndEffector() {

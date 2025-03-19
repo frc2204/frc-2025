@@ -31,7 +31,9 @@ import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.autonomous.Intake
 import frc.robot.commands.autonomous.L4Score
 import frc.robot.commands.command_groups.*
+import frc.robot.commands.end_effector.StageCoral
 import frc.robot.subsystems.drive.*
+import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
 
@@ -292,6 +294,8 @@ class RobotContainer {
 
         ps5Controller.triangle()
             .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right))
+
+        ps5Controller.R1().whileTrue(StageCoral({EESubsystem.beamBreakState}))
     }
 
     val autonomousCommand: Command
