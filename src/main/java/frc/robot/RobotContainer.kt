@@ -294,8 +294,6 @@ class RobotContainer {
 
         ps5Controller.triangle()
             .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right))
-
-        ps5Controller.R1().whileTrue(StageCoral({EESubsystem.beamBreakState}))
     }
 
     val autonomousCommand: Command
