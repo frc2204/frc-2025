@@ -1,19 +1,16 @@
 package frc.robot.commands.autonomous
 
 import config.ElevatorConstants
-import edu.wpi.first.wpilibj.SynchronousInterrupt.WaitResult
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup
-import edu.wpi.first.wpilibj2.command.WaitCommand
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand
 import frc.robot.commands.elevator.PositionElevator
 import frc.robot.commands.end_effector.BeamBreakCommand
 import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.intake.IntakeSubsystem
 
 class Intake: SequentialCommandGroup(
-    PositionElevator({ ElevatorConstants.ELEVATOR_MIN_HEIGHT},
-        {it in ElevatorConstants.ELEVATOR_MIN_HEIGHT - ElevatorConstants.OFFSET_RATE..ElevatorConstants.ELEVATOR_MIN_HEIGHT + ElevatorConstants.OFFSET_RATE}),
+    PositionElevator({ ElevatorConstants.elevatorMinHeight},
+        {it in ElevatorConstants.elevatorMinHeight - ElevatorConstants.OFFSET_RATE..ElevatorConstants.elevatorMinHeight + ElevatorConstants.OFFSET_RATE}),
     Commands.runOnce({ IntakeSubsystem.intake()}, IntakeSubsystem),
     Commands.runOnce({ EESubsystem.startEndEffector()}, EESubsystem),
     BeamBreakCommand ({ EESubsystem.beamBreakState }, { IntakeSubsystem.intakeCurrent })

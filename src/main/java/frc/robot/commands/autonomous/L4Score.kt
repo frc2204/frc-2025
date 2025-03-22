@@ -14,6 +14,6 @@ class L4Score: SequentialCommandGroup(
     WaitCommand(0.5),
     Commands.runOnce({ EESubsystem.stopEndEffector() }, EESubsystem),
     WaitCommand(0.2),
-    PositionElevator({ ElevatorConstants.ELEVATOR_MIN_HEIGHT },
-        {it in ElevatorConstants.ELEVATOR_MIN_HEIGHT - ElevatorConstants.OFFSET_RATE..ElevatorConstants.ELEVATOR_MIN_HEIGHT + ElevatorConstants.OFFSET_RATE})
+    PositionElevator({ ElevatorConstants.elevatorMinHeight },
+        {it in ElevatorConstants.elevatorMinHeight - ElevatorConstants.OFFSET_RATE..ElevatorConstants.elevatorMinHeight + ElevatorConstants.OFFSET_RATE})
 )
