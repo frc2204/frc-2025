@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
+import frc.robot.commands.auto_align.AutoAlignNew
 import frc.robot.commands.autonomous.Intake
 import frc.robot.commands.autonomous.L4Score
 import frc.robot.commands.command_groups.*
@@ -271,8 +272,10 @@ class RobotContainer {
 
         /** Reef auto align */
 //        controller.x().and(controller.povLeft().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Left)))
+//        ps5Controller.square()
+//            .and(ps5Controller.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Left))
         ps5Controller.square()
-            .and(ps5Controller.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Left))
+            .and(ps5Controller.povLeft()).whileTrue(AutoBuilder.followPath(AutoAlignNew.testPathReefTwoLeft))
 //        controller.x().and(controller.povRight().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF4_Right)))
         ps5Controller.square()
             .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF5_Right))
