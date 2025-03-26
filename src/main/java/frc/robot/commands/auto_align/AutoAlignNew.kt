@@ -8,7 +8,7 @@ import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.util.Units
 
 object AutoAlignNew {
-    private val pathConstraints = PathConstraints(3.3, 3.8,
+    private val pathConstraints = PathConstraints(1.5, 2.0,
         Units.degreesToRadians(360.0), Units.degreesToRadians(540.0))
 
     val testPathReefTwoLeft = PathPlannerPath(
