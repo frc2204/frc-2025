@@ -3,8 +3,6 @@ package config
 import com.ctre.phoenix6.signals.InvertedValue
 import com.ctre.phoenix6.signals.NeutralModeValue
 import com.pathplanner.lib.config.PIDConstants
-import com.revrobotics.spark.config.SparkBaseConfig
-import com.revrobotics.spark.config.SparkMaxConfig
 
 object AlgaeHandlerConstants {
     const val ALGAE_HANDLER_WRIST_ID = 15
@@ -16,7 +14,7 @@ object AlgaeHandlerConstants {
 
     const val HARD_STOP = 0.0
 
-    const val ALGAE_HANDLER_WRIST_REDUCTION = 0
+    const val ALGAE_HANDLER_WRIST_REDUCTION = 0.0
 
     val algaeHandlerWristNeutralMode = NeutralModeValue.Brake
     val algaeHandlerWristInverted = InvertedValue.Clockwise_Positive
@@ -33,16 +31,5 @@ object AlgaeHandlerConstants {
 
     /** Spinner SparkMAX configs */
 
-    private const val ALGAE_HANDLER_SPINNER_REDUCTION = 0.0
-
-    val algaeSpinnerConfig = SparkMaxConfig()
-
-    init {
-        algaeSpinnerConfig.smartCurrentLimit(40)
-        algaeSpinnerConfig.idleMode(SparkBaseConfig.IdleMode.kCoast)
-        /** verification required */
-        algaeSpinnerConfig.inverted(false)
-        algaeSpinnerConfig.openLoopRampRate(0.25)
-        algaeSpinnerConfig.encoder.positionConversionFactor(ALGAE_HANDLER_SPINNER_REDUCTION)
-    }
+    const val ALGAE_HANDLER_SPINNER_REDUCTION = 0.0
 }
