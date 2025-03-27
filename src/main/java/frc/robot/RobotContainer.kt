@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
+import frc.robot.commands.auto_align.AutoAlignCommand
 import frc.robot.commands.autonomous.Intake
 import frc.robot.commands.autonomous.L4Score
 import frc.robot.commands.command_groups.*
@@ -292,8 +293,10 @@ class RobotContainer {
         ps5Controller.triangle()
             .and(ps5Controller.povLeft()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Left))
 
+//        ps5Controller.triangle()
+//            .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right))
         ps5Controller.triangle()
-            .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right))
+            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(Pose2d(3.995, 5.208, Rotation2d.fromDegrees(-60.0))))
     }
 
     val autonomousCommand: Command
