@@ -2,6 +2,9 @@ package config
 
 import com.pathplanner.lib.path.PathConstraints
 import com.pathplanner.lib.path.PathPlannerPath
+import com.pathplanner.lib.path.Waypoint
+import edu.wpi.first.math.geometry.Pose2d
+import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.util.Units
 
 object AutoAlignConstants {
@@ -55,6 +58,13 @@ object AutoAlignConstants {
     val ALIGN_REEF5_Right = CompletePath(PathPlannerPath.fromPathFile("Auto_Align_Reef5_Right"),
         PathConstraints(3.3, 3.8,
             Units.degreesToRadians(480.0), Units.degreesToRadians(540.0)))
+
+//    val ALIGN_REEF2_LEFT_WAYPOINTS = PathPlannerPath.waypointsFromPoses(
+//        Pose2d(5.121, 2.568, Rotation2d.fromDegrees(120.0))
+//    )
+
+    val pathConstraints = PathConstraints(1.5, 2.0,
+        Units.degreesToRadians(360.0), Units.degreesToRadians(540.0))
 }
 
 data class CompletePath(val path: PathPlannerPath, val constraints: PathConstraints)

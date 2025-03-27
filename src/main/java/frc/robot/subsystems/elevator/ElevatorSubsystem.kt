@@ -13,7 +13,7 @@ object ElevatorSubsystem: SubsystemBase() {
 
     var desiredPosition = position
         set(position) {
-            field = if(position in ElevatorConstants.ELEVATOR_MIN_HEIGHT..ElevatorConstants.ELEVATOR_MAX_HEIGHT)
+            field = if(position in ElevatorConstants.elevatorMinHeight..ElevatorConstants.ELEVATOR_MAX_HEIGHT)
                 position
             else
                 this.position
@@ -25,8 +25,11 @@ object ElevatorSubsystem: SubsystemBase() {
 
     override fun periodic() {
         //elevatorMotor.setControl(desiredPositionDutyCycle)
-        /** previous */
-        elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
+        if(desiredPosition < position) {
+            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(1))
+        } else {
+            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
+        }
 
         Logger.recordOutput("ElevatorDesiredPosition", desiredPosition)
 
