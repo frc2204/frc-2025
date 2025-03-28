@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.auto_align.AutoAlignCommand
+import frc.robot.commands.autonomous.ElevatorL1
 import frc.robot.commands.autonomous.Intake
 import frc.robot.commands.autonomous.L3Score
 import frc.robot.commands.autonomous.L4Score
@@ -134,6 +135,7 @@ class RobotContainer {
         NamedCommands.registerCommand("Intake", Intake())
         NamedCommands.registerCommand("L4Score",L4Score())
         NamedCommands.registerCommand("L3Score", L3Score())
+        NamedCommands.registerCommand("ElevatorL1", ElevatorL1())
 
         // Set up auto routines
         autoChooser = LoggedDashboardChooser("Auto Choices", AutoBuilder.buildAutoChooser())
