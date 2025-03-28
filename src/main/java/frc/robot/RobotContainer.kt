@@ -30,6 +30,7 @@ import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.auto_align.AutoAlignCommand
 import frc.robot.commands.autonomous.Intake
+import frc.robot.commands.autonomous.L3Score
 import frc.robot.commands.autonomous.L4Score
 import frc.robot.commands.command_groups.*
 import frc.robot.commands.end_effector.StageCoral
@@ -132,6 +133,7 @@ class RobotContainer {
 
         NamedCommands.registerCommand("Intake", Intake())
         NamedCommands.registerCommand("L4Score",L4Score())
+        NamedCommands.registerCommand("L3Score", L3Score())
 
         // Set up auto routines
         autoChooser = LoggedDashboardChooser("Auto Choices", AutoBuilder.buildAutoChooser())
@@ -310,6 +312,16 @@ class RobotContainer {
             .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_LEFT_POSE))
         ps5Controller.triangle()
             .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_RIGHT_POSE))
+
+        ps5Controller.L3()
+            .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_LEFT_POSE))
+        ps5Controller.L3()
+            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_RIGHT_POSE))
+
+        ps5Controller.R3()
+            .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))
+        ps5Controller.R3()
+            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
     }
 
     val autonomousCommand: Command
