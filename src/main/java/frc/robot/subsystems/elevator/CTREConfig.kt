@@ -13,6 +13,10 @@ object CTREConfig {
         elevatorFXConfig.Slot0.kI = ElevatorConstants.ELEVATOR_PID.kI
         elevatorFXConfig.Slot0.kD = ElevatorConstants.ELEVATOR_PID.kD
 
+        elevatorFXConfig.Slot1.kP = ElevatorConstants.ELEVATOR_PID_DEC1.kP
+        elevatorFXConfig.Slot1.kI = ElevatorConstants.ELEVATOR_PID_DEC1.kI
+        elevatorFXConfig.Slot1.kD = ElevatorConstants.ELEVATOR_PID_DEC1.kD
+
         /** MotorOutput States */
         elevatorFXConfig.MotorOutput.NeutralMode = ElevatorConstants.elevatorNeutralMode
         elevatorFXConfig.MotorOutput.Inverted = ElevatorConstants.elevatorInverted
