@@ -12,9 +12,7 @@ object AlgaeHandlerConstants {
 
     val ALGAE_HANDLER_WRIST_PID = PIDConstants(2.0, 0.0, 0.0)
 
-    const val HARD_STOP = 0.0
-
-    const val ALGAE_HANDLER_WRIST_REDUCTION = 0.0
+    const val ALGAE_HANDLER_WRIST_REDUCTION = 25.0
 
     val algaeHandlerWristNeutralMode = NeutralModeValue.Brake
     val algaeHandlerWristInverted = InvertedValue.Clockwise_Positive
@@ -29,7 +27,24 @@ object AlgaeHandlerConstants {
     const val DUTY_CYCLE_CLOSED_LOOP_RAMP_PERIOD = 0.0
     const val VOLTAGE_CLOSED_LOOP_RAMP_PERIOD = 0.0
 
+    /** Wrist Constants */
+
+    var wristMinPosition = 0.0
+    private const val MAX_OFFSET = 1.0
+    private const val L1_ALGAE_OFFSET = 0.0
+    private const val L2_ALGAE_OFFSET = 0.0
+
+    val WRIST_MAX_POSITION = wristMinPosition + MAX_OFFSET
+    val L1_ALGAE_POSITION = wristMinPosition + L1_ALGAE_OFFSET
+    val L2_ALGAE_POSITION = wristMinPosition + L2_ALGAE_OFFSET
+
     /** Spinner SparkMAX configs */
 
-    const val ALGAE_HANDLER_SPINNER_REDUCTION = 0.0
+    const val ALGAE_HANDLER_SPINNER_REDUCTION = 12.5
+
+    /** Spinner Constants */
+
+    const val DEALGAEFY_OUTPUT = 0.2
+    const val SCORE_ALGAE_OUTPUT = -0.7
+    const val INTAKE_STALLING = 30.0
 }
