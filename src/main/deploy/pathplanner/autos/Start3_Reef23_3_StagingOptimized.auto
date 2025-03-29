@@ -13,12 +13,6 @@
                 "data": {
                   "pathName": "Start3_Reef2_StageRight"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorL1"
-                }
               }
             ]
           }
@@ -45,7 +39,7 @@
         {
           "type": "named",
           "data": {
-            "name": "L4Score"
+            "name": "L3Score"
           }
         },
         {
@@ -68,12 +62,6 @@
                 "type": "path",
                 "data": {
                   "pathName": "Source_Reef3_Stage_Left"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorL1"
                 }
               },
               {
@@ -107,7 +95,7 @@
         {
           "type": "named",
           "data": {
-            "name": "L4Score"
+            "name": "L3Score"
           }
         },
         {
@@ -130,12 +118,6 @@
                 "type": "path",
                 "data": {
                   "pathName": "Source_Reef3_Stage_Right"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorL1"
                 }
               },
               {
@@ -169,7 +151,7 @@
         {
           "type": "named",
           "data": {
-            "name": "L4Score"
+            "name": "L3Score"
           }
         }
       ]

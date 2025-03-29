@@ -7,7 +7,7 @@ object ElevatorConstants {
     const val ELEVATOR_MOTOR_ID = 13
 
     /** must be tuned later */
-    val ELEVATOR_PID = PIDConstants(4.4, 0.0, 0.0)
+    val ELEVATOR_PID = PIDConstants(4.0, 0.0, 0.0)
     val ELEVATOR_PID_DEC1 = PIDConstants(2.9, 0.0, 0.0)
     val ELEVATOR_PID_DEC2 = PIDConstants(0.20, 0.0, 0.0)
 
@@ -27,19 +27,19 @@ object ElevatorConstants {
     val elevatorInverted = InvertedValue.CounterClockwise_Positive
 
     const val ELEVATOR_ENABLE_CURRENT_LIMIT = true
-    const val ELEVATOR_CURRENT_LIMIT = 45.0
+    const val ELEVATOR_CURRENT_LIMIT = 40.0
     const val ELEVATOR_CURRENT_LOWER_LIMIT = 30.0
     const val ELEVATOR_CURRENT_LOWER_TIME = 1.0
 
-    const val DUTY_CYCLE_OPEN_LOOP_RAMP_PERIOD = 0.10
-    const val VOLTAGE_OPEN_LOOP_RAMP_PERIOD = 0.10
+    const val DUTY_CYCLE_OPEN_LOOP_RAMP_PERIOD = 0.25
+    const val VOLTAGE_OPEN_LOOP_RAMP_PERIOD = 0.25
     const val DUTY_CYCLE_CLOSED_LOOP_RAMP_PERIOD = 0.0
     const val VOLTAGE_CLOSED_LOOP_RAMP_PERIOD = 0.0
 
     private const val L1_OFFSET = 1.2
     private const val L2_OFFSET = 1.69
     private const val L3_OFFSET = 3.12
-    private const val L4_OFFSET = 5.30
+    private const val L4_OFFSET = 5.50
 
     val L1_POSITION = elevatorMinHeight + L1_OFFSET
     val L2_POSITION = elevatorMinHeight + L2_OFFSET

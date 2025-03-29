@@ -314,14 +314,14 @@ class RobotContainer {
         ps5Controller.triangle()
             .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_RIGHT_POSE))
 
-        ps5Controller.L3()
+        ps5Controller.touchpad()
             .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_LEFT_POSE))
-        ps5Controller.L3()
+        ps5Controller.touchpad()
             .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_RIGHT_POSE))
 
-        ps5Controller.R3()
+        ps5Controller.options()
             .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))
-        ps5Controller.R3()
+        ps5Controller.options()
             .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
     }
 
