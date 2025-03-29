@@ -37,9 +37,9 @@ object ElevatorConstants {
     const val VOLTAGE_CLOSED_LOOP_RAMP_PERIOD = 0.0
 
     private const val L1_OFFSET = 1.2
-    private const val L2_OFFSET = 1.8
-    private const val L3_OFFSET = 3.0
-    private const val L4_OFFSET = 4.5
+    private const val L2_OFFSET = 1.69
+    private const val L3_OFFSET = 3.12
+    private const val L4_OFFSET = 5.30
 
     val L1_POSITION = elevatorMinHeight + L1_OFFSET
     val L2_POSITION = elevatorMinHeight + L2_OFFSET

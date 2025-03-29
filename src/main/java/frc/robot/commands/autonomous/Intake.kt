@@ -14,6 +14,5 @@ class Intake: SequentialCommandGroup(
         {it in ElevatorConstants.elevatorMinHeight - ElevatorConstants.OFFSET_RATE..ElevatorConstants.elevatorMinHeight + ElevatorConstants.OFFSET_RATE}),
     Commands.runOnce({ IntakeSubsystem.intake()}, IntakeSubsystem),
     Commands.runOnce({ EESubsystem.startEndEffector()}, EESubsystem),
-    BeamBreakCommand ({ EESubsystem.beamBreakState }, { IntakeSubsystem.intakeCurrent }),
-    StageCoral { EESubsystem.beamBreakState }
+    BeamBreakCommand ({ EESubsystem.beamBreakState }, { IntakeSubsystem.intakeCurrent })
 )
