@@ -5,9 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "start1_reef6right_stage"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "start1_reef6right_stage"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorL1"
+                }
+              }
+            ]
           }
         },
         {
@@ -48,9 +61,28 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "source1_reef5left_stage"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "source1_reef5left_stage"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StageCoral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorL1"
+                }
+              }
+            ]
           }
         },
         {
@@ -67,12 +99,6 @@
                 "type": "named",
                 "data": {
                   "name": "ElevatorRaise"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "StageCoral"
                 }
               }
             ]
@@ -97,9 +123,28 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "source1_reef5right_stage"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "source1_reef5right_stage"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StageCoral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorL1"
+                }
+              }
+            ]
           }
         },
         {
@@ -116,12 +161,6 @@
                 "type": "named",
                 "data": {
                   "name": "ElevatorRaise"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "StageCoral"
                 }
               }
             ]
