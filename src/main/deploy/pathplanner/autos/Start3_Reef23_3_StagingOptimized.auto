@@ -1,0 +1,181 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Start3_Reef2_StageRight"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorL1"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Reef2_Stage_Right"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorRaise"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "L4Score"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Reef2_Right_Source"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Source_Reef3_Stage_Left"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorL1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StageCoral"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Reef3_Stage_Left"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorRaise"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "L4Score"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Reef3_Left_Source"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Source_Reef3_Stage_Right"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorL1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StageCoral"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Reef3_Stage_Right"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorRaise"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "L4Score"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": false,
+  "folder": null,
+  "choreoAuto": false
+}
