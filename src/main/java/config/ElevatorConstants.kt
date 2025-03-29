@@ -13,7 +13,6 @@ object ElevatorConstants {
 
     var elevatorMinHeight = 0.0
     /** in inches, need to tune */
-    const val ELEVATOR_MAX_HEIGHT = 5.783
 
     const val ELEVATOR_MAX_ERROR = 1.45
 
@@ -40,9 +39,11 @@ object ElevatorConstants {
     private const val L2_OFFSET = 1.8
     private const val L3_OFFSET = 3.0
     private const val L4_OFFSET = 4.5
+    private const val MAX_OFFSET = 5.5
 
     val L1_POSITION = elevatorMinHeight + L1_OFFSET
     val L2_POSITION = elevatorMinHeight + L2_OFFSET
     val L3_POSITION = elevatorMinHeight + L3_OFFSET
     val L4_POSITION = elevatorMinHeight + L4_OFFSET
+    val ELEVATOR_MAX_HEIGHT = elevatorMinHeight + MAX_OFFSET
 }
