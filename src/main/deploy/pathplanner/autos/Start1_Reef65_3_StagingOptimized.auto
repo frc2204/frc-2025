@@ -11,9 +11,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "reef6right_stage_reef6right"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "reef6right_stage_reef6right"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorRaise"
+                }
+              }
+            ]
           }
         },
         {
@@ -41,9 +54,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "reef5left_stage_reef5left"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "reef5left_stage_reef5left"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorRaise"
+                }
+              }
+            ]
           }
         },
         {
@@ -71,9 +97,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "reef5right_stage_reef5right"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "reef5right_stage_reef5right"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorRaise"
+                }
+              }
+            ]
           }
         },
         {
