@@ -140,6 +140,7 @@ public class Robot extends LoggedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.schedule();
     }
+    ElevatorSubsystem.INSTANCE.setAutonomousActive(true);
   }
 
   /** This function is called periodically during autonomous. */
@@ -156,6 +157,7 @@ public class Robot extends LoggedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
+    ElevatorSubsystem.INSTANCE.setAutonomousActive(false);
   }
 
   /** This function is called periodically during operator control. */

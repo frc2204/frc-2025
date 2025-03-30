@@ -13,12 +13,6 @@
                 "data": {
                   "pathName": "start1_reef6right_stage"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorL1"
-                }
               }
             ]
           }
@@ -75,12 +69,6 @@
                 "data": {
                   "name": "StageCoral"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorL1"
-                }
               }
             ]
           }
@@ -136,12 +124,6 @@
                 "type": "named",
                 "data": {
                   "name": "StageCoral"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorL1"
                 }
               }
             ]

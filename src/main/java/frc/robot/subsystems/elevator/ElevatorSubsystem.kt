@@ -9,6 +9,8 @@ import org.littletonrobotics.junction.Logger
 object ElevatorSubsystem: SubsystemBase() {
     private val elevatorMotor = TalonFX(ElevatorConstants.ELEVATOR_MOTOR_ID, "rio")
 
+    var isAutonomousActive: Boolean = false
+
     val position get() = elevatorMotor.position.valueAsDouble
 
     var desiredPosition = position
@@ -25,10 +27,14 @@ object ElevatorSubsystem: SubsystemBase() {
 
     override fun periodic() {
         //elevatorMotor.setControl(desiredPositionDutyCycle)
-        if(desiredPosition < position) {
+        if((desiredPosition < position) && !isAutonomousActive) {
             elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(1))
         } else {
             elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
+        }
+
+        if(isAutonomousActive) {
+            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(2))
         }
 
         Logger.recordOutput("ElevatorDesiredPosition", desiredPosition)

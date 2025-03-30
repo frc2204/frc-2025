@@ -17,7 +17,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ElevatorL1"
+                  "name": "ElevatorRaise"
                 }
               }
             ]
@@ -26,13 +26,26 @@
         {
           "type": "named",
           "data": {
-            "name": "L4Score"
+            "name": "L3ScoreMaintainElevator"
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Reef6_Source"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Reef6_Source"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ZeroElevator"
+                }
+              }
+            ]
           }
         },
         {
@@ -54,7 +67,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ElevatorL1"
+                  "name": "ElevatorRaise"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StageCoral"
                 }
               }
             ]
@@ -63,13 +82,26 @@
         {
           "type": "named",
           "data": {
-            "name": "L4Score"
+            "name": "L3ScoreMaintainElevator"
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Reef5Right_Source"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Reef5Right_Source"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ZeroElevator"
+                }
+              }
+            ]
           }
         },
         {
@@ -91,7 +123,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ElevatorL1"
+                  "name": "ElevatorRaise"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StageCoral"
                 }
               }
             ]
@@ -100,7 +138,7 @@
         {
           "type": "named",
           "data": {
-            "name": "L4Score"
+            "name": "L3Score"
           }
         }
       ]
