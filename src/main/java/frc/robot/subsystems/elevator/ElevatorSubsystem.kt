@@ -3,6 +3,7 @@ package frc.robot.subsystems.elevator
 import com.ctre.phoenix6.controls.PositionDutyCycle
 import com.ctre.phoenix6.hardware.TalonFX
 import config.ElevatorConstants
+import config.ElevatorConstants.L3_POSITION
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.littletonrobotics.junction.Logger
 
@@ -12,6 +13,9 @@ object ElevatorSubsystem: SubsystemBase() {
     var isAutonomousActive: Boolean = false
 
     val position get() = elevatorMotor.position.valueAsDouble
+
+    val isElevatorRaised: Boolean
+        get() = position >= L3_POSITION
 
     var desiredPosition = position
         set(position) {

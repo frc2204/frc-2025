@@ -24,5 +24,5 @@ object EEConstants {
     const val DUTY_CYCLE_CLOSED_LOOP_RAMP_PERIOD = 0.0
     const val VOLTAGE_CLOSED_LOOP_RAMP_PERIOD = 0.0
 
-    const val SCORING_WAIT_TIME = 0.3
+    const val SCORING_WAIT_TIME = 0.35
 }

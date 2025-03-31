@@ -7,8 +7,8 @@
     "Testing"
   ],
   "autoFolders": [],
-  "defaultMaxVel": 3.7,
-  "defaultMaxAccel": 2.25,
+  "defaultMaxVel": 3.65,
+  "defaultMaxAccel": 2.3,
   "defaultMaxAngVel": 300.0,
   "defaultMaxAngAccel": 480.0,
   "defaultNominalVoltage": 12.0,

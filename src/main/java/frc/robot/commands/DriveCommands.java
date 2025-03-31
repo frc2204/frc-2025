@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.drive.Drive;
+import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.LinkedList;
@@ -71,11 +72,24 @@ public class DriveCommands {
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
       DoubleSupplier omegaSupplier) {
+
+    DoubleSupplier finalXSupplier;
+    DoubleSupplier finalYSupplier;
+
+    if (ElevatorSubsystem.INSTANCE.isElevatorRaised()) {
+      finalXSupplier = () -> xSupplier.getAsDouble() * 0.2;
+      finalYSupplier = () -> ySupplier.getAsDouble() * 0.2;
+    } else {
+      finalYSupplier = ySupplier;
+      finalXSupplier = xSupplier;
+    }
+
     return Commands.run(
         () -> {
           // Get linear velocity
           Translation2d linearVelocity =
-              getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
+              getLinearVelocityFromJoysticks(
+                  finalXSupplier.getAsDouble(), finalYSupplier.getAsDouble());
 
           // Apply rotation deadband
           double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);

@@ -15,9 +15,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "ElevatorRaise"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.9
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ElevatorRaise"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -26,7 +39,7 @@
         {
           "type": "named",
           "data": {
-            "name": "L3ScoreMaintainElevator"
+            "name": "L4ScoreMaintainElevator"
           }
         },
         {
@@ -40,9 +53,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "ZeroElevator"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.15
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ZeroElevator"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -67,13 +93,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ElevatorRaise"
+                  "name": "StageCoral"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "StageCoral"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.9
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ElevatorRaise"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -82,7 +121,7 @@
         {
           "type": "named",
           "data": {
-            "name": "L3ScoreMaintainElevator"
+            "name": "L4ScoreMaintainElevator"
           }
         },
         {
@@ -96,9 +135,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "ZeroElevator"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.15
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ZeroElevator"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -123,13 +175,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ElevatorRaise"
+                  "name": "StageCoral"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "StageCoral"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ElevatorRaise"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -138,7 +203,7 @@
         {
           "type": "named",
           "data": {
-            "name": "L3Score"
+            "name": "L4Score"
           }
         }
       ]
