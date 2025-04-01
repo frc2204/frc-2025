@@ -6,7 +6,7 @@ import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.util.Units
 
 object AutoAlignConstantsNew {
-    val pathConstraints = PathConstraints(3.5, 2.3,  Units.degreesToRadians(300.0), Units.degreesToRadians(480.0))
+    val pathConstraints = PathConstraints(3.5, 2.5,  Units.degreesToRadians(300.0), Units.degreesToRadians(480.0))
 
     val ALIGN_SOURCE_1_POSE = Pose2d(1.2, 7.090, Rotation2d.fromDegrees(-54.0))
     val ALIGN_SOURCE_2_POSE = Pose2d(1.232, 0.723, Rotation2d.fromDegrees(54.0))

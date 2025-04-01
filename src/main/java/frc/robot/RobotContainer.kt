@@ -138,6 +138,7 @@ class RobotContainer {
         NamedCommands.registerCommand("L3ScoreMaintainElevator", L3ScoreMaintainElevator())
         NamedCommands.registerCommand("L4ScoreMaintainElevator", L4ScoreMaintainElevator())
         NamedCommands.registerCommand("ZeroElevator", ZeroElevator())
+        NamedCommands.registerCommand("AutonIntake", AutonomousIntake())
 
         // Set up auto routines
         autoChooser = LoggedDashboardChooser("Auto Choices", AutoBuilder.buildAutoChooser())
