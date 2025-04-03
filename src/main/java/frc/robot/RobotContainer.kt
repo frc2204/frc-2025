@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
+import frc.robot.commands.Testing.AutonIntakeLoop
 import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.auto_align.AutoAlignCommand
 import frc.robot.commands.autonomous.*

@@ -12,11 +12,20 @@ object IntakeSubsystem: SubsystemBase() {
         configure(IntakeSparkMAXConfig.intakeMotorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
     }
 
+    private var startTime: Long = 0
+
     val intakeCurrent
         get() = intakeMotor.outputCurrent >= IntakeConstants.INTAKE_STALL_LIMIT
 
-    val autonIntakeCurrent
-        get() = intakeMotor.outputCurrent >= IntakeConstants.AUTO_STALL_LIMIT
+    fun startTimer() {
+        startTime = System.currentTimeMillis()
+    }
+
+    val autonIntakeCurrent: Boolean
+        get() {
+            val elapsedTime = System.currentTimeMillis() - startTime
+            return elapsedTime >= IntakeConstants.AUTO_INTAKE_DEBOUNCE && intakeMotor.outputCurrent >= IntakeConstants.AUTO_STALL_LIMIT
+        }
 
     fun intake() {
         intakeMotor.set(IntakeConstants.INTAKE_SPEED)
