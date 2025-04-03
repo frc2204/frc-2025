@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Start1_Reef6"
+                  "pathName": "start3_reef2_right"
                 }
               },
               {
@@ -49,7 +49,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Reef6_Source"
+                  "pathName": "reef2left_source2"
                 }
               },
               {
@@ -93,7 +93,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Source_Reef5_Right"
+                  "pathName": "source2_reef3_left"
                 }
               },
               {
@@ -137,7 +137,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Reef5Right_Source"
+                  "pathName": "Reef3_Left_Source"
                 }
               },
               {
@@ -181,7 +181,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Source_Reef5Left"
+                  "pathName": "Source_Reef3_Right"
                 }
               },
               {
@@ -221,7 +221,7 @@
       ]
     }
   },
-  "resetOdom": false,
+  "resetOdom": true,
   "folder": null,
   "choreoAuto": false
 }
