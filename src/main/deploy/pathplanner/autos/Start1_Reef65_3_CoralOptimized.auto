@@ -67,23 +67,17 @@
                       "data": {
                         "name": "ZeroElevator"
                       }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.15
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "AutonIntake"
-                      }
                     }
                   ]
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonIntake"
           }
         },
         {
@@ -97,19 +91,19 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "StageCoral"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
                     {
+                      "type": "named",
+                      "data": {
+                        "name": "StageCoral"
+                      }
+                    },
+                    {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.15
+                        "waitTime": 0.45
                       }
                     },
                     {
@@ -155,23 +149,17 @@
                       "data": {
                         "name": "ZeroElevator"
                       }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.15
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "AutonIntake"
-                      }
                     }
                   ]
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonIntake"
           }
         },
         {
@@ -185,19 +173,19 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "StageCoral"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
                     {
+                      "type": "named",
+                      "data": {
+                        "name": "StageCoral"
+                      }
+                    },
+                    {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.15
+                        "waitTime": 0.45
                       }
                     },
                     {

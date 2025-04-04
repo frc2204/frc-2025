@@ -21,7 +21,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.0
+                        "waitTime": 1.15
                       }
                     },
                     {
@@ -97,19 +97,19 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "StageCoral"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
                     {
+                      "type": "named",
+                      "data": {
+                        "name": "StageCoral"
+                      }
+                    },
+                    {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.15
+                        "waitTime": 0.5
                       }
                     },
                     {
@@ -185,19 +185,19 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "StageCoral"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
                     {
+                      "type": "named",
+                      "data": {
+                        "name": "StageCoral"
+                      }
+                    },
+                    {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.15
+                        "waitTime": 0.5
                       }
                     },
                     {

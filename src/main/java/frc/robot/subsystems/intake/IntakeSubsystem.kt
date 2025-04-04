@@ -24,11 +24,16 @@ object IntakeSubsystem: SubsystemBase() {
     val autonIntakeCurrent: Boolean
         get() {
             val elapsedTime = System.currentTimeMillis() - startTime
-            return elapsedTime >= IntakeConstants.AUTO_INTAKE_DEBOUNCE && intakeMotor.outputCurrent >= IntakeConstants.AUTO_STALL_LIMIT
+            return elapsedTime >= IntakeConstants.AUTO_INTAKE_DEBOUNCE && intakeMotor.outputCurrent >= IntakeConstants.AUTO_STALL_LIMIT && intakeMotor.outputCurrent <= IntakeConstants.INTAKE_MAX
         }
 
     fun intake() {
-        intakeMotor.set(IntakeConstants.INTAKE_SPEED)
+        //intakeMotor.set(IntakeConstants.INTAKE_SPEED)
+        intakeMotor.setVoltage(-10.0)
+    }
+
+    fun autonIntake() {
+        intakeMotor.setVoltage(-10.0)
     }
 
     fun reverseIntake() {

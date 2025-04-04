@@ -328,6 +328,8 @@ class RobotContainer {
             .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))
         ps5Controller.options()
             .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
+
+        //xBoxController.leftTrigger().onTrue(AutonIntakeLoop())
     }
 
     val autonomousCommand: Command

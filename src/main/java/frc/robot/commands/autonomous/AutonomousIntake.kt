@@ -13,7 +13,7 @@ class AutonomousIntake: Command() {
     }
 
     override fun execute() {
-        IntakeSubsystem.intake()
+        IntakeSubsystem.autonIntake()
     }
 
     override fun isFinished(): Boolean {

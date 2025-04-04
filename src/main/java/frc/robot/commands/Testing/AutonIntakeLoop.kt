@@ -7,6 +7,6 @@ import frc.robot.commands.autonomous.StageCoral
 
 class AutonIntakeLoop: SequentialCommandGroup(
     AutonomousIntake(),
-    WaitCommand(2.0),
+    WaitCommand(1.0),
     StageCoral()
 )
