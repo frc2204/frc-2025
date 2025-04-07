@@ -5,6 +5,7 @@ import config.EEConstants
 
 object EECTREConfig {
     var eeFXConfig = TalonFXConfiguration()
+
     init {
         eeFXConfig = TalonFXConfiguration()
 

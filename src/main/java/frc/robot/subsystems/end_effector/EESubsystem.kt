@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DigitalInput
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.littletonrobotics.junction.Logger
 
-object EESubsystem: SubsystemBase() {
+object EESubsystem : SubsystemBase() {
     private val eeMotor = TalonFX(EEConstants.EE_MOTOR_ID, "rio")
     private val beamBreak = DigitalInput(0)
     val beamBreakState

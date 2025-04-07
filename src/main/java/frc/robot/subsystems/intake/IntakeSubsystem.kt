@@ -7,9 +7,13 @@ import config.IntakeConstants
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.littletonrobotics.junction.Logger
 
-object IntakeSubsystem: SubsystemBase() {
+object IntakeSubsystem : SubsystemBase() {
     private val intakeMotor = SparkMax(IntakeConstants.INTAKE_MOTOR_CAN_ID, SparkLowLevel.MotorType.kBrushless).apply {
-        configure(IntakeSparkMAXConfig.intakeMotorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+        configure(
+            IntakeSparkMAXConfig.intakeMotorConfig,
+            SparkBase.ResetMode.kResetSafeParameters,
+            SparkBase.PersistMode.kPersistParameters
+        )
     }
 
     private var startTime: Long = 0

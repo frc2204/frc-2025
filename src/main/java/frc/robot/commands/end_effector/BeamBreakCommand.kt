@@ -4,8 +4,9 @@ import edu.wpi.first.wpilibj2.command.Command
 import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.intake.IntakeSubsystem
 
-class BeamBreakCommand(private val beamBreakState: () -> Boolean, private val intakeStall: () -> Boolean): Command() {
+class BeamBreakCommand(private val beamBreakState: () -> Boolean, private val intakeStall: () -> Boolean) : Command() {
     private var isBroken = false
+
     init {
         addRequirements(EESubsystem, IntakeSubsystem)
     }

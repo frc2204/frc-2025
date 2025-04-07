@@ -4,7 +4,7 @@ import config.StatusState
 import edu.wpi.first.wpilibj2.command.Command
 import frc.robot.subsystems.status.StatusSubsystem
 
-class StatusCommand(private val state: () -> StatusState): Command() {
+class StatusCommand(private val state: () -> StatusState) : Command() {
     init {
         addRequirements(StatusSubsystem)
     }

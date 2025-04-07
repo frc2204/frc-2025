@@ -5,6 +5,7 @@ import config.ElevatorConstants
 
 object CTREConfig {
     var elevatorFXConfig = TalonFXConfiguration()
+
     init {
         elevatorFXConfig = TalonFXConfiguration()
 
@@ -45,7 +46,8 @@ object CTREConfig {
         // 0V to 12V
         elevatorFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = ElevatorConstants.VOLTAGE_OPEN_LOOP_RAMP_PERIOD
 
-        elevatorFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = ElevatorConstants.DUTY_CYCLE_CLOSED_LOOP_RAMP_PERIOD
+        elevatorFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod =
+            ElevatorConstants.DUTY_CYCLE_CLOSED_LOOP_RAMP_PERIOD
         elevatorFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = ElevatorConstants.VOLTAGE_CLOSED_LOOP_RAMP_PERIOD
     }
 }

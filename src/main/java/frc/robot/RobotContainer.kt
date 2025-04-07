@@ -15,7 +15,9 @@ package frc.robot
 import com.pathplanner.lib.auto.AutoBuilder
 import com.pathplanner.lib.auto.NamedCommands
 import com.pathplanner.lib.commands.PathPlannerAuto
-import config.*
+import config.AutoAlignConstantsNew
+import config.ElevatorConstants
+import config.TunerConstants
 import edu.wpi.first.math.Matrix
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
@@ -27,14 +29,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
-import frc.robot.commands.Testing.AutonIntakeLoop
-import frc.robot.commands.auto_align.AutoAlign
 import frc.robot.commands.auto_align.AutoAlignCommand
 import frc.robot.commands.autonomous.*
 import frc.robot.commands.command_groups.*
-import frc.robot.commands.end_effector.StageCoral
 import frc.robot.subsystems.drive.*
-import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
 
@@ -131,7 +129,7 @@ class RobotContainer {
         }
 
         NamedCommands.registerCommand("Intake", Intake())
-        NamedCommands.registerCommand("L4Score",L4Score())
+        NamedCommands.registerCommand("L4Score", L4Score())
         NamedCommands.registerCommand("L3Score", L3Score())
         NamedCommands.registerCommand("ElevatorL1", ElevatorL1())
         NamedCommands.registerCommand("ElevatorRaise", ElevatorRaise())
@@ -300,34 +298,46 @@ class RobotContainer {
 //        ps5Controller.triangle()
 //            .and(ps5Controller.povRight()).whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_REEF6_Right))
         ps5Controller.square()
-            .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_LEFT_POSE))
+            .and(ps5Controller.povLeft())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_LEFT_POSE))
         ps5Controller.square()
-            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_RIGHT_POSE))
+            .and(ps5Controller.povRight())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_RIGHT_POSE))
 
         ps5Controller.circle()
-            .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_LEFT_POSE))
+            .and(ps5Controller.povLeft())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_LEFT_POSE))
         ps5Controller.circle()
-            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_RIGHT_POSE))
+            .and(ps5Controller.povRight())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_RIGHT_POSE))
 
         ps5Controller.cross()
-            .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_LEFT_POSE))
+            .and(ps5Controller.povLeft())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_LEFT_POSE))
         ps5Controller.cross()
-            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_RIGHT_POSE))
+            .and(ps5Controller.povRight())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_RIGHT_POSE))
 
         ps5Controller.triangle()
-            .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_LEFT_POSE))
+            .and(ps5Controller.povLeft())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_LEFT_POSE))
         ps5Controller.triangle()
-            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_RIGHT_POSE))
+            .and(ps5Controller.povRight())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_RIGHT_POSE))
 
         ps5Controller.touchpad()
-            .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_LEFT_POSE))
+            .and(ps5Controller.povLeft())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_LEFT_POSE))
         ps5Controller.touchpad()
-            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_RIGHT_POSE))
+            .and(ps5Controller.povRight())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_RIGHT_POSE))
 
         ps5Controller.options()
-            .and(ps5Controller.povLeft()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))
+            .and(ps5Controller.povLeft())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))
         ps5Controller.options()
-            .and(ps5Controller.povRight()).whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
+            .and(ps5Controller.povRight())
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
 
         //xBoxController.leftTrigger().onTrue(AutonIntakeLoop())
     }

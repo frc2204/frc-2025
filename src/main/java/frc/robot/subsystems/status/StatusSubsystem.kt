@@ -7,7 +7,7 @@ import config.StatusState
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.littletonrobotics.junction.Logger
 
-object StatusSubsystem: SubsystemBase() {
+object StatusSubsystem : SubsystemBase() {
     val candle = CANdle(StatusConstants.CANDLE_ID, "rio")
     lateinit var statusState: StatusState
 
@@ -19,7 +19,7 @@ object StatusSubsystem: SubsystemBase() {
 
     fun disableStatus() {
         candle.animate(null)
-        candle.setLEDs(0,0,0)
+        candle.setLEDs(0, 0, 0)
     }
 
     fun setCandleStatus(statusState: StatusState) {

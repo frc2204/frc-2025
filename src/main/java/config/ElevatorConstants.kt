@@ -1,4 +1,5 @@
 package config
+
 import com.ctre.phoenix6.signals.InvertedValue
 import com.ctre.phoenix6.signals.NeutralModeValue
 import com.pathplanner.lib.config.PIDConstants
@@ -12,6 +13,7 @@ object ElevatorConstants {
     val ELEVATOR_PID_DEC2 = PIDConstants(2.15, 0.0, 0.0)
 
     var elevatorMinHeight = 0.0
+
     /** in inches, need to tune */
     const val ELEVATOR_MAX_HEIGHT = 5.783
 

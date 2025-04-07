@@ -13,7 +13,7 @@ class CoralAlign(
     private val visionSubsystem: Vision,
     private val cameraIndex: Int,
     private val isRight: Boolean
-): Command() {
+) : Command() {
 
     private var calculatedTheta = 0.0
 
@@ -22,16 +22,16 @@ class CoralAlign(
     }
 
     override fun execute() {
-       calculatedTheta = degreesToRadians(calculateOffset())
-       DriveCommands.joystickDriveAtAngle(driveSubsystem, {0.0}, {0.0}, {Rotation2d(calculatedTheta)})
+        calculatedTheta = degreesToRadians(calculateOffset())
+        DriveCommands.joystickDriveAtAngle(driveSubsystem, { 0.0 }, { 0.0 }, { Rotation2d(calculatedTheta) })
     }
 
     override fun isFinished(): Boolean {
-       return false
+        return false
     }
 
     override fun end(interrupted: Boolean) {
-       driveSubsystem.stop()
+        driveSubsystem.stop()
     }
 
     private fun calculateOffset(): Double {
@@ -42,6 +42,6 @@ class CoralAlign(
     }
 
     private fun degreesToRadians(degrees: Double): Double {
-        return degrees * (PI/180)
+        return degrees * (PI / 180)
     }
 }

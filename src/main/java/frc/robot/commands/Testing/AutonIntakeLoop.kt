@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand
 import frc.robot.commands.autonomous.AutonomousIntake
 import frc.robot.commands.autonomous.StageCoral
 
-class AutonIntakeLoop: SequentialCommandGroup(
+class AutonIntakeLoop : SequentialCommandGroup(
     AutonomousIntake(),
     WaitCommand(1.0),
     StageCoral()

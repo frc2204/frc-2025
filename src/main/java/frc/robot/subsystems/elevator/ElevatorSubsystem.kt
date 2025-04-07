@@ -7,7 +7,7 @@ import config.ElevatorConstants.L3_POSITION
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import org.littletonrobotics.junction.Logger
 
-object ElevatorSubsystem: SubsystemBase() {
+object ElevatorSubsystem : SubsystemBase() {
     private val elevatorMotor = TalonFX(ElevatorConstants.ELEVATOR_MOTOR_ID, "rio")
 
     var isAutonomousActive: Boolean = false
@@ -19,25 +19,25 @@ object ElevatorSubsystem: SubsystemBase() {
 
     var desiredPosition = position
         set(position) {
-            field = if(position in ElevatorConstants.elevatorMinHeight..ElevatorConstants.ELEVATOR_MAX_HEIGHT)
+            field = if (position in ElevatorConstants.elevatorMinHeight..ElevatorConstants.ELEVATOR_MAX_HEIGHT)
                 position
             else
                 this.position
         }
 
-    init{
+    init {
         elevatorMotor.configurator.apply(CTREConfig.elevatorFXConfig)
     }
 
     override fun periodic() {
         //elevatorMotor.setControl(desiredPositionDutyCycle)
-        if((desiredPosition < position) && !isAutonomousActive) {
+        if ((desiredPosition < position) && !isAutonomousActive) {
             elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(1))
         } else {
             elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
         }
 
-        if(isAutonomousActive) {
+        if (isAutonomousActive) {
             elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(2))
         }
 

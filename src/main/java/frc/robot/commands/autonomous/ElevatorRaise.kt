@@ -4,7 +4,7 @@ import config.ElevatorConstants
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup
 import frc.robot.commands.elevator.PositionElevator
 
-class ElevatorRaise: SequentialCommandGroup(
+class ElevatorRaise : SequentialCommandGroup(
     PositionElevator({ ElevatorConstants.L4_POSITION },
-        {it in ElevatorConstants.L4_POSITION - ElevatorConstants.SCORING_OFFSET .. ElevatorConstants.L4_POSITION + ElevatorConstants.SCORING_OFFSET}),
+        { it in ElevatorConstants.L4_POSITION - ElevatorConstants.SCORING_OFFSET..ElevatorConstants.L4_POSITION + ElevatorConstants.SCORING_OFFSET }),
 )
