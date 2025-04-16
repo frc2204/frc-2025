@@ -18,7 +18,7 @@ object IntakeSubsystem : SubsystemBase() {
 
     private var startTime: Long = 0
 
-    val intakeCurrent
+    val intakeCurrent //Boolean
         get() = intakeMotor.outputCurrent >= IntakeConstants.INTAKE_STALL_LIMIT
 
     fun startTimer() {
@@ -48,6 +48,21 @@ object IntakeSubsystem : SubsystemBase() {
         intakeMotor.stopMotor()
     }
 
+    fun checkIntakeSpike(): Boolean {
+        var spikeStartTime:Double? = null
+        var coraled:Boolean = false
+        if (intakeMotor.outputCurrent > IntakeConstants.INTAKE_STALL_LIMIT){
+            if(spikeStartTime == null){
+                spikeStartTime = System.currentTimeMillis().toDouble() //check if the timer startd
+            } else if ((System.currentTimeMillis().toDouble() - spikeStartTime!!) > IntakeConstants.SPIKE_DURATION){ // if the current spike is above a value for more than a set time, it is a coral and not false spikes
+                coraled = true
+            } else {
+                coraled = false
+                spikeStartTime = null
+            }
+        }
+        return coraled
+    }
     override fun periodic() {
         Logger.recordOutput("Intake/Output", intakeMotor.appliedOutput)
         Logger.recordOutput("Intake/Velocity", intakeMotor.encoder.velocity)
