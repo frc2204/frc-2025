@@ -7,4 +7,6 @@ object IntakeConstants {
     const val AUTO_STALL_LIMIT = 5.5
     const val INTAKE_MAX = 10.0
     const val AUTO_INTAKE_DEBOUNCE = 500
+    const val INTAKE_CURRENT_SPIKE = 2.0 //tune later
+    const val SPIKE_DURATION = 2.0 //tune later
 }
