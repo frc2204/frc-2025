@@ -48,7 +48,7 @@ public class DriveCommands {
     private static final double FF_RAMP_RATE = 0.1; // Volts/Sec
     private static final double WHEEL_RADIUS_MAX_VELOCITY = 0.25; // Rad/Sec
     private static final double WHEEL_RADIUS_RAMP_RATE = 0.05; // Rad/Sec^2
-
+    public static boolean STUNNED = false;
     private DriveCommands() {
     }
 
@@ -66,6 +66,18 @@ public class DriveCommands {
                 .getTranslation();
     }
 
+
+    //if R1 is held down, put a cap on the max speed
+    public static Command stunned (){
+        STUNNED = true;
+        return null;
+    }
+    public static Command unstunned (){
+        STUNNED = false;
+        return null;
+    }
+
+
     /**
      * Field relative drive command using two joysticks (controlling linear and angular velocities).
      */
@@ -73,7 +85,8 @@ public class DriveCommands {
             Drive drive,
             DoubleSupplier xSupplier,
             DoubleSupplier ySupplier,
-            DoubleSupplier omegaSupplier) {
+            DoubleSupplier omegaSupplier,
+            boolean stunned) {
 
         DoubleSupplier finalXSupplier;
         DoubleSupplier finalYSupplier;
@@ -81,6 +94,9 @@ public class DriveCommands {
         if (ElevatorSubsystem.INSTANCE.isElevatorRaised()) {
             finalXSupplier = () -> xSupplier.getAsDouble() * 0.2;
             finalYSupplier = () -> ySupplier.getAsDouble() * 0.2;
+        } else if (stunned) {
+            finalYSupplier = () -> ySupplier.getAsDouble() * 0.5;
+            finalXSupplier = () -> xSupplier.getAsDouble() * 0.5;
         } else {
             finalYSupplier = ySupplier;
             finalXSupplier = xSupplier;
