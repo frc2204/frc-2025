@@ -85,9 +85,9 @@ public class DriveCommands {
             Drive drive,
             DoubleSupplier xSupplier,
             DoubleSupplier ySupplier,
-            DoubleSupplier omegaSupplier,
-            boolean stunned) {
-
+            DoubleSupplier omegaSupplier
+            ) {
+        boolean stunned = STUNNED;
         DoubleSupplier finalXSupplier;
         DoubleSupplier finalYSupplier;
 
