@@ -89,14 +89,14 @@ public class DriveCommands {
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
       DoubleSupplier omegaSupplier) {
-    boolean stunned = STUNNED;
+//    boolean stunned = STUNNED;
     DoubleSupplier finalXSupplier;
     DoubleSupplier finalYSupplier;
 
     if (ElevatorSubsystem.INSTANCE.isElevatorRaised()) {
       finalXSupplier = () -> xSupplier.getAsDouble() * 0.2;
       finalYSupplier = () -> ySupplier.getAsDouble() * 0.2;
-    } else if (stunned) {
+    } else if (STUNNED) {
       finalYSupplier = () -> ySupplier.getAsDouble() * 0.5;
       finalXSupplier = () -> xSupplier.getAsDouble() * 0.5;
     } else {
