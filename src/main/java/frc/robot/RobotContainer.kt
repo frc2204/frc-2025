@@ -25,8 +25,11 @@ import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
+import edu.wpi.first.wpilibj2.command.InstantCommand
+import edu.wpi.first.wpilibj2.command.RunCommand
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
+import edu.wpi.first.wpilibj2.command.button.Trigger
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlignCommand
@@ -37,6 +40,8 @@ import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
+
+
 class RobotContainer {
     // Subsystems
     private var drive: Drive? = null
@@ -207,8 +212,8 @@ class RobotContainer {
     private fun configureButtonBindings() {
         // Default command, normal field-relative drive
         //stunned making swerve sensitivity lower so it wont bounce when hitting source
-        ps5Controller.R2().onTrue(DriveCommands.stunned())
-        ps5Controller.R2().onFalse(DriveCommands.unstunned())
+//        ps5Controller.R2().onTrue(DriveCommands.stunned())
+//        ps5Controller.R2().onFalse(DriveCommands.unstunned())
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
             { -ps5Controller.leftY * 1 },
@@ -268,7 +273,7 @@ class RobotContainer {
 //        xBoxController.a().onFalse(ScoreCoralHome())
 
 
-
+//        xBoxController.x().whileTrue(Commands.runOnce({DriveCommands.stun()}))
 
         xBoxController.x().onTrue(PositionElevator { ElevatorConstants.L1_POSITION })
         xBoxController.x().onFalse(ScoreCoralHome())
@@ -289,8 +294,13 @@ class RobotContainer {
 //        ps5Controller.L1().onTrue(SourceIntake())
 //        ps5Controller.L1().onFalse(SourceIntakeHome())
 
-        ps5Controller.R1().toggleOnTrue(SourceIntake())
-        ps5Controller.R1().toggleOnFalse(SourceIntakeHome())
+//        ps5Controller.R1().onTrue(SourceIntake())
+        var isToggledOn:Boolean = false
+        ps5Controller.R1().onTrue(InstantCommand({ isToggledOn = !isToggledOn }))
+        Trigger { isToggledOn }
+            .whileTrue(SourceIntake())
+        Trigger { !isToggledOn }
+            .onTrue(SourceIntakeHome())
 
         /** Source auto align */
 //        ps5Controller.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
@@ -369,54 +379,55 @@ class RobotContainer {
 //            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
 
 
-
+        ps5Controller.R2().whileTrue(Commands.runOnce({DriveCommands.stun()}))
+        ps5Controller.R2().whileFalse(Commands.runOnce({DriveCommands.unstun()}))
 
 
         //new reef autoalign for daniel
         ps5Controller.L1()
-            .and(ps5Controller.triangle())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_LEFT_POSE))
+            .and(ps5Controller.triangle()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_LEFT_POSE)))
         ps5Controller.L2()
-            .and(ps5Controller.triangle())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_RIGHT_POSE))
+            .and(ps5Controller.triangle()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_RIGHT_POSE)))
         ps5Controller.L1()
-            .and(ps5Controller.triangle())
-            .and(ps5Controller.circle())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_LEFT_POSE))
+            .and(ps5Controller.triangle()
+            .and(ps5Controller.circle()
+                .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_LEFT_POSE))))
         ps5Controller.L2()
-            .and(ps5Controller.triangle())
-            .and(ps5Controller.circle())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_RIGHT_POSE))
+            .and(ps5Controller.triangle()
+            .and(ps5Controller.circle()
+                .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_RIGHT_POSE))))
         ps5Controller.L1()
-            .and(ps5Controller.circle())
-            .and(ps5Controller.cross())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))
+            .and(ps5Controller.circle()
+            .and(ps5Controller.cross()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))))
         ps5Controller.L2()
-            .and(ps5Controller.circle())
-            .and(ps5Controller.cross())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
+            .and(ps5Controller.circle()
+            .and(ps5Controller.cross()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))))
         ps5Controller.L1()
-            .and(ps5Controller.cross())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_LEFT_POSE))
+            .and(ps5Controller.cross()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_LEFT_POSE)))
         ps5Controller.L2()
-            .and(ps5Controller.cross())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_RIGHT_POSE))
+            .and(ps5Controller.cross()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_RIGHT_POSE)))
         ps5Controller.L1()
-            .and(ps5Controller.cross())
-            .and(ps5Controller.square())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_LEFT_POSE))
+            .and(ps5Controller.cross()
+            .and(ps5Controller.square()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_LEFT_POSE))))
         ps5Controller.L2()
-            .and(ps5Controller.cross())
-            .and(ps5Controller.square())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_RIGHT_POSE))
+            .and(ps5Controller.cross()
+            .and(ps5Controller.square()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_RIGHT_POSE))))
         ps5Controller.L1()
-            .and(ps5Controller.square())
-            .and(ps5Controller.triangle())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_LEFT_POSE))
+            .and(ps5Controller.square()
+            .and(ps5Controller.triangle()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_LEFT_POSE))))
         ps5Controller.L2()
-            .and(ps5Controller.square())
-            .and(ps5Controller.triangle())
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_RIGHT_POSE))
+            .and(ps5Controller.square()
+            .and(ps5Controller.triangle()
+            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_RIGHT_POSE))))
 
 
 

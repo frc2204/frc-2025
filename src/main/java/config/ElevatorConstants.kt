@@ -8,7 +8,7 @@ object ElevatorConstants {
     const val ELEVATOR_MOTOR_ID = 13
 
     /** must be tuned later */
-    val ELEVATOR_PID = PIDConstants(0.5, 0.0, 0.0)  //start testing with d at 10-20% of p
+    val ELEVATOR_PID = PIDConstants(0.8, 0.0, 0.0)  //start testing with d at 10-20% of p
     val ELEVATOR_PID_DEC1 = PIDConstants(0.125, 0.0, 0.0)
     val ELEVATOR_PID_DEC2 = PIDConstants(2.15, 0.0, 0.0)
 
@@ -33,8 +33,8 @@ object ElevatorConstants {
     const val ELEVATOR_CURRENT_LOWER_LIMIT = 35.0
     const val ELEVATOR_CURRENT_LOWER_TIME = 1.45
 
-    const val DUTY_CYCLE_OPEN_LOOP_RAMP_PERIOD = 0.0
-    const val VOLTAGE_OPEN_LOOP_RAMP_PERIOD = 0.0
+    const val DUTY_CYCLE_OPEN_LOOP_RAMP_PERIOD = 0.15
+    const val VOLTAGE_OPEN_LOOP_RAMP_PERIOD = 0.15
     const val DUTY_CYCLE_CLOSED_LOOP_RAMP_PERIOD = 0.0
     const val VOLTAGE_CLOSED_LOOP_RAMP_PERIOD = 0.0
 
