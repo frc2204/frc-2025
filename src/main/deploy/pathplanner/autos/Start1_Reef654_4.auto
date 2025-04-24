@@ -15,12 +15,6 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "StageCoral"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
