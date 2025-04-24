@@ -295,7 +295,7 @@ class RobotContainer {
 //        ps5Controller.L1().onFalse(SourceIntakeHome())
 
 //        ps5Controller.R1().onTrue(SourceIntake())
-        var isToggledOn:Boolean = false
+        var isToggledOn: Boolean = false
         ps5Controller.R1().onTrue(InstantCommand({ isToggledOn = !isToggledOn }))
         Trigger { isToggledOn }
             .whileTrue(SourceIntake())
@@ -307,7 +307,6 @@ class RobotContainer {
 //        ps5Controller.R2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_2))
 //        ps5Controller.L2().whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_SOURCE_1_POSE))
 //        ps5Controller.R2().whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_SOURCE_2_POSE))
-
 
 
         /** Reef auto align */
@@ -379,60 +378,98 @@ class RobotContainer {
 //            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
 
 
-        ps5Controller.R2().whileTrue(Commands.runOnce({DriveCommands.stun()}))
-        ps5Controller.R2().whileFalse(Commands.runOnce({DriveCommands.unstun()}))
+        ps5Controller.R2().whileTrue(Commands.runOnce({ DriveCommands.stun() }))
+        ps5Controller.R2().whileFalse(Commands.runOnce({ DriveCommands.unstun() }))
 
-        ps5Controller.L1().whileTrue(AutoAlignCommand.pathFind(findClosestLeftReefStick()))
-        ps5Controller.L2().whileTrue(AutoAlignCommand.pathFind(findClosestRightReefStick()))
+        ps5Controller.L1().whileTrue(AutoAlignCommand.pathFind(findClosestReefFace(Side.LEFT)))
+        ps5Controller.L2().whileTrue(AutoAlignCommand.pathFind(findClosestReefFace(Side.RIGHT)))
 
 
         //new reef autoalign for daniel
         ps5Controller.L1()
-            .and(ps5Controller.triangle()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_LEFT_POSE)))
+            .and(
+                ps5Controller.triangle()
+                    .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_LEFT_POSE))
+            )
         ps5Controller.L2()
-            .and(ps5Controller.triangle()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_RIGHT_POSE)))
+            .and(
+                ps5Controller.triangle()
+                    .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF1_RIGHT_POSE))
+            )
         ps5Controller.L1()
-            .and(ps5Controller.triangle()
-            .and(ps5Controller.circle()
-                .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_LEFT_POSE))))
+            .and(
+                ps5Controller.triangle()
+                    .and(
+                        ps5Controller.circle()
+                            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_LEFT_POSE))
+                    )
+            )
         ps5Controller.L2()
-            .and(ps5Controller.triangle()
-            .and(ps5Controller.circle()
-                .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_RIGHT_POSE))))
+            .and(
+                ps5Controller.triangle()
+                    .and(
+                        ps5Controller.circle()
+                            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF2_RIGHT_POSE))
+                    )
+            )
         ps5Controller.L1()
-            .and(ps5Controller.circle()
-            .and(ps5Controller.cross()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))))
+            .and(
+                ps5Controller.circle()
+                    .and(
+                        ps5Controller.cross()
+                            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_LEFT_POSE))
+                    )
+            )
         ps5Controller.L2()
-            .and(ps5Controller.circle()
-            .and(ps5Controller.cross()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))))
+            .and(
+                ps5Controller.circle()
+                    .and(
+                        ps5Controller.cross()
+                            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
+                    )
+            )
         ps5Controller.L1()
-            .and(ps5Controller.cross()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_LEFT_POSE)))
+            .and(
+                ps5Controller.cross()
+                    .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_LEFT_POSE))
+            )
         ps5Controller.L2()
-            .and(ps5Controller.cross()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_RIGHT_POSE)))
+            .and(
+                ps5Controller.cross()
+                    .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF4_RIGHT_POSE))
+            )
         ps5Controller.L1()
-            .and(ps5Controller.cross()
-            .and(ps5Controller.square()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_LEFT_POSE))))
+            .and(
+                ps5Controller.cross()
+                    .and(
+                        ps5Controller.square()
+                            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_LEFT_POSE))
+                    )
+            )
         ps5Controller.L2()
-            .and(ps5Controller.cross()
-            .and(ps5Controller.square()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_RIGHT_POSE))))
+            .and(
+                ps5Controller.cross()
+                    .and(
+                        ps5Controller.square()
+                            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF5_RIGHT_POSE))
+                    )
+            )
         ps5Controller.L1()
-            .and(ps5Controller.square()
-            .and(ps5Controller.triangle()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_LEFT_POSE))))
+            .and(
+                ps5Controller.square()
+                    .and(
+                        ps5Controller.triangle()
+                            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_LEFT_POSE))
+                    )
+            )
         ps5Controller.L2()
-            .and(ps5Controller.square()
-            .and(ps5Controller.triangle()
-            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_RIGHT_POSE))))
-
-
+            .and(
+                ps5Controller.square()
+                    .and(
+                        ps5Controller.triangle()
+                            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF6_RIGHT_POSE))
+                    )
+            )
 
 
         //xBoxController.leftTrigger().onTrue(AutonIntakeLoop())
@@ -477,23 +514,34 @@ class RobotContainer {
     private fun start3_reef23_2(): Command {
         return PathPlannerAuto("Start3_Reef23_2")
     }
-
-    fun findClosestLeftReefStick(): Pose2d {
+    enum class Side { LEFT, RIGHT }
+    fun findClosestReefFace(direction: Side): Pose2d {
         val currentPose = drive!!.pose
-        val leftReefSticks = AutoAlignConstantsNew.LEFT_REEF_STICK_POSE
-        return leftReefSticks.minByOrNull { reef ->
-            val dx = reef.translation.x - currentPose.translation.x
-            val dy = reef.translation.y - currentPose.translation.y
-            hypot(dx, dy)
-        } ?: leftReefSticks.first()
+        val ReefFaces = AutoAlignConstantsNew.LIST_OF_REEF_FACE_POSE
+        val RightReefSticks = AutoAlignConstantsNew.RIGHT_REEF_STICK_POSE
+        val LeftReefSticks = AutoAlignConstantsNew.LEFT_REEF_STICK_POSE
+        var ClosestReefFacePosInList: Int
+        ClosestReefFacePosInList = ReefFaces.indexOf(
+            ReefFaces.minByOrNull { reef ->
+                val dx = reef.translation.x - currentPose.translation.x
+                val dy = reef.translation.y - currentPose.translation.y
+                hypot(dx, dy)
+            } ?: ReefFaces.first()
+        )
+        if (direction == Side.LEFT) {
+            return LeftReefSticks[ClosestReefFacePosInList]
+        } else {
+            return RightReefSticks[ClosestReefFacePosInList]
+        }
     }
-    fun findClosestRightReefStick(): Pose2d {
-        val currentPose = drive!!.pose
-        val rightReefSticks = AutoAlignConstantsNew.RIGHT_REEF_STICK_POSE
-        return rightReefSticks.minByOrNull { reef ->
-            val dx = reef.translation.x - currentPose.translation.x
-            val dy = reef.translation.y - currentPose.translation.y
-            hypot(dx, dy)
-        } ?: rightReefSticks.first()
-    }
+//    fun findClosestRightReefStick(): Pose2d {
+//        val currentPose = drive!!.pose
+//        val rightReefSticks = AutoAlignConstantsNew.RIGHT_REEF_STICK_POSE
+//        return rightReefSticks.minByOrNull { reef ->
+//            val dx = reef.translation.x - currentPose.translation.x
+//            val dy = reef.translation.y - currentPose.translation.y
+//            hypot(dx, dy)
+//        } ?: rightReefSticks.first()
+//    }
 }
+
