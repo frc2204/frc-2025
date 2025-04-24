@@ -18,6 +18,7 @@ import com.pathplanner.lib.commands.PathPlannerAuto
 import config.AutoAlignConstantsNew
 import config.ElevatorConstants
 import config.TunerConstants
+import kotlin.math.hypot
 import edu.wpi.first.math.Matrix
 import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
@@ -26,7 +27,6 @@ import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.InstantCommand
-import edu.wpi.first.wpilibj2.command.RunCommand
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.button.Trigger
@@ -382,6 +382,9 @@ class RobotContainer {
         ps5Controller.R2().whileTrue(Commands.runOnce({DriveCommands.stun()}))
         ps5Controller.R2().whileFalse(Commands.runOnce({DriveCommands.unstun()}))
 
+        ps5Controller.L1().whileTrue(AutoAlignCommand.pathFind(findClosestLeftReefStick()))
+        ps5Controller.L2().whileTrue(AutoAlignCommand.pathFind(findClosestRightReefStick()))
+
 
         //new reef autoalign for daniel
         ps5Controller.L1()
@@ -473,5 +476,24 @@ class RobotContainer {
 
     private fun start3_reef23_2(): Command {
         return PathPlannerAuto("Start3_Reef23_2")
+    }
+
+    fun findClosestLeftReefStick(): Pose2d {
+        val currentPose = drive!!.pose
+        val leftReefSticks = AutoAlignConstantsNew.LEFT_REEF_STICK_POSE
+        return leftReefSticks.minByOrNull { reef ->
+            val dx = reef.translation.x - currentPose.translation.x
+            val dy = reef.translation.y - currentPose.translation.y
+            hypot(dx, dy)
+        } ?: leftReefSticks.first()
+    }
+    fun findClosestRightReefStick(): Pose2d {
+        val currentPose = drive!!.pose
+        val rightReefSticks = AutoAlignConstantsNew.RIGHT_REEF_STICK_POSE
+        return rightReefSticks.minByOrNull { reef ->
+            val dx = reef.translation.x - currentPose.translation.x
+            val dy = reef.translation.y - currentPose.translation.y
+            hypot(dx, dy)
+        } ?: rightReefSticks.first()
     }
 }
