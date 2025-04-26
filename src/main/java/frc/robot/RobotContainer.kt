@@ -11,7 +11,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 package frc.robot
-
+import frc.robot.subsystems.onebuttonscoring.onebuttonscoringSubsystem
 import com.pathplanner.lib.auto.AutoBuilder
 import com.pathplanner.lib.auto.NamedCommands
 import com.pathplanner.lib.commands.PathPlannerAuto
@@ -32,10 +32,12 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import edu.wpi.first.wpilibj2.command.button.Trigger
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
+import frc.robot.commands.Side
 import frc.robot.commands.auto_align.AutoAlignCommand
 import frc.robot.commands.autonomous.*
 import frc.robot.commands.command_groups.*
 import frc.robot.commands.elevator.PositionElevator
+import frc.robot.commands.onebuttonscoring
 import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.vision.*
@@ -381,11 +383,11 @@ class RobotContainer {
         ps5Controller.R2().whileTrue(Commands.runOnce({ DriveCommands.stun() }))
         ps5Controller.R2().whileFalse(Commands.runOnce({ DriveCommands.unstun() }))
 
-        ps5Controller.L1().whileTrue(AutoAlignCommand.pathFind(findClosestReefFace(Side.LEFT)))
-        ps5Controller.L2().whileTrue(AutoAlignCommand.pathFind(findClosestReefFace(Side.RIGHT)))
+        ps5Controller.L1().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.LEFT))
+        ps5Controller.L2().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.RIGHT)
 
 
-        //new reef autoalign for daniel
+    //new reef autoalign for daniel
         ps5Controller.L1()
             .and(
                 ps5Controller.triangle()
@@ -514,26 +516,45 @@ class RobotContainer {
     private fun start3_reef23_2(): Command {
         return PathPlannerAuto("Start3_Reef23_2")
     }
-    enum class Side { LEFT, RIGHT }
-    fun findClosestReefFace(direction: Side): Pose2d {
-        val currentPose = drive!!.pose
-        val ReefFaces = AutoAlignConstantsNew.LIST_OF_REEF_FACE_POSE
-        val RightReefSticks = AutoAlignConstantsNew.RIGHT_REEF_STICK_POSE
-        val LeftReefSticks = AutoAlignConstantsNew.LEFT_REEF_STICK_POSE
-        var ClosestReefFacePosInList: Int
-        ClosestReefFacePosInList = ReefFaces.indexOf(
-            ReefFaces.minByOrNull { reef ->
-                val dx = reef.translation.x - currentPose.translation.x
-                val dy = reef.translation.y - currentPose.translation.y
-                hypot(dx, dy)
-            } ?: ReefFaces.first()
-        )
-        if (direction == Side.LEFT) {
-            return LeftReefSticks[ClosestReefFacePosInList]
-        } else {
-            return RightReefSticks[ClosestReefFacePosInList]
-        }
-    }
+
+//
+//
+//    enum class Side { LEFT, RIGHT }
+//    fun findClosestReefFace(direction: Side): Pose2d {
+//        var currentPose: () -> Pose2d = {drive!!.pose}
+//        val ReefFaces = AutoAlignConstantsNew.LIST_OF_REEF_FACE_POSE
+//        val RightReefSticks = AutoAlignConstantsNew.RIGHT_REEF_STICK_POSE
+//        val LeftReefSticks = AutoAlignConstantsNew.LEFT_REEF_STICK_POSE
+//        var ClosestReefFacePosInList: Int =
+//            ReefFaces.indexOf(
+//            ReefFaces.minByOrNull { reef ->
+//                var dx = reef.translation.x - currentPose.translation.x
+//                var dy = reef.translation.y - currentPose.translation.y
+//                hypot(dx, dy)
+//            } ?: print("uh oh")
+//        )
+//        if (direction == Side.LEFT) {
+//            System.out.println("HELOOOOOOOOO")
+//            System.out.println(ClosestReefFacePosInList)
+//            System.out.println("CURRENT POSE: $currentPose")
+//            println(ClosestReefFacePosInList)
+//            return LeftReefSticks[ClosestReefFacePosInList]
+//        } else {
+//            System.out.println("HELOOOOOOOOO")
+//            System.out.println(ClosestReefFacePosInList)
+//            println("HELOOOOOOOOO")
+//            println(ClosestReefFacePosInList)
+//            System.out.println("CURRENT POSE: $currentPose")
+//            return RightReefSticks[ClosestReefFacePosInList]
+//
+//        }
+//    }
+//
+//
+//
+//
+
+
 //    fun findClosestRightReefStick(): Pose2d {
 //        val currentPose = drive!!.pose
 //        val rightReefSticks = AutoAlignConstantsNew.RIGHT_REEF_STICK_POSE
