@@ -32,11 +32,17 @@ class onebuttonscoring(var pose:Drive, val pS5Controller: CommandPS5Controller, 
     }
 
     override fun isFinished(): Boolean {
-        // TODO: Make this return true when this Command no longer needs to run execute()
-        return !pS5Controller.L1().asBoolean || !pS5Controller.L2().asBoolean
+        if (side==Side.LEFT){
+            return !pS5Controller.L1().asBoolean
+        }
+        if (side==Side.RIGHT){
+            return !pS5Controller.L2().asBoolean
+        }
+        return false
     }
 
     override fun end(interrupted: Boolean) {
         CommandScheduler.getInstance().cancel(leftpathcommand)
+        CommandScheduler.getInstance().cancel(rightpathcommand)
     }
 }
