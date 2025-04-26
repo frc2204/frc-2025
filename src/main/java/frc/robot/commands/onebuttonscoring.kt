@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
 import frc.robot.commands.auto_align.AutoAlignCommand
 import frc.robot.subsystems.drive.Drive
-import frc.robot.subsystems.onebuttonscoring.onebuttonscoringSubsystem
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 enum class Side { LEFT, RIGHT }
 class onebuttonscoring(var pose:Drive, val pS5Controller: CommandPS5Controller, val side:Side ) : Command() {
@@ -14,7 +13,7 @@ class onebuttonscoring(var pose:Drive, val pS5Controller: CommandPS5Controller, 
 
     init {
         // each subsystem used by the command must be passed into the addRequirements() method
-        addRequirements(onebuttonscoringSubsystem)
+        addRequirements()
     }
 
     override fun initialize() {
