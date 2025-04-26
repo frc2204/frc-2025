@@ -384,7 +384,7 @@ class RobotContainer {
         ps5Controller.R2().whileFalse(Commands.runOnce({ DriveCommands.unstun() }))
 
         ps5Controller.L1().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.LEFT))
-        ps5Controller.L2().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.RIGHT)
+        ps5Controller.L2().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.RIGHT))
 
 
     //new reef autoalign for daniel
