@@ -17,8 +17,8 @@ class AutonomousIntake : Command() {
     }
 
     override fun isFinished(): Boolean {
-//        return IntakeSubsystem.autonIntakeCurrent
-        return IntakeSubsystem.checkIntakeSpike()
+        return IntakeSubsystem.autonIntakeCurrent
+//        return IntakeSubsystem.checkIntakeSpike()
     }
 
     override fun end(interrupted: Boolean) {
