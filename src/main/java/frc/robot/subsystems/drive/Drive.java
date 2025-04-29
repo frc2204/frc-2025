@@ -40,10 +40,14 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
@@ -56,6 +60,7 @@ import org.littletonrobotics.junction.AutoLogOutput;
 import org.littletonrobotics.junction.Logger;
 
 public class Drive extends SubsystemBase {
+  private final Field2d field = new Field2d();
   // TunerConstants doesn't include these constants, so they are declared locally
   static final double ODOMETRY_FREQUENCY = 100.0;
   // new CANBus(TunerConstants.DrivetrainConstants.CANBusName).isNetworkFD() ? 250.0 : 100.0;
@@ -117,6 +122,8 @@ public class Drive extends SubsystemBase {
     modules[1] = new Module(frModuleIO, 1, TunerConstants.FrontRight);
     modules[2] = new Module(blModuleIO, 2, TunerConstants.BackLeft);
     modules[3] = new Module(brModuleIO, 3, TunerConstants.BackRight);
+    // Regerstering field
+    SmartDashboard.putData("Field", field);
 
     // Usage reporting for swerve template
     HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_AdvantageKit);
@@ -215,6 +222,25 @@ public class Drive extends SubsystemBase {
 
     // Update gyro alert
     gyroDisconnectedAlert.set(!gyroInputs.connected && Constants.currentMode != Mode.SIM);
+
+    // Logging to Elastic
+      // logging field pose
+    field.setRobotPose(getPose());
+
+    // Logging Swerve states
+    Logger.recordOutput("Swerve/FrontLeft/Angle", modules[0].getAngle().getRadians());
+    Logger.recordOutput("Swerve/FrontLeft/Velocity", modules[0].getVelocityMetersPerSec());
+
+    Logger.recordOutput("Swerve/FrontRight/Angle", modules[1].getAngle().getRadians());
+    Logger.recordOutput("Swerve/FrontRight/Velocity", modules[1].getVelocityMetersPerSec());
+
+    Logger.recordOutput("Swerve/BackLeft/Angle", modules[2].getAngle().getRadians());
+    Logger.recordOutput("Swerve/BackLeft/Velocity", modules[2].getVelocityMetersPerSec());
+
+    Logger.recordOutput("Swerve/BackRight/Angle", modules[3].getAngle().getRadians());
+    Logger.recordOutput("Swerve/BackRight/Velocity", modules[3].getVelocityMetersPerSec());
+
+    Logger.recordOutput("Swerve/RobotAngle", getRotation().getRadians());
   }
 
   /**
