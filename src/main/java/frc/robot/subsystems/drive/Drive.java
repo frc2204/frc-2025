@@ -124,7 +124,36 @@ public class Drive extends SubsystemBase {
     modules[3] = new Module(brModuleIO, 3, TunerConstants.BackRight);
     // Regerstering field
     SmartDashboard.putData("Field", field);
+    SmartDashboard.putData(
+        "Swerve",
+        new Sendable() {
+          @Override
+          public void initSendable(SendableBuilder builder) {
+            builder.setSmartDashboardType("swerveDrive");
 
+            builder.addDoubleProperty(
+                "Front Left Angle", () -> modules[0].getAngle().getRadians(), null);
+            builder.addDoubleProperty(
+                "Front Left Velocity", () -> modules[0].getVelocityMetersPerSec(), null);
+
+            builder.addDoubleProperty(
+                "Front Right Angle", () -> modules[1].getAngle().getRadians(), null);
+            builder.addDoubleProperty(
+                "Front Right Velocity", () -> modules[1].getVelocityMetersPerSec(), null);
+
+            builder.addDoubleProperty(
+                "Back Left Angle", () -> modules[2].getAngle().getRadians(), null);
+            builder.addDoubleProperty(
+                "Back Left Velocity", () -> modules[2].getVelocityMetersPerSec(), null);
+
+            builder.addDoubleProperty(
+                "Back Right Angle", () -> modules[3].getAngle().getRadians(), null);
+            builder.addDoubleProperty(
+                "Back Right Velocity", () -> modules[3].getVelocityMetersPerSec(), null);
+
+            builder.addDoubleProperty("Robot Angle", () -> getRotation().getRadians(), null);
+          }
+        });
     // Usage reporting for swerve template
     HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_AdvantageKit);
 
@@ -224,23 +253,10 @@ public class Drive extends SubsystemBase {
     gyroDisconnectedAlert.set(!gyroInputs.connected && Constants.currentMode != Mode.SIM);
 
     // Logging to Elastic
-      // logging field pose
+    // logging field pose
     field.setRobotPose(getPose());
 
     // Logging Swerve states
-    Logger.recordOutput("Swerve/FrontLeft/Angle", modules[0].getAngle().getRadians());
-    Logger.recordOutput("Swerve/FrontLeft/Velocity", modules[0].getVelocityMetersPerSec());
-
-    Logger.recordOutput("Swerve/FrontRight/Angle", modules[1].getAngle().getRadians());
-    Logger.recordOutput("Swerve/FrontRight/Velocity", modules[1].getVelocityMetersPerSec());
-
-    Logger.recordOutput("Swerve/BackLeft/Angle", modules[2].getAngle().getRadians());
-    Logger.recordOutput("Swerve/BackLeft/Velocity", modules[2].getVelocityMetersPerSec());
-
-    Logger.recordOutput("Swerve/BackRight/Angle", modules[3].getAngle().getRadians());
-    Logger.recordOutput("Swerve/BackRight/Velocity", modules[3].getVelocityMetersPerSec());
-
-    Logger.recordOutput("Swerve/RobotAngle", getRotation().getRadians());
   }
 
   /**
