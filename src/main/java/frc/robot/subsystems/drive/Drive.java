@@ -129,7 +129,7 @@ public class Drive extends SubsystemBase {
         new Sendable() {
           @Override
           public void initSendable(SendableBuilder builder) {
-            builder.setSmartDashboardType("swerveDrive");
+            builder.setSmartDashboardType("SwerveDrive");
 
             builder.addDoubleProperty(
                 "Front Left Angle", () -> modules[0].getAngle().getRadians(), null);
