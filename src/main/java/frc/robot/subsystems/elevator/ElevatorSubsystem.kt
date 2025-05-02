@@ -31,15 +31,17 @@ object ElevatorSubsystem : SubsystemBase() {
 
     override fun periodic() {
         //elevatorMotor.setControl(desiredPositionDutyCycle)
-        if ((desiredPosition < position) && !isAutonomousActive) {
+        if ((desiredPosition < position) && !isAutonomousActive) { // if elevator going down in teleop use slot 1
             elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(1))
+        } else if ((desiredPosition < position) && isAutonomousActive){
+            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(2)) // if elevator going down in auton use slot 2
         } else {
-            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
+            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0)) //if elevator going up use slot 0
         }
 
-        if (isAutonomousActive) {
-            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(2))
-        }
+//        if (isAutonomousActive) {
+//            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
+//        }
 
         Logger.recordOutput("ElevatorDesiredPosition", desiredPosition)
 

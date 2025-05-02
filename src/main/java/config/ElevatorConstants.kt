@@ -10,7 +10,7 @@ object ElevatorConstants {
     /** must be tuned later */
     val ELEVATOR_PID = PIDConstants(0.8, 0.0, 0.0)  //start testing with d at 10-20% of p
     val ELEVATOR_PID_DEC1 = PIDConstants(0.125, 0.0, 0.0)
-    val ELEVATOR_PID_DEC2 = PIDConstants(2.15, 0.0, 0.0)
+    val ELEVATOR_PID_DEC2 = PIDConstants(0.125, 0.0, 0.0) //just raising for auton
 
     var elevatorMinHeight = 0.0
 
