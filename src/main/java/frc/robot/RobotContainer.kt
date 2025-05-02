@@ -219,7 +219,8 @@ class RobotContainer {
             drive,
             { -ps5Controller.leftY * 1 },
             { -ps5Controller.leftX * 1 },
-            { -ps5Controller.rightX * 1 }
+            { -ps5Controller.rightX * 1 },
+            { ps5Controller.R2().asBoolean }
             )
 
         // Lock to 0° when A button is held
