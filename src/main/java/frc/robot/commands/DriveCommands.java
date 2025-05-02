@@ -28,12 +28,14 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
@@ -88,15 +90,15 @@ public class DriveCommands {
       Drive drive,
       DoubleSupplier xSupplier,
       DoubleSupplier ySupplier,
-      DoubleSupplier omegaSupplier) {
-//    boolean stunned = STUNNED;
+      DoubleSupplier omegaSupplier,
+      BooleanSupplier STUNNED) {
     DoubleSupplier finalXSupplier;
     DoubleSupplier finalYSupplier;
 
     if (ElevatorSubsystem.INSTANCE.isElevatorRaised()) {
       finalXSupplier = () -> xSupplier.getAsDouble() * 0.2;
       finalYSupplier = () -> ySupplier.getAsDouble() * 0.2;
-    } else if (STUNNED) {
+    } else if (STUNNED.getAsBoolean()) {
       finalYSupplier = () -> ySupplier.getAsDouble() * 0.5;
       finalXSupplier = () -> xSupplier.getAsDouble() * 0.5;
     } else {
