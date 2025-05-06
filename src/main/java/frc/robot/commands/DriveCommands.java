@@ -28,7 +28,6 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import java.text.DecimalFormat;
@@ -78,9 +77,28 @@ public class DriveCommands {
 
   public static void stun() {
     STUNNED = true;
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
   }
+
   public static void unstun() {
-        STUNNED = false;
+    STUNNED = false;
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
+//    System.out.println(STUNNED);
   }
 
   /**

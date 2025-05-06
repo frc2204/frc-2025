@@ -41,6 +41,7 @@ import frc.robot.subsystems.drive.*
 import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
+//import frc.utils.Utils.ElasticUtil;
 
 
 class RobotContainer {
@@ -217,9 +218,9 @@ class RobotContainer {
 //        ps5Controller.R2().onFalse(DriveCommands.unstunned())
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
-            { -ps5Controller.leftY * 1 },
-            { -ps5Controller.leftX * 1 },
-            { -ps5Controller.rightX * 1 },
+            { -xBoxController.leftY * 1 },
+            { -xBoxController.leftX * 1 },
+            { -xBoxController.rightX * 1 },
             { ps5Controller.R2().asBoolean }
             )
 
@@ -385,8 +386,10 @@ class RobotContainer {
 
         ps5Controller.L1().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.LEFT))
         ps5Controller.L2().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.RIGHT))
-
-
+// source autoalign
+        ps5Controller.L2().and(ps5Controller.R2().whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_SOURCE_1_POSE)))
+        ps5Controller.L2().and(ps5Controller.R2().whileTrue(SourceIntake()))
+        ps5Controller.L2().and(ps5Controller.R2().onFalse(SourceIntakeHome()))
     //new reef autoalign for daniel
         ps5Controller.L1()
             .and(
