@@ -108,6 +108,12 @@ public class Drive extends SubsystemBase {
       };
   private final SwerveDrivePoseEstimator poseEstimator =
       new SwerveDrivePoseEstimator(kinematics, rawGyroRotation, lastModulePositions, new Pose2d());
+  public static boolean stunned = false;
+
+  public boolean ChangeStunned() {
+    stunned = !stunned;
+    return stunned;
+  }
 
   public Drive(
       GyroIO gyroIO,

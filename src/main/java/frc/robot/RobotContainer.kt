@@ -23,6 +23,7 @@ import edu.wpi.first.math.geometry.Pose2d
 import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
+import edu.wpi.first.wpilibj.XboxController
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
 import edu.wpi.first.wpilibj2.command.InstantCommand
@@ -216,13 +217,21 @@ class RobotContainer {
         //stunned making swerve sensitivity lower so it wont bounce when hitting source
 //        ps5Controller.R2().onTrue(DriveCommands.stunned())
 //        ps5Controller.R2().onFalse(DriveCommands.unstunned())
+
+        var isStunned: Boolean = false
+        xBoxController.leftBumper().onTrue(InstantCommand({ isStunned = !isStunned }))
+
+
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
-            { -xBoxController.leftY * 1 },
-            { -xBoxController.leftX * 1 },
-            { -xBoxController.rightX * 1 },
-            { ps5Controller.R2().asBoolean }
+            { -ps5Controller.leftY * 1 },
+            { -ps5Controller.leftX * 1 },
+            { -ps5Controller.rightX * 1 },
+            { isStunned }
             )
+
+
+
 
         // Lock to 0° when A button is held
 //        controller
@@ -292,6 +301,8 @@ class RobotContainer {
         xBoxController.rightBumper().onFalse(SourceIntakeHome())
         xBoxController.rightTrigger().whileTrue(ReverseIntake())
         xBoxController.rightTrigger().onFalse(ReverseIntakeStop())
+
+//        xBoxController.leftBumper().onTrue( Commands.runOnce{StunnedSubsystem.ChangeStunned()})
 
         /** Intake commands */
 //        ps5Controller.L1().onTrue(SourceIntake())

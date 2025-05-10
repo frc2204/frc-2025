@@ -77,28 +77,28 @@ public class DriveCommands {
 
   public static void stun() {
     STUNNED = true;
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
   }
 
   public static void unstun() {
     STUNNED = false;
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
-//    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
+    //    System.out.println(STUNNED);
   }
 
   /**
@@ -117,11 +117,21 @@ public class DriveCommands {
       finalXSupplier = () -> xSupplier.getAsDouble() * 0.2;
       finalYSupplier = () -> ySupplier.getAsDouble() * 0.2;
     } else if (STUNNED.getAsBoolean()) {
-      finalYSupplier = () -> ySupplier.getAsDouble() * 0.5;
-      finalXSupplier = () -> xSupplier.getAsDouble() * 0.5;
+      finalYSupplier = () -> ySupplier.getAsDouble() * 0.0;
+      finalXSupplier = () -> xSupplier.getAsDouble() * 0.0;
+      System.out.println("HELOOOOO");
+      System.out.println("HELOOOOO");
+      System.out.println("HELOOOOO");
+      System.out.println("HELOOOOO");
+      System.out.println("HELOOOOO");
+      System.out.println("HELOOOOO");
+      System.out.println("HELOOOOO");
+      System.out.println("HELOOOOO");
     } else {
       finalYSupplier = ySupplier;
       finalXSupplier = xSupplier;
+      System.out.println(STUNNED);
+      //      System.console()
     }
 
     return Commands.run(
