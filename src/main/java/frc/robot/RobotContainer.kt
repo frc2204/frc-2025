@@ -25,11 +25,8 @@ import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
-import edu.wpi.first.wpilibj2.command.InstantCommand
-import edu.wpi.first.wpilibj2.command.RunCommand
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
-import edu.wpi.first.wpilibj2.command.button.Trigger
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlignCommand
@@ -295,12 +292,16 @@ class RobotContainer {
 //        ps5Controller.L1().onFalse(SourceIntakeHome())
 
 //        ps5Controller.R1().onTrue(SourceIntake())
-        var isToggledOn:Boolean = false
-        ps5Controller.R1().onTrue(InstantCommand({ isToggledOn = !isToggledOn }))
-        Trigger { isToggledOn }
-            .whileTrue(SourceIntake())
-        Trigger { !isToggledOn }
-            .onTrue(SourceIntakeHome())
+//        var isToggledOn:Boolean = false
+//        ps5Controller.R1().onTrue(InstantCommand({ isToggledOn = !isToggledOn }))
+//        Trigger { isToggledOn }
+//            .whileTrue(SourceIntake())
+//        Trigger { !isToggledOn }
+//            .onTrue(SourceIntakeHome())
+
+        /** Toggle intake */
+
+        ps5Controller.R1().toggleOnTrue(ToggleIntake())
 
         /** Source auto align */
 //        ps5Controller.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
