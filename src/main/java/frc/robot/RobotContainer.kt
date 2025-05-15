@@ -25,11 +25,8 @@ import edu.wpi.first.math.numbers.N1
 import edu.wpi.first.math.numbers.N3
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.Commands
-import edu.wpi.first.wpilibj2.command.InstantCommand
-import edu.wpi.first.wpilibj2.command.RunCommand
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
-import edu.wpi.first.wpilibj2.command.button.Trigger
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine
 import frc.robot.commands.DriveCommands
 import frc.robot.commands.auto_align.AutoAlignCommand
@@ -37,6 +34,7 @@ import frc.robot.commands.autonomous.*
 import frc.robot.commands.command_groups.*
 import frc.robot.commands.elevator.PositionElevator
 import frc.robot.subsystems.drive.*
+import frc.robot.subsystems.elevator.ElevatorSubsystem
 import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.vision.*
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser
@@ -55,6 +53,15 @@ class RobotContainer {
 
     // Vision
     private var vision: Vision? = null
+
+    private val joystickDriveConstant =
+        if (ElevatorSubsystem.isElevatorRaised) {
+            0.5
+        } else if (ps5Controller.R1().asBoolean) {
+            0.7
+        } else {
+            1.0
+        }
 
     /** The container for the robot. Contains subsystems, OI devices, and commands.  */
     init {
@@ -216,9 +223,9 @@ class RobotContainer {
 //        ps5Controller.R2().onFalse(DriveCommands.unstunned())
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
-            { -ps5Controller.leftY * 1 },
-            { -ps5Controller.leftX * 1 },
-            { -ps5Controller.rightX * 1 }
+            { -ps5Controller.leftY * joystickDriveConstant },
+            { -ps5Controller.leftX * joystickDriveConstant },
+            { -ps5Controller.rightX * joystickDriveConstant }
             )
 
         // Lock to 0° when A button is held
@@ -295,12 +302,16 @@ class RobotContainer {
 //        ps5Controller.L1().onFalse(SourceIntakeHome())
 
 //        ps5Controller.R1().onTrue(SourceIntake())
-        var isToggledOn:Boolean = false
-        ps5Controller.R1().onTrue(InstantCommand({ isToggledOn = !isToggledOn }))
-        Trigger { isToggledOn }
-            .whileTrue(SourceIntake())
-        Trigger { !isToggledOn }
-            .onTrue(SourceIntakeHome())
+//        var isToggledOn:Boolean = false
+//        ps5Controller.R1().onTrue(InstantCommand({ isToggledOn = !isToggledOn }))
+//        Trigger { isToggledOn }
+//            .whileTrue(SourceIntake())
+//        Trigger { !isToggledOn }
+//            .onTrue(SourceIntakeHome())
+
+        /** Toggle intake */
+
+        ps5Controller.R1().toggleOnTrue(ToggleIntake())
 
         /** Source auto align */
 //        ps5Controller.L2().whileTrue(AutoAlign.pathFind(AutoAlignConstants.ALIGN_SOURCE_1))
