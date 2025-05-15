@@ -76,8 +76,9 @@ public class DriveCommands {
   public static void stun() {
     STUNNED = true;
   }
+
   public static void unstun() {
-        STUNNED = false;
+    STUNNED = false;
   }
 
   /**
@@ -92,8 +93,7 @@ public class DriveCommands {
         () -> {
           // Get linear velocity
           Translation2d linearVelocity =
-              getLinearVelocityFromJoysticks(
-                  xSupplier.getAsDouble(), ySupplier.getAsDouble());
+              getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
 
           // Apply rotation deadband
           double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);

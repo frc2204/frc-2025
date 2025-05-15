@@ -1,6 +1,7 @@
 package frc.robot.commands.autonomous
 
 import edu.wpi.first.wpilibj2.command.Command
+import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.intake.IntakeSubsystem
 
 class AutonomousIntake : Command() {
@@ -17,8 +18,8 @@ class AutonomousIntake : Command() {
     }
 
     override fun isFinished(): Boolean {
-//        return IntakeSubsystem.autonIntakeCurrent
-        return IntakeSubsystem.checkIntakeSpike()
+        return IntakeSubsystem.autonIntakeCurrent
+       // return IntakeSubsystem.checkIntakeSpike()
     }
 
     override fun end(interrupted: Boolean) {

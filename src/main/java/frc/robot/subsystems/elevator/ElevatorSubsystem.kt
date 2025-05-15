@@ -37,7 +37,11 @@ object ElevatorSubsystem : SubsystemBase() {
             elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(0))
         }
 
-        if (isAutonomousActive) {
+        if (isAutonomousActive && (desiredPosition < position)) {
+            elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(1))
+        }
+
+        if (isAutonomousActive && (desiredPosition > position)) {
             elevatorMotor.setControl(PositionDutyCycle(desiredPosition).withSlot(2))
         }
 

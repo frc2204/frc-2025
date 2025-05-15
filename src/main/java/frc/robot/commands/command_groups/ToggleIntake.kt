@@ -1,6 +1,7 @@
 package frc.robot.commands.command_groups
 
 import edu.wpi.first.wpilibj2.command.Command
+import frc.robot.commands.autonomous.Intake
 import frc.robot.commands.end_effector.StageCoral
 import frc.robot.subsystems.end_effector.EESubsystem
 import frc.robot.subsystems.intake.IntakeSubsystem
@@ -11,7 +12,8 @@ class ToggleIntake: Command() {
     }
 
     override fun execute() {
-        SourceIntake()
+        IntakeSubsystem.intake()
+        EESubsystem.startEndEffector()
     }
 
     override fun end(interrupted: Boolean) {
