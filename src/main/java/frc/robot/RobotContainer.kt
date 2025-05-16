@@ -57,7 +57,7 @@ class RobotContainer {
     private val joystickDriveConstant =
         if (ElevatorSubsystem.isElevatorRaised) {
             0.5
-        } else if (ps5Controller.R2().asBoolean) {
+        } else if (ps5Controller.R1().asBoolean) {
             0.7
         } else {
             1.0
@@ -219,6 +219,8 @@ class RobotContainer {
     private fun configureButtonBindings() {
         // Default command, normal field-relative drive
         //stunned making swerve sensitivity lower so it wont bounce when hitting source
+//        ps5Controller.R2().onTrue(DriveCommands.stunned())
+//        ps5Controller.R2().onFalse(DriveCommands.unstunned())
         drive!!.defaultCommand = DriveCommands.joystickDrive(
             drive,
             { -ps5Controller.leftY * joystickDriveConstant },
@@ -386,6 +388,11 @@ class RobotContainer {
 //        ps5Controller.options()
 //            .and(ps5Controller.povRight())
 //            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
+
+
+        ps5Controller.R2().whileTrue(Commands.runOnce({DriveCommands.stun()}))
+        ps5Controller.R2().whileFalse(Commands.runOnce({DriveCommands.unstun()}))
+
 
         //new reef autoalign for daniel
         ps5Controller.L1()
