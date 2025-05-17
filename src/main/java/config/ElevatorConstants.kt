@@ -46,7 +46,7 @@ object ElevatorConstants {
     private const val L1_OFFSET = 1.2
     private const val L2_OFFSET = 1.8
     private const val L3_OFFSET = 3.29
-    private const val L4_OFFSET = 5.44
+    private const val L4_OFFSET = 5.5
 
     val L1_POSITION = elevatorMinHeight + L1_OFFSET
     val L2_POSITION = elevatorMinHeight + L2_OFFSET
