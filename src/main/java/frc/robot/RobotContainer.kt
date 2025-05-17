@@ -391,16 +391,16 @@ class RobotContainer {
 //            .and(ps5Controller.povRight())
 //            .whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_REEF3_RIGHT_POSE))
 
-
-        ps5Controller.R2().whileTrue(Commands.runOnce({ DriveCommands.stun() }))
-        ps5Controller.R2().whileFalse(Commands.runOnce({ DriveCommands.unstun() }))
+//
+//        ps5Controller.R2().whileTrue(Commands.runOnce({ DriveCommands.stun() }))
+//        ps5Controller.R2().whileFalse(Commands.runOnce({ DriveCommands.unstun() }))
 
         ps5Controller.L1().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.LEFT))
         ps5Controller.L2().whileTrue(onebuttonscoring(drive!!,ps5Controller,Side.RIGHT))
 // source autoalign
-        ps5Controller.L2().and(ps5Controller.R2().whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_SOURCE_1_POSE)))
-        ps5Controller.L2().and(ps5Controller.R2().whileTrue(SourceIntake()))
-        ps5Controller.L2().and(ps5Controller.R2().onFalse(SourceIntakeHome()))
+//        ps5Controller.L2().and(ps5Controller.R2().whileTrue(AutoAlignCommand.pathFind(AutoAlignConstantsNew.ALIGN_SOURCE_1_POSE)))
+//        ps5Controller.L2().and(ps5Controller.R2().whileTrue(SourceIntake()))
+//        ps5Controller.L2().and(ps5Controller.R2().onFalse(SourceIntakeHome()))
     //new reef autoalign for daniel
         ps5Controller.L1()
             .and(
