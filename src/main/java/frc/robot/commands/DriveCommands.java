@@ -29,12 +29,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.drive.Drive;
-import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
@@ -105,34 +103,32 @@ public class DriveCommands {
    * Field relative drive command using two joysticks (controlling linear and angular velocities).
    */
   public static Command joystickDrive(
-      Drive drive,
-      DoubleSupplier xSupplier,
-      DoubleSupplier ySupplier,
-      DoubleSupplier omegaSupplier,
-      BooleanSupplier STUNNED) {
+      Drive drive, DoubleSupplier xSupplier, DoubleSupplier ySupplier, DoubleSupplier omegaSupplier
+      //      BooleanSupplier STUNNED
+      ) {
     DoubleSupplier finalXSupplier;
     DoubleSupplier finalYSupplier;
 
-    if (ElevatorSubsystem.INSTANCE.isElevatorRaised()) {
-      finalXSupplier = () -> xSupplier.getAsDouble() * 0.2;
-      finalYSupplier = () -> ySupplier.getAsDouble() * 0.2;
-    } else if (STUNNED.getAsBoolean()) {
-      finalYSupplier = () -> ySupplier.getAsDouble() * 0.0;
-      finalXSupplier = () -> xSupplier.getAsDouble() * 0.0;
-      System.out.println("HELOOOOO");
-      System.out.println("HELOOOOO");
-      System.out.println("HELOOOOO");
-      System.out.println("HELOOOOO");
-      System.out.println("HELOOOOO");
-      System.out.println("HELOOOOO");
-      System.out.println("HELOOOOO");
-      System.out.println("HELOOOOO");
-    } else {
-      finalYSupplier = ySupplier;
-      finalXSupplier = xSupplier;
-      System.out.println(STUNNED);
-      //      System.console()
-    }
+    //    if (ElevatorSubsystem.INSTANCE.isElevatorRaised()) {
+    //      finalXSupplier = () -> xSupplier.getAsDouble() * 0.2;
+    //      finalYSupplier = () -> ySupplier.getAsDouble() * 0.2;
+    //    } else if (STUNNED.getAsBoolean()) {
+    //      finalYSupplier = () -> ySupplier.getAsDouble() * 0.0;
+    //      finalXSupplier = () -> xSupplier.getAsDouble() * 0.0;
+    //      System.out.println("HELOOOOO");
+    //      System.out.println("HELOOOOO");
+    //      System.out.println("HELOOOOO");
+    //      System.out.println("HELOOOOO");
+    //      System.out.println("HELOOOOO");
+    //      System.out.println("HELOOOOO");
+    //      System.out.println("HELOOOOO");
+    //      System.out.println("HELOOOOO");
+    //    } else {
+    finalYSupplier = ySupplier;
+    finalXSupplier = xSupplier;
+    //      System.out.println(STUNNED);
+    //      System.console()
+    //    }
 
     return Commands.run(
         () -> {

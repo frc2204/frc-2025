@@ -27,11 +27,17 @@
           "data": {
             "name": "L4ScoreMaintainElevator"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ZeroElevator"
+          }
         }
       ]
     }
   },
-  "resetOdom": true,
+  "resetOdom": false,
   "folder": null,
   "choreoAuto": false
 }
